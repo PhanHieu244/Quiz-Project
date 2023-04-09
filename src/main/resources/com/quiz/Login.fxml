@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.LoginController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="72.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Student Login">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="studentEmail" layoutX="226.0" layoutY="112.0" prefHeight="25.0" prefWidth="197.0" />
+                        <PasswordField fx:id="studentPassword" layoutX="226.0" layoutY="167.0" prefHeight="25.0" prefWidth="197.0" />
+                        <Label layoutX="74.0" layoutY="114.0" text="Tên Đăng Nhập" textFill="#1a48b0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="74.0" layoutY="169.0" text="Mật Khẩu" textFill="#1a48b0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="253.0" layoutY="258.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="81.0" style="-fx-background-color: #14c4ff;" text="Login" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+          <Tab text="Admin Login">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="adminEmail" layoutX="226.0" layoutY="112.0" prefHeight="25.0" prefWidth="197.0" />
+                        <PasswordField fx:id="adminPassword" layoutX="226.0" layoutY="167.0" prefHeight="25.0" prefWidth="197.0" />
+                        <Label layoutX="74.0" layoutY="114.0" text="Tên Đăng Nhập" textFill="#1a48b0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="74.0" layoutY="169.0" text="Mật Khẩu" textFill="#1a48b0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="253.0" layoutY="258.0" mnemonicParsing="false" onAction="#SwitchAdminHomeScene" prefHeight="14.0" prefWidth="81.0" style="-fx-background-color: #14c4ff;" text="Login" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
