@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="159.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.SettingPopUpController">
+   <children>
+      <Label layoutX="35.0" layoutY="26.0" prefHeight="54.0" prefWidth="132.0" text="Question Bank" textFill="#257adc">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="486.0" prefHeight="177.0" prefWidth="100.0">
+         <children>
+            <Hyperlink fx:id="questionLink" text="Question">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categoriesLink" text="Categories">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="exportLink" text="Export">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="importLink" text="Import">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
