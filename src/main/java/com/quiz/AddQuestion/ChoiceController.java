@@ -6,7 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +26,11 @@ public class ChoiceController implements Initializable {
     public ComboBox<String> gradeBox;
     @FXML
     public Label choiceId;
+    @FXML
+    public ImageView imageView;
+
+    private final FileChooser fileChooser = new FileChooser();
+
 
 
     @Override
@@ -32,9 +44,34 @@ public class ChoiceController implements Initializable {
                 "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%"
         );
         gradeBox.setValue("None");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif")
+        );
+        importFile.setOnAction(event -> {
+            Stage stage = (Stage) importFile.getScene().getWindow();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null){
+                Image image = new Image(file.toURI().toString());
+                imageView.setImage(image);
+                /*try {
+                    Image image = loadImage(file);
+                    imageView.setImage(image);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }*/
+
+            }
+        });
     }
 
     public void setChoiceId(int id){
         choiceId.setText("Choice " + id);
     }
+
+    /*private Image loadImage(File file) throws FileNotFoundException {
+        // Load image from file
+        FileInputStream stream = new FileInputStream(file);
+        return new Image(stream);
+    }*/
 }
