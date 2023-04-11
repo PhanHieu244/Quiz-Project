@@ -8,8 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -33,6 +38,12 @@ public class AddQuestionController implements Initializable {
     private Button saveOut;
     @FXML
     private Button cancel;
+    @FXML
+    public ImageView imageView;
+    @FXML
+    private Button importFile;
+
+    private final FileChooser fileChooser = new FileChooser();
 
     private ArrayList<ComboBox<String>> listGradeChoice = new ArrayList<ComboBox<String>>();
     private ArrayList<TextArea> choicesText = new ArrayList<TextArea>();
@@ -43,6 +54,19 @@ public class AddQuestionController implements Initializable {
         moreChoices.setOnAction(event -> {
             AddChoice(3);
             moreChoices.setVisible(false);
+        });
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif")
+        );
+        importFile.setOnAction(event -> {
+            Stage stage = (Stage) importFile.getScene().getWindow();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null){
+                Image image = new Image(file.toURI().toString());
+                imageView.setImage(image);
+
+            }
         });
         //todo: test
         saveContinue.setOnAction(event -> {
