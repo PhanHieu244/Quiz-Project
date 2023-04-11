@@ -1,4 +1,4 @@
-package com.quiz;
+package com.quiz.TabPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +32,7 @@ public class SettingController implements Initializable {
 
     private void SetupScene(){
         try {
-            questionTab.setContent(new FXMLLoader(getClass().getResource("QuestionTab.fxml")).load());
+            questionTab.setContent(new FXMLLoader(getClass().getResource("QuestionTab/QuestionTab.fxml")).load());
             categoriesTab.setContent(new FXMLLoader(getClass().getResource("CategoriesTab.fxml")).load());
             importTab.setContent(new FXMLLoader(getClass().getResource("ImportTab.fxml")).load());
             exportTab.setContent(new FXMLLoader(getClass().getResource("ExportTab.fxml")).load());

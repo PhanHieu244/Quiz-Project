@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="605.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.QuestionTab.QuestionListController">
+   <children>
+      <VBox prefHeight="605.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="54.0" prefWidth="593.0">
+               <children>
+                  <CheckBox fx:id="seclectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
+                  <Label layoutX="45.0" layoutY="6.0" text="Question">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="45.0" layoutY="31.0" text="Question name" textFill="#17bbf2" />
+                  <Label layoutX="126.0" layoutY="31.0" text=" / " />
+                  <Label layoutX="138.0" layoutY="31.0" text="ID number" textFill="#17bbf2" />
+                  <Label layoutX="521.0" layoutY="17.0" text="Actions">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <ScrollPane prefHeight="479.0" prefWidth="573.0">
+              <content>
+                  <VBox fx:id="vBox" prefHeight="603.0" prefWidth="583.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

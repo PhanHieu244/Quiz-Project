@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="159.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.SettingPopUpController">
+<AnchorPane prefHeight="159.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.SettingPopUpController">
    <children>
       <Label layoutX="35.0" layoutY="26.0" prefHeight="54.0" prefWidth="132.0" text="Question Bank" textFill="#257adc">
          <font>

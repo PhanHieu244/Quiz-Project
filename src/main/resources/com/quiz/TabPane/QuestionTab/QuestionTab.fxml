@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="683.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuestionTabController">
+<AnchorPane prefHeight="683.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.QuestionTab.QuestionTabController">
    <children>
-      <VBox layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="vBox" layoutX="10.0" layoutY="17.0" prefHeight="847.0" prefWidth="600.0" AnchorPane.bottomAnchor="-164.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="46.0" prefWidth="160.0" text="Question Bank" textFill="#eb0e0e">
                <VBox.margin>
@@ -33,7 +33,7 @@
                         <Insets left="10.0" top="6.0" />
                      </HBox.margin>
                   </Text>
-                  <ComboBox prefHeight="40.0" prefWidth="195.0" promptText="Default">
+                  <ComboBox fx:id="categoriesBox" prefHeight="40.0" prefWidth="195.0" promptText="Default">
                      <HBox.margin>
                         <Insets left="2.0" />
                      </HBox.margin>
@@ -67,7 +67,7 @@
                   <Font size="13.0" />
                </font>
             </CheckBox>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #17a1e1;" text="CREAT A NEW QUESTION...." textFill="WHITE">
+            <Button fx:id="createQuestion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScene" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #17a1e1;" text="CREAT A NEW QUESTION...." textFill="WHITE">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>

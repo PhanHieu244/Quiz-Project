@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="573.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.QuestionTab.QuestionBoxController">
+   <children>
+      <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#selectBox" prefHeight="34.0" prefWidth="36.0" text="[]" />
+      <Label fx:id="questionText" prefHeight="20.0" prefWidth="477.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="edit" onAction="#editQuestion" text="Edit">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</HBox>

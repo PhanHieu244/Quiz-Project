@@ -1,4 +1,4 @@
-package com.quiz;
+package com.quiz.TabPane;
 
 import javafx.fxml.FXML;
 

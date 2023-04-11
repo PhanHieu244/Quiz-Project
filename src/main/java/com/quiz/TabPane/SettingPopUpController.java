@@ -1,13 +1,11 @@
-package com.quiz;
+package com.quiz.TabPane;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.quiz.MainUI.UIController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -23,7 +21,6 @@ public class SettingPopUpController implements Initializable {
     @FXML
     private Hyperlink importLink;
 
-    public UIController mainController;
 
 
     @Override
@@ -36,12 +33,12 @@ public class SettingPopUpController implements Initializable {
 
     private void OpenTab(SettingTab settingTab){
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SettingTabPane.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/SettingTabPane.fxml"));
             Parent root = fxmlLoader.load();
             SettingController settingController = fxmlLoader.getController();
-            mainController.SetCenter(root);
+            UIController.Instance.SetCenter(root);
             settingController.ShowTab(settingTab);
-            mainController.settingBut.setVisible(false);
+            UIController.Instance.settingBut.setVisible(false);
             Stage popup = (Stage) questionLink.getScene().getWindow();
             popup.close();
         }catch (Exception e){
