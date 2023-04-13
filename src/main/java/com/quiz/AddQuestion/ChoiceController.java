@@ -11,10 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URL;
+import java.util.Base64;
 import java.util.ResourceBundle;
 
 public class ChoiceController implements Initializable {
@@ -31,7 +30,7 @@ public class ChoiceController implements Initializable {
 
     private final FileChooser fileChooser = new FileChooser();
 
-
+    private  FileInputStream fileInputStream;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,7 +51,9 @@ public class ChoiceController implements Initializable {
             Stage stage = (Stage) importFile.getScene().getWindow();
             File file = fileChooser.showOpenDialog(stage);
             if (file != null){
+                choice.setText(encodeFileToBase64Binary(file));
                 Image image = new Image(file.toURI().toString());
+
                 imageView.setImage(image);
                 /*try {
                     Image image = loadImage(file);
@@ -63,15 +64,39 @@ public class ChoiceController implements Initializable {
 
             }
         });
+
     }
 
     public void setChoiceId(int id){
         choiceId.setText("Choice " + id);
     }
 
-    /*private Image loadImage(File file) throws FileNotFoundException {
-        // Load image from file
+
+    private Image loadImage(File file) throws FileNotFoundException{
         FileInputStream stream = new FileInputStream(file);
         return new Image(stream);
-    }*/
+    }
+
+    private Image base64ToImage(String base64String){
+        byte[] imageBytes = Base64.getDecoder().decode(base64String);
+        return new Image(new ByteArrayInputStream(imageBytes));
+    }
+    private static String encodeFileToBase64Binary(File file){
+        String encodedfile = null;
+        try {
+            FileInputStream fileInputStreamReader = new FileInputStream(file);
+            byte[] bytes = new byte[(int)file.length()];
+            fileInputStreamReader.read(bytes);
+            encodedfile = new String(Base64.getEncoder().encode(bytes));
+            //encodedfile = Base64.getEncoder().encode(bytes).toString();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException exception) {
+            // TODO Auto-generated catch block
+        }
+
+        return encodedfile;
+    }
+
 }
