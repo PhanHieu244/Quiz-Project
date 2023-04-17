@@ -3,6 +3,7 @@ module com.quiz {
     requires javafx.fxml;
     requires json.simple;
     requires javafx.media;
+    requires org.apache.poi.ooxml;
 
     exports com.quiz.TabPane;
     opens com.quiz.TabPane to javafx.fxml;

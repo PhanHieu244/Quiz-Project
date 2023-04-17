@@ -1,5 +1,6 @@
 package com.quiz.AddQuestion;
 
+import com.Base64Convert.Base64Convert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,7 +52,7 @@ public class ChoiceController implements Initializable {
             Stage stage = (Stage) importFile.getScene().getWindow();
             File file = fileChooser.showOpenDialog(stage);
             if (file != null){
-                choice.setText(encodeFileToBase64Binary(file));
+                choice.setText(Base64Convert.encodeFileToBase64Binary(file));
                 Image image = new Image(file.toURI().toString());
 
                 imageView.setImage(image);
@@ -77,26 +78,7 @@ public class ChoiceController implements Initializable {
         return new Image(stream);
     }
 
-    private Image base64ToImage(String base64String){
-        byte[] imageBytes = Base64.getDecoder().decode(base64String);
-        return new Image(new ByteArrayInputStream(imageBytes));
-    }
-    private static String encodeFileToBase64Binary(File file){
-        String encodedfile = null;
-        try {
-            FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int)file.length()];
-            fileInputStreamReader.read(bytes);
-            encodedfile = new String(Base64.getEncoder().encode(bytes));
-            //encodedfile = Base64.getEncoder().encode(bytes).toString();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException exception) {
-            // TODO Auto-generated catch block
-        }
 
-        return encodedfile;
-    }
+
 
 }

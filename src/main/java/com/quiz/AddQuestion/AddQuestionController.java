@@ -1,5 +1,6 @@
 package com.quiz.AddQuestion;
 
+import com.Base64Convert.Base64Convert;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +21,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.ResourceBundle;
 
 public class AddQuestionController implements Initializable {
@@ -64,37 +64,34 @@ public class AddQuestionController implements Initializable {
 
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"),
-                new FileChooser.ExtensionFilter("Video Files", "*.mp4")
+                new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mkv", "*.avi"),
+                new FileChooser.ExtensionFilter("Text Files", "*.docx")
         );
         importFile.setOnAction(event -> {
             Stage stage = (Stage) importFile.getScene().getWindow();
             File file = fileChooser.showOpenDialog(stage);
 
             if (file != null){
-                //questionText.setText(encodeFileToBase64Binary(file));
-                if (file.getName().endsWith(".mp4")){
-                    //todo
+                questionText.setText(Base64Convert.encodeFileToBase64Binary(file));
+                if (Base64Convert.isVideoFile(file)){
                     imageView.setImage(null);
                     Media media = new Media(file.toURI().toString());
                     MediaPlayer mediaPlayer = new MediaPlayer(media);
                     mediaView.setMediaPlayer(mediaPlayer);
-                    System.out.println("media");
+                    //System.out.println("media");
                     mediaPlayer.play();
-                }else {
+                }else if (Base64Convert.isImageFile(file)) {
                     mediaView.setMediaPlayer(null);
                     Image image = new Image(file.toURI().toString());
                     imageView.setImage(image);
                 }
+                else {
+                    System.out.println("File Name is not found");
+                }
             }
         });
         //todo: test
-        saveContinue.setOnAction(event -> {
-            for (int i = 0; i < listGradeChoice.size(); i++) {
-                String s = listGradeChoice.get(i).getValue();
-                System.out.println(getPercent(s));
-                System.out.println();
-            }
-        });
+
     }
 
     private void AddChoice(int amount){
@@ -120,49 +117,6 @@ public class AddQuestionController implements Initializable {
         String percentString = string;
         percentString = percentString.replaceAll("%", ""); // remove the percent symbol
         return Float.parseFloat(percentString);
-    }
-
-
-
-    //todo: delete
-
-    private static String encodeFileToBase64Binary(File file){
-        String encodedfile = null;
-        try {
-            FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int)file.length()];
-            fileInputStreamReader.read(bytes);
-            encodedfile = new String(Base64.getEncoder().encode(bytes));
-            //encodedfile = Base64.getEncoder().encode(bytes).toString();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException exception) {
-            // TODO Auto-generated catch block
-        }
-
-        return encodedfile;
-    }
-
-    private Media base64ToMedia(String base64String){
-
-        byte[] videoBytes = Base64.getDecoder().decode(base64String);
-
-        try {
-            // Create a new ByteArrayInputStream from the byte array
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(videoBytes);
-
-            // Save the byte array to a temporary video file
-            FileOutputStream outputStream = new FileOutputStream("temp.mp4");
-            outputStream.write(videoBytes);
-            outputStream.close();
-
-            // Create a new Media object from the temporary video file
-            return new Media(new File("temp.mp4").toURI().toString());
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }
