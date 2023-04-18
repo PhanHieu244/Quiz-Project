@@ -1,5 +1,6 @@
 package com.quiz.TabPane.QuestionTab;
 
+import com.DataManager.APIConnector;
 import com.quiz.MainUI.UIController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,11 +29,7 @@ public class QuestionTabController implements Initializable {
 
     private Node list;
 
-    ObservableList<String> categories = FXCollections.observableArrayList(
-            "300 bai code thieu nhi (300)",
-            "Toi da code dao nhu nao (100)",
-            "Lap trinh huong ve em (1)"
-    );
+    ObservableList<String> categories = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

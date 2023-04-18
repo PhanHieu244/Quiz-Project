@@ -1,5 +1,7 @@
 package com.quiz.MainUI;
 
+import com.DataManager.CategoryAPI;
+import com.DataManager.DataManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -1,62 +1,60 @@
 package com.DataManager;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Scanner;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+
 
 public class APIConnector {
+    private static APIConnector instance;
+    private final static OkHttpClient client = new OkHttpClient();
 
-    private final String urlString;
+    private APIConnector() {}
 
-    public APIConnector(String urlString) throws MalformedURLException{
-        this.urlString = urlString;
-    }
-
-    public JSONArray GetJSONArray(String query){
-        Object parser = GetJsonParser(query);
-        return (JSONArray) parser;
-    }
-
-    public JSONObject GetJSONObject(String query){
-        Object parser = GetJsonParser(query);
-        return (JSONObject) parser;
-    }
-
-    private Object GetJsonParser(String query){
-        try {
-            URL url = new URL(urlString + query);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            //Check if connect is made
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-
-                StringBuilder informationString = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
-                }
-                scanner.close();
-
-                JSONParser parse = new JSONParser();
-
-                return parse.parse(String.valueOf(informationString));
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+    public static APIConnector getInstance() {
+        if (instance == null){
+            instance = new APIConnector();
         }
-        return null;
+        return instance;
     }
+
+    public static Object getData(String url){
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            String string = response.body().string();
+            JSONParser parser = new JSONParser();
+            try {
+                return parser.parse(string);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void postData(String json, String url) throws IOException {
+        RequestBody body = RequestBody.create(json, DataManager.JSON);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response);
+    }
+
+    public static void putData(String json, String query){
+
+    }
+
 }

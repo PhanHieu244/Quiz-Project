@@ -4,6 +4,7 @@ module com.quiz {
     requires json.simple;
     requires javafx.media;
     requires org.apache.poi.ooxml;
+    requires okhttp3;
 
     exports com.quiz.TabPane;
     opens com.quiz.TabPane to javafx.fxml;
@@ -13,6 +14,5 @@ module com.quiz {
     opens com.quiz.AddQuestion to javafx.fxml;
     exports com.quiz.TabPane.QuestionTab;
     opens com.quiz.TabPane.QuestionTab to javafx.fxml;
-
 
 }
