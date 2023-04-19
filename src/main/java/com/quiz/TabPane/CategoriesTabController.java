@@ -36,7 +36,8 @@ public class CategoriesTabController {
         int id;
         if (name.getText().equals("")) return;
         try{
-            id = Integer.parseInt(idString);
+            if (idString.equals("")) id = 0;
+            else id = Integer.parseInt(idString);
         }catch (NumberFormatException e){
             System.out.println("Loi nhap id");
             e.printStackTrace();
@@ -46,7 +47,7 @@ public class CategoriesTabController {
         quesCtrl.Setup();
         reset();
         try {
-            System.out.println(CategoryAPI.getAllCatagories().toString());
+            System.out.println(CategoryAPI.getAllCategories().toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

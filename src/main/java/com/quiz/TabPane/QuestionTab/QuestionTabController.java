@@ -1,6 +1,5 @@
 package com.quiz.TabPane.QuestionTab;
 
-import com.DataManager.APIConnector;
 import com.DataManager.CategoryAPI;
 import com.quiz.MainUI.UIController;
 import javafx.collections.FXCollections;
@@ -13,12 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class QuestionTabController implements Initializable {
@@ -31,6 +28,7 @@ public class QuestionTabController implements Initializable {
 
     private Node list;
 
+    private HashMap<String, Integer> map;
 
 
     @Override
@@ -42,6 +40,8 @@ public class QuestionTabController implements Initializable {
                 vBox.getChildren().remove(list);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/QuestionTab/QuestionList.fxml"));
                 list = fxmlLoader.load();
+                QuestionListController listController = fxmlLoader.getController();
+                listController.Show(map.get(categoriesBox.getValue()));
                 vBox.getChildren().add(list);
             }catch (Exception e){
                 e.printStackTrace();
@@ -60,10 +60,12 @@ public class QuestionTabController implements Initializable {
     }
 
     public void Setup(){
-        ObservableList<String> categories = FXCollections.observableArrayList();
         try {
-            String[] names = CategoryAPI.getName();
-            categories.addAll(names);
+            ObservableList<String> categories = FXCollections.observableArrayList();
+            map = CategoryAPI.getMap();
+            for(String name: map.keySet()){
+                categories.add(name);
+            }
             categoriesBox.setItems(categories);
         } catch (IOException e) {
             throw new RuntimeException(e);

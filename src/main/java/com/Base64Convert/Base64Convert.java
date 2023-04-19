@@ -37,12 +37,15 @@ public class Base64Convert {
     }
 
     public static Image base64ToImage(String base64String){
+        if (base64String == null) return null;
+        if (base64String.equals("")) return null;
         byte[] imageBytes = Base64.getDecoder().decode(base64String);
         return new Image(new ByteArrayInputStream(imageBytes));
     }
 
     public static Media base64ToMedia(String base64String){
-
+        if (base64String == null) return null;
+        if (base64String.equals("")) return null;
         byte[] videoBytes = Base64.getDecoder().decode(base64String);
 
         try {

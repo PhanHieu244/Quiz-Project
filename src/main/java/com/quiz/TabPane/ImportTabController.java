@@ -6,8 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.apache.poi.ss.formula.functions.Choose;
 
 import java.io.File;
 import java.net.URL;

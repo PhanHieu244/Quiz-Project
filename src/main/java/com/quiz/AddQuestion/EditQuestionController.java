@@ -5,7 +5,6 @@ import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddQuestionController implements Initializable {
+public class EditQuestionController implements Initializable {
     @FXML
     private VBox vBox;
     @FXML
@@ -66,12 +65,6 @@ public class AddQuestionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        AddChoice(2);
-        moreChoices.setOnAction(event -> {
-            AddChoice(3);
-            moreChoices.setVisible(false);
-        });
-
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"),
                 new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mkv", "*.avi"),
@@ -122,13 +115,59 @@ public class AddQuestionController implements Initializable {
         }
     }
 
+    private void AddChoice(Choice choice){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Choice.fxml"));
+            Node node = fxmlLoader.load();
+            ChoiceController controller = fxmlLoader.getController();
+            int id = listGradeChoice.size();
+            vBox.getChildren().add(id, node);
+            controller.setChoiceId(id + 1);
+            controller.loadData(choice);
+            listGradeChoice.add(controller.gradeBox);
+            choicesText.add(controller.choice);
+            base64List.add(controller.base64);
+            //todo add image
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadData(int idCate, int quesID){
+        try {
+            Question question = QuestionAPI.getQuestion(quesID, idCate);
+            loadQuesContent(question);
+            List<Choice> choices = question.getChoices();
+            for (int i = 0; i < choices.size(); i++) {
+                AddChoice(choices.get(i));
+            }
+            int remain = 5 - choices.size();
+            if (remain < 0) moreChoices.setVisible(false);
+            else {
+                moreChoices.setText("BLANKS FOR " + remain + " MORE CHOICE");
+                moreChoices.setOnAction(event -> {
+                    AddChoice(remain);
+                    moreChoices.setVisible(false);
+                });
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadQuesContent(Question question){
+        questionText.setText(question.getContentQuestion());
+        imageView.setImage(Base64Convert.base64ToImage(base64));
+        //todo show video
+    }
+
     private float getPercent(String string){
         if (string.equals("None")) return 0;
         String percentString = string;
         percentString = percentString.replaceAll("%", ""); // remove the percent symbol
         return Float.parseFloat(percentString);
     }
-
 
     @FXML
     private void addNewQuestion(ActionEvent event){
@@ -143,6 +182,5 @@ public class AddQuestionController implements Initializable {
         }
         Question question = new Question(questionText.getText(), base64, choices);
         QuestionAPI.postNewQuestion(2, question);
-        //todo add category
     }
 }

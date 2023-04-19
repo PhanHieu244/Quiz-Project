@@ -1,6 +1,7 @@
 package com.quiz.AddQuestion;
 
 import com.Base64Convert.Base64Convert;
+import com.Question.Choice;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Base64;
 import java.util.ResourceBundle;
 
 public class ChoiceController implements Initializable {
@@ -28,6 +28,8 @@ public class ChoiceController implements Initializable {
     public Label choiceId;
     @FXML
     public ImageView imageView;
+
+    public String base64;
 
     private final FileChooser fileChooser = new FileChooser();
 
@@ -52,9 +54,8 @@ public class ChoiceController implements Initializable {
             Stage stage = (Stage) importFile.getScene().getWindow();
             File file = fileChooser.showOpenDialog(stage);
             if (file != null){
-                choice.setText(Base64Convert.encodeFileToBase64Binary(file));
+                base64 = Base64Convert.encodeFileToBase64Binary(file);
                 Image image = new Image(file.toURI().toString());
-
                 imageView.setImage(image);
                 /*try {
                     Image image = loadImage(file);
@@ -78,7 +79,12 @@ public class ChoiceController implements Initializable {
         return new Image(stream);
     }
 
-
+    public void loadData(Choice chosen){
+        choice.setText(chosen.getContentChoice());
+        gradeBox.setValue(chosen.getPercentGrade() + "%");
+        base64 = chosen.getImageDataChoice();
+        imageView.setImage(Base64Convert.base64ToImage(base64));
+    }
 
 
 }

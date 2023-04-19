@@ -1,10 +1,16 @@
 package com.quiz.TabPane.QuestionTab;
 
+import com.quiz.AddQuestion.EditQuestionController;
+import com.quiz.MainUI.UIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 
 public class QuestionBoxController {
@@ -15,6 +21,13 @@ public class QuestionBoxController {
     @FXML
     private Hyperlink edit;
 
+    private int idCate;
+    private int quesID;
+
+    public void setID(int idCate, int quesID){
+        this.idCate = idCate;
+        this.quesID = quesID;
+    }
 
     @FXML
     private void selectBox(ActionEvent event){
@@ -28,7 +41,16 @@ public class QuestionBoxController {
 
     @FXML
     private void editQuestion(ActionEvent event){
-        System.out.printf("change edit scene");
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/AddQuestion/EditQuestion.fxml"));
+            Node node = fxmlLoader.load();
+            EditQuestionController controller = fxmlLoader.getController();
+            UIController.Instance.SetCenter(node);
+            controller.loadData(idCate, quesID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setText(String string){

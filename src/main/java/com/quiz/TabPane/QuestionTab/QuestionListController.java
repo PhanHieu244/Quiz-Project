@@ -1,14 +1,18 @@
 package com.quiz.TabPane.QuestionTab;
 
+import com.DataManager.QuestionAPI;
+import com.Question.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,14 +27,24 @@ public class QuestionListController implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
+
+    public void Show(int idCate){
+        ArrayList<Question> questionsContent;
         try {
-            for (int i = 0; i < 100; i++) {
+            questionsContent = QuestionAPI.getQuestionsContent(idCate);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            for (int i = 0; i < questionsContent.size(); i++) {
+                Question question = questionsContent.get(i);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("QuestionBox.fxml"));
                 Node node = fxmlLoader.load();
                 QuestionBoxController controller = fxmlLoader.getController();
                 listCheckBox.add(controller.checkBox);
-                controller.setText("" + i);
+                controller.setText(question.getContentQuestion());
+                controller.setID(idCate, question.getIdQuestion());
                 vBox.getChildren().add(node);
             }
 
@@ -38,7 +52,6 @@ public class QuestionListController implements Initializable {
             e.printStackTrace();
             System.out.println("loi roi");
         }
-
     }
 
     @FXML
@@ -47,6 +60,6 @@ public class QuestionListController implements Initializable {
         for (int i = 0; i < listCheckBox.size(); i++) {
             listCheckBox.get(i).setSelected(isSelected);
         }
-
     }
+
 }
