@@ -1,5 +1,6 @@
 package com.quiz.TabPane;
 
+import com.quiz.TabPane.QuestionTab.QuestionTabController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,10 +33,19 @@ public class SettingController implements Initializable {
 
     private void SetupScene(){
         try {
-            questionTab.setContent(new FXMLLoader(getClass().getResource("QuestionTab/QuestionTab.fxml")).load());
-            categoriesTab.setContent(new FXMLLoader(getClass().getResource("CategoriesTab.fxml")).load());
-            importTab.setContent(new FXMLLoader(getClass().getResource("ImportTab.fxml")).load());
-            exportTab.setContent(new FXMLLoader(getClass().getResource("ExportTab.fxml")).load());
+            FXMLLoader quesLoader = new FXMLLoader(getClass().getResource("QuestionTab/QuestionTab.fxml"));
+            FXMLLoader cateLoader = new FXMLLoader(getClass().getResource("CategoriesTab.fxml"));
+            FXMLLoader importLoader = new FXMLLoader(getClass().getResource("ImportTab.fxml"));
+            FXMLLoader exportLoader = new FXMLLoader(getClass().getResource("ExportTab.fxml"));
+            questionTab.setContent(quesLoader.load());
+            categoriesTab.setContent(cateLoader.load());
+            importTab.setContent(importLoader.load());
+            exportTab.setContent(exportLoader.load());
+            QuestionTabController quesCtrl = quesLoader.getController();
+            CategoriesTabController cateCtrl = cateLoader.getController();
+            ImportTabController importCtrl = importLoader.getController();
+            ExportTabController exportCtrl = exportLoader.getController();
+            cateCtrl.quesCtrl = quesCtrl;
 
         } catch (Exception e){
             e.printStackTrace();

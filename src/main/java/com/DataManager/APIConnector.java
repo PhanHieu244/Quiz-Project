@@ -51,9 +51,10 @@ public class APIConnector {
                 .build();
         Response response = client.newCall(request).execute();
         System.out.println(response);
+        response.close();
     }
 
-    public static void putData(String json, String query){
+    public static void putData(String json, String url){
 
     }
 

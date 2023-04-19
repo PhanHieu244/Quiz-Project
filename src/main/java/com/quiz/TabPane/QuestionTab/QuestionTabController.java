@@ -1,6 +1,7 @@
 package com.quiz.TabPane.QuestionTab;
 
 import com.DataManager.APIConnector;
+import com.DataManager.CategoryAPI;
 import com.quiz.MainUI.UIController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,11 +31,12 @@ public class QuestionTabController implements Initializable {
 
     private Node list;
 
-    ObservableList<String> categories = FXCollections.observableArrayList();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        categoriesBox.setItems(categories);
+        Setup();
+
         categoriesBox.setOnAction(event -> {
             try{
                 vBox.getChildren().remove(list);
@@ -53,6 +56,17 @@ public class QuestionTabController implements Initializable {
             UIController.Instance.SetCenter(node);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void Setup(){
+        ObservableList<String> categories = FXCollections.observableArrayList();
+        try {
+            String[] names = CategoryAPI.getName();
+            categories.addAll(names);
+            categoriesBox.setItems(categories);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

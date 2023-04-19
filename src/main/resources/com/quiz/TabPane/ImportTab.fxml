@@ -10,8 +10,8 @@
    <children>
       <Label fx:id="string" layoutX="48.0" layoutY="90.0" prefHeight="213.0" prefWidth="468.0" text="Label" textAlignment="JUSTIFY" />
       <TextArea fx:id="textArea" layoutX="300.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="button" layoutX="126.0" layoutY="32.0" mnemonicParsing="false" onAction="#ChangeName" text="Button" />
+      <Button fx:id="button" layoutX="126.0" layoutY="32.0" mnemonicParsing="false" text="Button" />
       <TextField fx:id="textField" layoutX="335.0" layoutY="32.0" />
-      <Button fx:id="get" layoutX="126.0" layoutY="65.0" mnemonicParsing="false" onAction="#GetData" text="Button" />
+      <Button fx:id="get" layoutX="126.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
