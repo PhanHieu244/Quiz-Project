@@ -64,6 +64,8 @@ public class AddQuestionController implements Initializable {
 
     private String base64;
 
+    public String[] base64Choices;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         AddChoice(2);

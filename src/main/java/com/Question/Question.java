@@ -8,9 +8,9 @@ public class Question {
     private List<Choice> choices = new ArrayList<Choice>();// danh sách câu trả lời
     private String key;// dạng chuỗi vì nó có thể chứa nhiều đáp án
     private String imageDataQs = null;
-    public Question(){
-    }
+    public Question(){ }
     public Question(String s){
+        contentQuestion = s;
     }
 
     public Question(String contentQuestion, List<Choice> choices, String key) {
@@ -98,7 +98,6 @@ public class Question {
         for (Choice choice : choices) {
             System.out.println(choice.getName() + " " + choice.getContentChoice() + " " + choice.isKey() + " " + choice.getImageDataChoice());
         }
-
         System.out.println(key);
     }
 }

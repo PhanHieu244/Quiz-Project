@@ -35,6 +35,8 @@ public class ChoiceController implements Initializable {
 
     private  FileInputStream fileInputStream;
 
+    public AddQuestionController addQuestionController;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gradeBox.getItems().addAll(
