@@ -3,8 +3,6 @@ package com.quiz.AddQuestion;
 import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
 import java.net.URL;
@@ -25,8 +23,8 @@ public class AddQuestionController extends AddQuestionBase {
         super.initialize(url, resourceBundle);
     }
 
-    @FXML
-    private void addNewQuestion(ActionEvent event){
+    @Override
+    protected void postQuestion() {
         List<Choice> choices = new ArrayList<>();
         for (int i = 0; i < choicesText.size(); i++) {
             TextArea choiceText = choicesText.get(i);
@@ -37,7 +35,9 @@ public class AddQuestionController extends AddQuestionBase {
             choices.add(choice);
         }
         Question question = new Question(questionText.getText(), base64, choices);
-        QuestionAPI.postNewQuestion(1, question);
+        QuestionAPI.postNewQuestion(map.get(categoriesBox.getValue()), question);
         //todo add category
     }
+
+
 }

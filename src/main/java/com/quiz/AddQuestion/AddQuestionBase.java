@@ -1,7 +1,14 @@
 package com.quiz.AddQuestion;
 
 import com.Base64Convert.Base64Convert;
+import com.DataManager.CategoriesData;
+import com.DataManager.CategoryAPI;
 import com.Question.Choice;
+import com.quiz.MainUI.UIController;
+import com.quiz.TabPane.QuestionTab.QuestionListController;
+import com.quiz.TabPane.SettingTab;
+import com.quiz.Tool.CategoriesBoxTool;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,9 +29,10 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class AddQuestionBase implements Initializable {
+public abstract class AddQuestionBase implements Initializable {
     @FXML
     protected VBox vBox;
     @FXML
@@ -49,15 +57,13 @@ public class AddQuestionBase implements Initializable {
     protected Button importFile;
     @FXML
     protected MediaView mediaView;
-
     protected final FileChooser fileChooser = new FileChooser();
-
     protected ArrayList<ComboBox<String>> listGradeChoice = new ArrayList<>();
     protected ArrayList<TextArea> choicesText = new ArrayList<>();
-
     protected String base64;
-
     protected String[] base64Choices;
+
+    protected HashMap<String, Integer> map;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,7 +95,16 @@ public class AddQuestionBase implements Initializable {
                 }
             }
         });
-        //todo: test
+    }
+
+    public void setup(String string){
+        map = CategoriesBoxTool.Setup(categoriesBox);
+        categoriesBox.setValue(string);
+    }
+
+    public void setup(Integer idCate){
+        map = CategoriesBoxTool.Setup(categoriesBox);
+        categoriesBox.setValue(CategoriesData.getCateFromID(idCate));
     }
 
      protected void AddChoice(int amount){
@@ -135,5 +150,25 @@ public class AddQuestionBase implements Initializable {
         return Float.parseFloat(percentString);
     }
 
+    protected abstract void postQuestion();
 
+    protected void out(){
+        UIController.Instance.openTabPane(SettingTab.QuestionTab);
+    }
+
+    @FXML
+    protected void saveContinue(ActionEvent event){
+        postQuestion();
+    }
+
+    @FXML
+    protected void saveOut(ActionEvent event){
+        postQuestion();
+        out();
+    }
+
+    @FXML
+    protected void cancel(ActionEvent event){
+        out();
+    }
 }

@@ -1,6 +1,7 @@
 package com.quiz.TabPane.QuestionTab;
 
 import com.DataManager.CategoryAPI;
+import com.quiz.AddQuestion.AddQuestionController;
 import com.quiz.MainUI.UIController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +55,8 @@ public class QuestionTabController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/AddQuestion/AddNewQuestion.fxml"));
             Node node = fxmlLoader.load();
             UIController.Instance.SetCenter(node);
+            AddQuestionController addQuestionController = fxmlLoader.getController();
+            addQuestionController.setup(map.get(categoriesBox.getValue()));
         }catch (Exception e){
             e.printStackTrace();
         }

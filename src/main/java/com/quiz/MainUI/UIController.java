@@ -1,5 +1,6 @@
 package com.quiz.MainUI;
-import com.quiz.TabPane.SettingPopUpController;
+import com.quiz.TabPane.SettingController;
+import com.quiz.TabPane.SettingTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,5 +62,18 @@ public class UIController implements Initializable {
 
     public void SetCenter(Node node){
         main.setCenter(node);
+    }
+
+    public void openTabPane(SettingTab settingTab){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/SettingTabPane.fxml"));
+            Parent root = fxmlLoader.load();
+            SettingController settingController = fxmlLoader.getController();
+            SetCenter(root);
+            settingController.ShowTab(settingTab);
+            settingBut.setVisible(false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

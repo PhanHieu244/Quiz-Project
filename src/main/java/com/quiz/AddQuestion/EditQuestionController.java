@@ -21,6 +21,20 @@ public class EditQuestionController extends AddQuestionBase {
         super.initialize(url, resourceBundle);
     }
 
+    @Override
+    protected void postQuestion() {
+        List<Choice> choices = new ArrayList<>();
+        for (int i = 0; i < choicesText.size(); i++) {
+            TextArea choiceText = choicesText.get(i);
+            String choiceContent = choiceText.getText();
+            if (choiceContent.equals("")) continue;
+            float percent = getPercent(listGradeChoice.get(i).getValue());
+            Choice choice = new Choice(choiceContent, base64Choices[i], percent);
+            choices.add(choice);
+        }
+        Question question = new Question(questionText.getText(), base64, choices);
+        QuestionAPI.postNewQuestion(2, question);
+    }
 
 
     public void loadData(int idCate, int quesID){
@@ -52,19 +66,4 @@ public class EditQuestionController extends AddQuestionBase {
         //todo show video
     }
 
-
-    @FXML
-    private void addNewQuestion(ActionEvent event){
-        List<Choice> choices = new ArrayList<>();
-        for (int i = 0; i < choicesText.size(); i++) {
-            TextArea choiceText = choicesText.get(i);
-            String choiceContent = choiceText.getText();
-            if (choiceContent.equals("")) continue;
-            float percent = getPercent(listGradeChoice.get(i).getValue());
-            Choice choice = new Choice(choiceContent, base64Choices[i], percent);
-            choices.add(choice);
-        }
-        Question question = new Question(questionText.getText(), base64, choices);
-        QuestionAPI.postNewQuestion(2, question);
-    }
 }

@@ -9,9 +9,6 @@ import javafx.scene.control.TabPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-enum SettingTab{
-    QuestionTab, CategoriesTab, ExportTab, ImportTab
-}
 
 public class SettingController implements Initializable {
     @FXML

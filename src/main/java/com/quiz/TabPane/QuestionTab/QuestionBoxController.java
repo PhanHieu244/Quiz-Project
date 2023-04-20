@@ -48,6 +48,7 @@ public class QuestionBoxController {
             EditQuestionController controller = fxmlLoader.getController();
             UIController.Instance.SetCenter(node);
             controller.loadData(idCate, quesID);
+            controller.setup(idCate);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

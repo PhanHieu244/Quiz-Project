@@ -6,22 +6,24 @@ public class Test {
     private static int sId = 0;
     private String nameTest;
     private int idTest;// id của test
-    List<Question> questions =  new ArrayList<Question>();
+    List<Question> questions =  new ArrayList<>();
 
     public Test() {
         idTest =++sId;
     }
 
     public Test(String nameTest) {
-        idTest =++sId;
         this.nameTest = nameTest;
     }
 
     public Test(String nameTest, List<Question> questions) {
         this.nameTest = nameTest;
         this.questions = questions;
-        idTest =++sId;
+    }
 
+    public Test(int id, String name){
+        idTest = id;
+        nameTest = name;
     }
 
     public String getNameTest() {
