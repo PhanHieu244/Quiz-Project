@@ -142,7 +142,7 @@ public class AddQuestionController implements Initializable {
             choices.add(choice);
         }
         Question question = new Question(questionText.getText(), base64, choices);
-        QuestionAPI.postNewQuestion(2, question);
+        QuestionAPI.postNewQuestion(1, question);
         //todo add category
     }
 }

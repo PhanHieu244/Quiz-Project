@@ -7,21 +7,21 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class QuestionAPI {
     private final static String urlQuestion = "http://localhost:8080/api/v1/answer/quiz_id=";
 
-    public static JSONObject getAllQuestion(int id) throws IOException {
-        System.out.println(((JSONObject) APIConnector.getData(urlQuestion + id)).toString());
-        return (JSONObject) APIConnector.getData(urlQuestion + id);
-    }
-
-    public static String creatJsonQuestion(){
-        JSONObject jsonObject = new JSONObject();
-
-        return jsonObject.toString();
+    public static Map<Integer, JSONObject> getAllQuestion(int id) throws IOException {
+        JSONObject jsonObject = (JSONObject) APIConnector.getData(urlQuestion + id);
+        JSONArray jsonArray = (JSONArray) jsonObject.get("data");
+        Map<Integer, JSONObject> map = new HashMap<>();
+        for (Object json : jsonArray) {
+            JSONObject jsonQues = (JSONObject) json;
+            int idQues = Integer.parseInt(jsonQues.get("id").toString());
+            map.put(idQues, jsonQues);
+        }
+        return map;
     }
 
     public static void post(String json, int id) throws IOException {
@@ -30,10 +30,11 @@ public class QuestionAPI {
 
     //todo get all question
     public static ArrayList<Question> getQuestionsContent(int id) throws IOException {
-        JSONArray jsonArray = (JSONArray) getAllQuestion(id).get("data");
+        Map<Integer, JSONObject> map = getAllQuestion(id);
+        List<JSONObject> listJson = new ArrayList<>(map.values());
         ArrayList<Question> questions = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+        for (int i = 0; i < listJson.size(); i++) {
+            JSONObject jsonObject = listJson.get(i);
             String content = jsonObject.get("description").toString();
             int quesID = Integer.parseInt(jsonObject.get("id").toString());
             questions.add(new Question(content, quesID));
@@ -43,8 +44,7 @@ public class QuestionAPI {
 
     //todo get one question
     public static Question getQuestion(int quesID, int id) throws IOException {
-        JSONArray jsonArray = (JSONArray) getAllQuestion(id).get("data");
-        JSONObject jsonObject = (JSONObject) jsonArray.get(quesID - 1);
+        JSONObject jsonObject = getAllQuestion(id).get(quesID);;
         String content = jsonObject.get("description").toString();
         String base64;
         if (jsonObject.get("imgQuiz") == null) base64 = "";
@@ -89,15 +89,17 @@ public class QuestionAPI {
         jsonObject.put("questionAnswerSet", jsonArray);
         jsonObject.put("description", question.getContentQuestion());
         jsonObject.put("imgQuiz", question.getImageDataQs());
-        System.out.println(jsonObject);
-        return jsonObject.toString();
+        jsonObject.put("question_mark", 1);
+        //todo add question mark
+        JSONArray json = new JSONArray();
+        json.add(jsonObject);
+        return json.toString();
     }
 
     public static void postNewQuestion(int id, Question question){
         String questionString = creatJsonQuestion(question);
         try {
             post(questionString, id);
-            JSONObject b = getAllQuestion(id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

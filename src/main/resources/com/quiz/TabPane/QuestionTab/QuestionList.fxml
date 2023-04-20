@@ -33,7 +33,7 @@
                   <Insets left="15.0" />
                </VBox.margin>
             </AnchorPane>
-            <ScrollPane prefHeight="479.0" prefWidth="573.0">
+            <ScrollPane prefHeight="369.0" prefWidth="600.0">
               <content>
                   <VBox fx:id="vBox" prefHeight="603.0" prefWidth="583.0">
                      <opaqueInsets>
