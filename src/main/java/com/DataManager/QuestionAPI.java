@@ -51,7 +51,7 @@ public class QuestionAPI {
         else base64 = jsonObject.get("imgQuiz").toString();
         JSONArray choicesJson = (JSONArray) jsonObject.get("questionAnswerSet");
         List<Choice> choices = getChoices(choicesJson);
-        return new Question(content, base64, choices);
+        return new Question(content, base64, choices, quesID);
     }
 
     //todo get all choice
@@ -60,7 +60,9 @@ public class QuestionAPI {
         for (int i = 0; i < choicesJson.size(); i++) {
             JSONObject object = (JSONObject) choicesJson.get(i);
             String content = object.get("description").toString();
-            String base64 = object.get("imgAnswer").toString();
+            String base64;
+            if (object.get("imgAnswer") == null) base64 = "";
+            else base64 = object.get("imgAnswer").toString();
             float percent = Float.parseFloat(object.get("score").toString());
             int id = Integer.parseInt(object.get("id").toString());
             choices.add(new Choice(id, content, base64, percent));
@@ -70,7 +72,7 @@ public class QuestionAPI {
 
     private static JSONObject creatJsonChoice(Choice choice){
         JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("id", 3); //todo
+        if (choice.getId() != null) jsonObject.put("id", choice.getId());
         jsonObject.put("description", choice.getContentChoice());
         jsonObject.put("imgAnswer", choice.getImageDataChoice());
         jsonObject.put("score", choice.getPercentGrade());
@@ -93,6 +95,7 @@ public class QuestionAPI {
         //todo add question mark
         JSONArray json = new JSONArray();
         json.add(jsonObject);
+        System.out.println(json);
         return json.toString();
     }
 

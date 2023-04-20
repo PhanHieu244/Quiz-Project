@@ -63,9 +63,7 @@ public class QuestionTabController implements Initializable {
         try {
             ObservableList<String> categories = FXCollections.observableArrayList();
             map = CategoryAPI.getMap();
-            for(String name: map.keySet()){
-                categories.add(name);
-            }
+            categories.addAll(map.keySet());
             categoriesBox.setItems(categories);
         } catch (IOException e) {
             throw new RuntimeException(e);

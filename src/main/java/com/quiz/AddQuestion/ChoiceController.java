@@ -31,11 +31,13 @@ public class ChoiceController implements Initializable {
 
     public String base64;
 
+    private int idUI;
+
     private final FileChooser fileChooser = new FileChooser();
 
     private  FileInputStream fileInputStream;
 
-    public AddQuestionController addQuestionController;
+    public AddQuestionBase addQuestionController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +59,7 @@ public class ChoiceController implements Initializable {
             File file = fileChooser.showOpenDialog(stage);
             if (file != null){
                 base64 = Base64Convert.encodeFileToBase64Binary(file);
+                addQuestionController.base64Choices[idUI] = base64;
                 Image image = new Image(file.toURI().toString());
                 imageView.setImage(image);
                 /*try {
@@ -72,6 +75,7 @@ public class ChoiceController implements Initializable {
     }
 
     public void setChoiceId(int id){
+        idUI = id - 1;
         choiceId.setText("Choice " + id);
     }
 
@@ -83,7 +87,12 @@ public class ChoiceController implements Initializable {
 
     public void loadData(Choice chosen){
         choice.setText(chosen.getContentChoice());
-        gradeBox.setValue(chosen.getPercentGrade() + "%");
+        float grade = chosen.getPercentGrade();
+        String gradeString;
+        if (grade == 0)  gradeString = "None";
+        else if ((int)grade == grade) gradeString = (int) grade + "%";
+        else gradeString = grade + "%";
+        gradeBox.setValue(gradeString);
         base64 = chosen.getImageDataChoice();
         imageView.setImage(Base64Convert.base64ToImage(base64));
     }

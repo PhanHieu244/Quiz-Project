@@ -1,7 +1,7 @@
 package com.Question;
 
 public class Choice {
-    private int id;
+    private Integer id;
     private String contentChoice;// nội dung đáp án
     private double point;// điểm có được khi chọn đáp án
     private boolean key;// nếu choice là ans thì choice = true
@@ -10,25 +10,25 @@ public class Choice {
 
     private float percentGrade; // sub 100
 
-    public Choice(){}
-
-    public Choice(String contentChoice, char name) {
-        this.contentChoice = contentChoice;
-        this.name = name;
-    }
-
-    public Choice(int id ,String content, String base64, float percent){
+    public Choice(Integer id, String content, String base64, float percent){
         this.id = id;
         contentChoice = content;
         imageDataChoice = base64;
         percentGrade = percent;
     }
 
+    public Choice(String contentChoice, char name) {
+        this.contentChoice = contentChoice;
+        this.name = name;
+    }
+
     public Choice(String content, String base64, float percent){
+        this.id = null;
         contentChoice = content;
         imageDataChoice = base64;
         percentGrade = percent;
     }
+
 
     public String getContentChoice() {
         return contentChoice;
@@ -66,5 +66,9 @@ public class Choice {
 
     public float getPercentGrade() {
         return percentGrade;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

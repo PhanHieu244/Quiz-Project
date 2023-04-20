@@ -25,6 +25,13 @@ public class Question {
         imageDataQs = base64;
     }
 
+    public Question(String contentQuestion, String base64, List<Choice> choices, int idQuestion) {
+        this.contentQuestion = contentQuestion;
+        this.choices = choices;
+        imageDataQs = base64;
+        this.idQuestion = idQuestion;
+    }
+
     public Question(String contentQuestion, int idQuestion){
         this.contentQuestion = contentQuestion;
         this.idQuestion = idQuestion;
