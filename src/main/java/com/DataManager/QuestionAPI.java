@@ -88,9 +88,9 @@ public class QuestionAPI {
         for (int i = 0; i < choices.size(); i++) {
             jsonArray.add(creatJsonChoice(choices.get(i)));
         }
-        jsonObject.put("questionAnswerSet", jsonArray);
+        jsonObject.put("questionAnswerDtos", jsonArray);
         jsonObject.put("description", question.getContentQuestion());
-        jsonObject.put("imgQuiz", question.getImageDataQs());
+        jsonObject.put("imgQuestion", question.getImageDataQs());
         jsonObject.put("question_mark", 1);
         //todo add question mark
         JSONArray json = new JSONArray();

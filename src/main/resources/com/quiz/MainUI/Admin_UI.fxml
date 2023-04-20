@@ -2,25 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="main" prefHeight="701.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.MainUI.UIController">
    <top>
@@ -95,78 +87,27 @@
          <children>
             <VBox layoutY="-55.0" prefHeight="1367.0" prefWidth="597.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Text fill="#d31414" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding a Multiple choice question" textAlignment="CENTER" wrappingWidth="296.13671875">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="5.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TitledPane animated="false" prefHeight="996.0" prefWidth="597.0" text="General" textFill="#e81313">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <content>
-                        <GridPane prefHeight="986.0" prefWidth="595.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="-Infinity" prefWidth="210.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="361.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="145.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="-Infinity" prefHeight="231.7999969482422" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <children>
-                                    <ComboBox layoutX="70.0" layoutY="10.0" prefHeight="27.0" prefWidth="165.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField layoutX="70.0" layoutY="7.0" prefHeight="27.0" prefWidth="224.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <children>
-                                    <TextArea layoutX="70.0" layoutY="13.0" prefHeight="128.0" prefWidth="282.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                                 <children>
-                                    <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question text" textAlignment="CENTER" wrappingWidth="71.203125" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="47.0" prefWidth="219.0">
-                                 <children>
-                                    <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="101.953125" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question name" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <children>
-                                    <TextField layoutX="70.0" layoutY="14.0" prefHeight="27.0" prefWidth="93.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                                 <children>
-                                    <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Default mark" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </GridPane>
-                     </content>
-                  </TitledPane>
+                  <AnchorPane prefHeight="61.0" prefWidth="597.0">
+                     <children>
+                        <Button layoutX="420.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="154.0" style="-fx-background-color: #208fbf;" text="TURN EDITING ON" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <VBox prefHeight="536.0" prefWidth="597.0">
+                     <children>
+                        <Hyperlink prefHeight="62.0" prefWidth="267.0" text="Hyperlink">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="40.0" />
+                           </padding>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

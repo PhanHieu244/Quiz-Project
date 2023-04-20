@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 
@@ -26,6 +27,8 @@ public class QuestionTabController implements Initializable {
     private VBox vBox;
     @FXML
     private Button createQuestion;
+    @FXML
+    private CheckBox showQues;
 
     private Node list;
 
@@ -35,18 +38,9 @@ public class QuestionTabController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Setup();
-
+        showQues.setSelected(true);
         categoriesBox.setOnAction(event -> {
-            try{
-                vBox.getChildren().remove(list);
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/QuestionTab/QuestionList.fxml"));
-                list = fxmlLoader.load();
-                QuestionListController listController = fxmlLoader.getController();
-                listController.Show(map.get(categoriesBox.getValue()));
-                vBox.getChildren().add(list);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            showQuesList(showQues.isSelected());
         });
     }
     @FXML
@@ -62,7 +56,14 @@ public class QuestionTabController implements Initializable {
         }
     }
 
+    @FXML
+    private void showList(ActionEvent event){
+        if (!showQues.isSelected()) vBox.getChildren().remove(list);
+        else showQuesList(categoriesBox.getValue() != null);
+    }
+
     public void Setup(){
+        vBox.getChildren().remove(list);
         try {
             ObservableList<String> categories = FXCollections.observableArrayList();
             map = CategoryAPI.getMap();
@@ -72,4 +73,21 @@ public class QuestionTabController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    private void showQuesList(boolean isShow){
+        if (!isShow) return;
+        if (categoriesBox.getValue() == null) return;
+        try{
+            vBox.getChildren().remove(list);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/QuestionTab/QuestionList.fxml"));
+            list = fxmlLoader.load();
+            QuestionListController listController = fxmlLoader.getController();
+            listController.Show(map.get(categoriesBox.getValue()));
+            vBox.getChildren().add(list);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -48,7 +48,7 @@
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Text>
-            <CheckBox mnemonicParsing="false" text="Also show questions from subcategories">
+            <CheckBox fx:id="showQues" mnemonicParsing="false" onAction="#showList" selected="true" text="Also show questions from subcategories">
                <padding>
                   <Insets left="10.0" top="5.0" />
                </padding>
