@@ -21,27 +21,12 @@ public class EditQuestionController extends AddQuestionBase {
         super.initialize(url, resourceBundle);
     }
 
-    @Override
-    protected void postQuestion() {
-        List<Choice> choices = new ArrayList<>();
-        for (int i = 0; i < choicesText.size(); i++) {
-            TextArea choiceText = choicesText.get(i);
-            String choiceContent = choiceText.getText();
-            if (choiceContent.equals("")) continue;
-            float percent = getPercent(listGradeChoice.get(i).getValue());
-            Choice choice = new Choice(choiceContent, base64Choices[i], percent);
-            choices.add(choice);
-        }
-        Question question = new Question(questionText.getText(), base64, choices);
-        QuestionAPI.postNewQuestion(2, question);
-    }
-
 
     public void loadData(int idCate, int quesID){
         try {
-            Question question = QuestionAPI.getQuestion(quesID, idCate);
-            loadQuesContent(question);
-            List<Choice> choices = question.getChoices();
+            questionSave = QuestionAPI.getQuestion(quesID, idCate);
+            loadQuesContent(questionSave);
+            List<Choice> choices = questionSave.getChoices();
             for (Choice choice : choices) {
                 LoadChoice(choice);
             }
@@ -66,4 +51,21 @@ public class EditQuestionController extends AddQuestionBase {
         //todo show video
     }
 
+    private void putQuestion(){
+        QuestionAPI.putNewQuestion(map.get(categoriesBox.getValue()), creatQuestion());
+    }
+
+    @Override
+    protected void saveOut(ActionEvent event) {
+        putQuestion();
+        out();
+    }
+
+    @Override
+    protected void saveContinue(ActionEvent event) {
+        putQuestion();
+    }
+
 }
+
+

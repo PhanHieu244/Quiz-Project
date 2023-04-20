@@ -3,7 +3,9 @@ package com.quiz.AddQuestion;
 import com.Base64Convert.Base64Convert;
 import com.DataManager.CategoriesData;
 import com.DataManager.CategoryAPI;
+import com.DataManager.QuestionAPI;
 import com.Question.Choice;
+import com.Question.Question;
 import com.quiz.MainUI.UIController;
 import com.quiz.TabPane.QuestionTab.QuestionListController;
 import com.quiz.TabPane.SettingTab;
@@ -30,6 +32,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public abstract class AddQuestionBase implements Initializable {
@@ -64,9 +67,11 @@ public abstract class AddQuestionBase implements Initializable {
     protected String[] base64Choices;
 
     protected HashMap<String, Integer> map;
+    protected Question questionSave;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"),
                 new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mkv", "*.avi"),
@@ -150,7 +155,8 @@ public abstract class AddQuestionBase implements Initializable {
         return Float.parseFloat(percentString);
     }
 
-    protected abstract void postQuestion();
+
+
 
     protected void out(){
         UIController.Instance.openTabPane(SettingTab.QuestionTab);
@@ -158,13 +164,28 @@ public abstract class AddQuestionBase implements Initializable {
 
     @FXML
     protected void saveContinue(ActionEvent event){
-        postQuestion();
+
     }
 
     @FXML
     protected void saveOut(ActionEvent event){
-        postQuestion();
         out();
+    }
+
+    protected Question creatQuestion(){
+        List<Choice> choices = new ArrayList<>();
+        List<Choice> choicesSave = questionSave.getChoices();
+        for (int i = 0; i < choicesText.size(); i++) {
+            TextArea choiceText = choicesText.get(i);
+            String choiceContent = choiceText.getText();
+            if (choiceContent.equals("")) continue;
+            float percent = getPercent(listGradeChoice.get(i).getValue());
+            Integer idChoice = null;
+            if (i < choicesSave.size()) idChoice = choicesSave.get(i).id;
+            Choice choice = new Choice(idChoice ,choiceContent, base64Choices[i], percent);
+            choices.add(choice);
+        }
+        return new Question(questionText.getText(), base64, choices, questionSave.idQuestion);
     }
 
     @FXML

@@ -83,34 +83,6 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="1186.0" prefWidth="597.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox layoutY="-55.0" prefHeight="1367.0" prefWidth="597.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane prefHeight="61.0" prefWidth="597.0">
-                     <children>
-                        <Button layoutX="420.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="154.0" style="-fx-background-color: #208fbf;" text="TURN EDITING ON" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <VBox prefHeight="536.0" prefWidth="597.0">
-                     <children>
-                        <Hyperlink prefHeight="62.0" prefWidth="267.0" text="Hyperlink">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="40.0" />
-                           </padding>
-                        </Hyperlink>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="1186.0" prefWidth="597.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

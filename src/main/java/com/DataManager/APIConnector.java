@@ -54,8 +54,15 @@ public class APIConnector {
         response.close();
     }
 
-    public static void putData(String json, String url){
-
+    public static void putData(String json, String url) throws IOException {
+        RequestBody body = RequestBody.create(json, DataManager.JSON);
+        Request request = new Request.Builder()
+                .url(url)
+                .put(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response);
+        response.close();
     }
 
 }

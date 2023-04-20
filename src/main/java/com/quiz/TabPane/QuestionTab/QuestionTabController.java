@@ -45,6 +45,7 @@ public class QuestionTabController implements Initializable {
     }
     @FXML
     private void changeScene(ActionEvent event){
+        if (categoriesBox.getValue() == null) return;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/AddQuestion/AddNewQuestion.fxml"));
             Node node = fxmlLoader.load();

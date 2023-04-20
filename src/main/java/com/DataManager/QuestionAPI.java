@@ -28,6 +28,10 @@ public class QuestionAPI {
         APIConnector.postData(json, urlQuestion + id);
     }
 
+    public static void put(String json, int id) throws IOException {
+        APIConnector.putData(json, urlQuestion + id);
+    }
+
     //todo get all question
     public static ArrayList<Question> getQuestionsContent(int id) throws IOException {
         Map<Integer, JSONObject> map = getAllQuestion(id);
@@ -72,7 +76,7 @@ public class QuestionAPI {
 
     private static JSONObject creatJsonChoice(Choice choice){
         JSONObject jsonObject = new JSONObject();
-        if (choice.getId() != null) jsonObject.put("id", choice.getId());
+        if (choice.id != null) jsonObject.put("id", choice.id);
         jsonObject.put("description", choice.getContentChoice());
         jsonObject.put("imgAnswer", choice.getImageDataChoice());
         jsonObject.put("score", choice.getPercentGrade());
@@ -82,12 +86,12 @@ public class QuestionAPI {
 
     public static String creatJsonQuestion(Question question){
         JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("id", 3); //todo
         JSONArray jsonArray = new JSONArray();
         List<Choice> choices = question.getChoices();
         for (int i = 0; i < choices.size(); i++) {
             jsonArray.add(creatJsonChoice(choices.get(i)));
         }
+        if(question.idQuestion != null) jsonObject.put("id", question.idQuestion);
         jsonObject.put("questionAnswerDtos", jsonArray);
         jsonObject.put("description", question.getContentQuestion());
         jsonObject.put("imgQuestion", question.getImageDataQs());
@@ -107,4 +111,15 @@ public class QuestionAPI {
             throw new RuntimeException(e);
         }
     }
+
+    public static void putNewQuestion(int id, Question question){
+        String questionString = creatJsonQuestion(question);
+        try {
+            System.out.println(questionString);
+            put(questionString, id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

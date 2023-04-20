@@ -3,36 +3,42 @@ package com.Question;
 import java.util.ArrayList;
 import java.util.List;
 public class Question {
-    private int idQuestion;// id của câu hỏi
+    public final Integer idQuestion;// id của câu hỏi
     private String contentQuestion;// nội dung đề bài
     private List<Choice> choices = new ArrayList<Choice>();// danh sách câu trả lời
     private String key;// dạng chuỗi vì nó có thể chứa nhiều đáp án
     private String imageDataQs = null;
-    public Question(){ }
+    public Question(){
+        this.idQuestion = null;
+    }
+
     public Question(String s){
         contentQuestion = s;
+        idQuestion = null;
     }
 
     public Question(String contentQuestion, List<Choice> choices, String key) {
         this.contentQuestion = contentQuestion;
         this.choices = choices;
         this.key = key;
+        idQuestion = null;
     }
 
     public Question(String contentQuestion, String base64, List<Choice> choices) {
         this.contentQuestion = contentQuestion;
         this.choices = choices;
         imageDataQs = base64;
+        idQuestion = null;
     }
 
-    public Question(String contentQuestion, String base64, List<Choice> choices, int idQuestion) {
+    public Question(String contentQuestion, String base64, List<Choice> choices, Integer idQuestion) {
         this.contentQuestion = contentQuestion;
         this.choices = choices;
         imageDataQs = base64;
         this.idQuestion = idQuestion;
     }
 
-    public Question(String contentQuestion, int idQuestion){
+    public Question(String contentQuestion, Integer idQuestion){
         this.contentQuestion = contentQuestion;
         this.idQuestion = idQuestion;
     }
