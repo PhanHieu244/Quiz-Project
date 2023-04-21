@@ -71,7 +71,7 @@ public abstract class AddQuestionBase implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        base64Choices = new String[5];
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"),
                 new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mkv", "*.avi"),
@@ -138,6 +138,8 @@ public abstract class AddQuestionBase implements Initializable {
             ChoiceController controller = fxmlLoader.getController();
             int id = listGradeChoice.size();
             vBox.getChildren().add(id, node);
+            base64Choices[id] = choice.getImageDataChoice();
+            controller.addQuestionController = this;
             controller.setChoiceId(id + 1);
             controller.loadData(choice);
             listGradeChoice.add(controller.gradeBox);

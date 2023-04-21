@@ -12,6 +12,8 @@ import java.util.*;
 public class QuestionAPI {
     private final static String urlQuestion = "http://localhost:8080/api/v1/answer/quiz_id=";
 
+    private final static String urlAnswer = "http://localhost:8080/api/v1/answer/question_id=";
+
     public static Map<Integer, JSONObject> getAllQuestion(int id) throws IOException {
         JSONObject jsonObject = (JSONObject) APIConnector.getData(urlQuestion + id);
         JSONArray jsonArray = (JSONArray) jsonObject.get("data");
@@ -24,12 +26,14 @@ public class QuestionAPI {
         return map;
     }
 
+    //post array question
     public static void post(String json, int id) throws IOException {
         APIConnector.postData(json, urlQuestion + id);
     }
 
+    //put object question
     public static void put(String json, int id) throws IOException {
-        APIConnector.putData(json, urlQuestion + id);
+        APIConnector.putData(json, urlAnswer + id);
     }
 
     //todo get all question
@@ -84,7 +88,7 @@ public class QuestionAPI {
         return jsonObject;
     }
 
-    public static String creatJsonQuestion(Question question){
+    public static JSONObject creatJsonQuestion(Question question){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Choice> choices = question.getChoices();
@@ -96,15 +100,15 @@ public class QuestionAPI {
         jsonObject.put("description", question.getContentQuestion());
         jsonObject.put("imgQuestion", question.getImageDataQs());
         jsonObject.put("question_mark", 1);
-        //todo add question mark
-        JSONArray json = new JSONArray();
-        json.add(jsonObject);
-        System.out.println(json);
-        return json.toString();
+        return jsonObject;
     }
 
+
+
     public static void postNewQuestion(int id, Question question){
-        String questionString = creatJsonQuestion(question);
+        JSONArray json = new JSONArray();
+        json.add(creatJsonQuestion(question));
+        String questionString = json.toString();
         try {
             post(questionString, id);
         } catch (IOException e) {
@@ -112,11 +116,11 @@ public class QuestionAPI {
         }
     }
 
-    public static void putNewQuestion(int id, Question question){
-        String questionString = creatJsonQuestion(question);
+    public static void putNewQuestion(Question question){
+        String questionString = creatJsonQuestion(question).toString();
         try {
             System.out.println(questionString);
-            put(questionString, id);
+            put(questionString, question.idQuestion);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

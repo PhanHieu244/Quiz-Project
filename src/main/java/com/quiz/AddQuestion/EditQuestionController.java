@@ -5,12 +5,9 @@ import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,9 +22,11 @@ public class EditQuestionController extends AddQuestionBase {
     public void loadData(int idCate, int quesID){
         try {
             questionSave = QuestionAPI.getQuestion(quesID, idCate);
+            base64 = questionSave.getImageDataQs();
             loadQuesContent(questionSave);
             List<Choice> choices = questionSave.getChoices();
             for (Choice choice : choices) {
+
                 LoadChoice(choice);
             }
             int remain = 5 - choices.size();
@@ -47,12 +46,12 @@ public class EditQuestionController extends AddQuestionBase {
 
     private void loadQuesContent(Question question){
         questionText.setText(question.getContentQuestion());
-        imageView.setImage(Base64Convert.base64ToImage(base64));
+        imageView.setImage(Base64Convert.base64ToImage(question.getImageDataQs()));
         //todo show video
     }
 
     private void putQuestion(){
-        QuestionAPI.putNewQuestion(map.get(categoriesBox.getValue()), creatQuestion());
+        QuestionAPI.putNewQuestion(creatQuestion());
     }
 
     @Override
