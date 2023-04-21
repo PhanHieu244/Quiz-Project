@@ -6,6 +6,7 @@ import com.DataManager.CategoryAPI;
 import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
+import com.Question.Test;
 import com.quiz.MainUI.UIController;
 import com.quiz.TabPane.QuestionTab.QuestionListController;
 import com.quiz.TabPane.SettingTab;
@@ -41,7 +42,7 @@ public abstract class AddQuestionBase implements Initializable {
     @FXML
     protected Button moreChoices;
     @FXML
-    protected ComboBox<String> categoriesBox;
+    protected ComboBox<Test> categoriesBox;
     @FXML
     protected TextField questionName;
     @FXML
@@ -66,7 +67,6 @@ public abstract class AddQuestionBase implements Initializable {
     protected String base64;
     protected String[] base64Choices;
 
-    protected HashMap<String, Integer> map;
     protected Question questionSave;
 
     @Override
@@ -102,15 +102,12 @@ public abstract class AddQuestionBase implements Initializable {
         });
     }
 
-    public void setup(String string){
-        map = CategoriesBoxTool.Setup(categoriesBox);
-        categoriesBox.setValue(string);
+    public void setup(Test test){
+        CategoriesBoxTool.Setup(categoriesBox);
+        categoriesBox.setValue(test);
     }
 
-    public void setup(Integer idCate){
-        map = CategoriesBoxTool.Setup(categoriesBox);
-        categoriesBox.setValue(CategoriesData.getCateFromID(idCate));
-    }
+
 
      protected void AddChoice(int amount){
         try{

@@ -26,7 +26,7 @@ public class AddQuestionController extends AddQuestionBase {
     }
 
     protected void postQuestion() {
-        QuestionAPI.postNewQuestion(map.get(categoriesBox.getValue()), questionSave);
+        QuestionAPI.postNewQuestion(categoriesBox.getValue().getIdTest(), questionSave);
     }
 
     @Override

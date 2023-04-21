@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.quiz.QuizTab.EditQuiz.ShowBankQuesController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="760.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.QuestionTab.QuestionListController">
+   <children>
+      <VBox fx:id="vBox1" layoutX="20.0" layoutY="27.0" prefHeight="874.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label prefHeight="26.0" prefWidth="313.0" text="Add from the question bank at the end" textFill="#eb0e0e">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="39.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select a category:">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="6.0" />
+                     </HBox.margin>
+                  </Text>
+                  <ComboBox fx:id="categoriesBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="195.0" promptText="Default" style="-fx-background-color: white;">
+                     <HBox.margin>
+                        <Insets left="2.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The default category for question shared in context" visible="false" wrappingWidth="300.125">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Text>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScene" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #17a1e1;" text="CREAT A NEW QUESTION...." textFill="WHITE" visible="false">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <CheckBox fx:id="showQues" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showList" selected="true" text="Also show questions from subcategories">
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </CheckBox>
+            <CheckBox layoutX="10.0" layoutY="128.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Also show old questions">
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </CheckBox>
+            <VBox prefHeight="605.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane prefHeight="54.0" prefWidth="593.0">
+                     <children>
+                        <CheckBox fx:id="seclectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
+                        <Label layoutX="45.0" layoutY="6.0" text="Question">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="45.0" layoutY="31.0" text="Question name" textFill="#17bbf2" />
+                        <Label layoutX="126.0" layoutY="31.0" text=" / " />
+                        <Label layoutX="138.0" layoutY="31.0" text="ID number" textFill="#17bbf2" />
+                        <Label layoutX="521.0" layoutY="17.0" text="Actions">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+                  <ScrollPane prefHeight="369.0" prefWidth="600.0">
+                     <content>
+                        <VBox fx:id="vBox" prefHeight="384.0" prefWidth="583.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="305.0" style="-fx-background-color: #1a91cd;" text="ADD SELECTED QUESTIONS TO THE QUIZ" textAlignment="CENTER" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

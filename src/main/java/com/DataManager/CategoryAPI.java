@@ -14,27 +14,35 @@ public class CategoryAPI {
     private final static String urlCategory = "http://localhost:8080/api/v1/quiz";
 
 
-    public static JSONObject getAllCategories() throws IOException {
-        return (JSONObject) APIConnector.getData(urlCategory);
+    public static JSONArray getJSONCategories() throws IOException {
+        JSONObject jsonObject = (JSONObject) APIConnector.getData(urlCategory);
+        return (JSONArray) jsonObject.get("data");
     }
 
 
 
-    public static HashMap<String, Integer> getMap() throws IOException {
+    public static List<Test> getCateChildren(JSONArray jsonArray, int gen){
+        if (jsonArray.size() == 0) return new ArrayList<>();
         List<Test> categories = new ArrayList<>();
-        JSONObject jsonObject = getAllCategories();
-        JSONArray jsonArray = (JSONArray) jsonObject.get("data");
-        HashMap<String, Integer> map = new HashMap<>();
-        for (Object json : jsonArray) {
-            JSONObject object = (JSONObject) json;
-            String name = object.get("name").toString();
-            int id = Integer.parseInt(object.get("id").toString());
-            map.put(name, id);
-            Test test = new Test(id, name);
-            categories.add(test);
+        for (Object json: jsonArray){
+            JSONObject jsonObject = (JSONObject) json;
+            String name = jsonObject.get("name").toString();
+            int id = Integer.parseInt(jsonObject.get("id").toString());
+            Integer idParent = null;
+            if (jsonObject.get("parentID") != null) idParent = (Integer) jsonObject.get("parentID");
+            JSONArray jsonChildren = (JSONArray) jsonObject.get("children");
+            List<Test> children = getCateChildren(jsonChildren, gen + 1);
+            categories.add(new Test(id, name, idParent, children, gen));
         }
-        CategoriesData.setData(categories);
-        return map;
+        return categories;
+    }
+
+    public static List<Test> getAllCategories(){
+        try {
+            return getCateChildren(getJSONCategories(), 0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

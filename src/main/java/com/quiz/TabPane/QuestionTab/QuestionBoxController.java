@@ -1,5 +1,6 @@
 package com.quiz.TabPane.QuestionTab;
 
+import com.Question.Test;
 import com.quiz.AddQuestion.EditQuestionController;
 import com.quiz.MainUI.UIController;
 import javafx.event.ActionEvent;
@@ -21,11 +22,11 @@ public class QuestionBoxController {
     @FXML
     private Hyperlink edit;
 
-    private int idCate;
+    private Test category;
     private int quesID;
 
-    public void setID(int idCate, int quesID){
-        this.idCate = idCate;
+    public void setID(Test category, int quesID){
+        this.category = category;
         this.quesID = quesID;
     }
 
@@ -47,8 +48,8 @@ public class QuestionBoxController {
             Node node = fxmlLoader.load();
             EditQuestionController controller = fxmlLoader.getController();
             UIController.Instance.SetCenter(node);
-            controller.loadData(idCate, quesID);
-            controller.setup(idCate);
+            controller.loadData(category.getIdTest(), quesID);
+            controller.setup(category);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

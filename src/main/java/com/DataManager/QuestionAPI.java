@@ -103,7 +103,22 @@ public class QuestionAPI {
         return jsonObject;
     }
 
+    public static JSONArray creatJsonListQues(List<Question> questions){
+        JSONArray json = new JSONArray();
+        for (Question question : questions) {
+            json.add(creatJsonQuestion(question));
+        }
+        return json;
+    }
 
+    public static void postListQuestion(int id, List<Question> questions){
+        String jsonString = creatJsonListQues(questions).toString();
+        try {
+            post(jsonString, id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void postNewQuestion(int id, Question question){
         JSONArray json = new JSONArray();

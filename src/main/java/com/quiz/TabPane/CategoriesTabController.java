@@ -46,11 +46,6 @@ public class CategoriesTabController {
         CategoryAPI.postNewCategory(nameString, info.getText(), id);
         quesCtrl.Setup();
         reset();
-        try {
-            System.out.println(CategoryAPI.getAllCategories().toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void reset(){

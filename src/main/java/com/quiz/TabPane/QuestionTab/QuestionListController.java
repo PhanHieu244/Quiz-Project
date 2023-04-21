@@ -2,6 +2,7 @@ package com.quiz.TabPane.QuestionTab;
 
 import com.DataManager.QuestionAPI;
 import com.Question.Question;
+import com.Question.Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +30,10 @@ public class QuestionListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
 
-    public void Show(int idCate){
+    public void Show(Test test){
         ArrayList<Question> questionsContent;
         try {
-            questionsContent = QuestionAPI.getQuestionsContent(idCate);
+            questionsContent = QuestionAPI.getQuestionsContent(test.getIdTest());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +45,7 @@ public class QuestionListController implements Initializable {
                 QuestionBoxController controller = fxmlLoader.getController();
                 listCheckBox.add(controller.checkBox);
                 controller.setText(question.getContentQuestion());
-                controller.setID(idCate, question.getIdQuestion());
+                controller.setID(test, question.getIdQuestion());
                 vBox.getChildren().add(node);
             }
 

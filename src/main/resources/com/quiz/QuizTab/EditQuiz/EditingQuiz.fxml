@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.quiz.QuizTab.EditingQuizController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="767.0" prefWidth="1108.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.EditingQuizController">
+   <children>
+      <VBox layoutY="196.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="196.0">
+         <children>
+            <ScrollPane prefHeight="572.0" prefWidth="1108.0">
+               <content>
+                  <VBox fx:id="vBox" prefHeight="368.0" prefWidth="1091.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <Label layoutX="31.0" layoutY="27.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="75.0" text="Question: 0 | This quiz is open">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="807.0" layoutY="75.0" text="Maximum grade">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="911.0" layoutY="67.0" prefHeight="35.0" prefWidth="76.0" />
+      <Button layoutX="993.0" layoutY="67.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: #56a7da;" text="SAVE" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="922.0" layoutY="116.0" text="Total of marks: 0.00" />
+      <Button layoutX="31.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #2ba5eb;" text="REPAGNATE" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="158.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #2ba5eb;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Button>
+      <ComboBox layoutX="974.0" layoutY="165.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" />
+      <CheckBox layoutX="944.0" layoutY="139.0" mnemonicParsing="false" text="Shuffer" />
+   </children>
 </AnchorPane>
