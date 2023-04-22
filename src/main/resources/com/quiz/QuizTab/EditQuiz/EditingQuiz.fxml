@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="767.0" prefWidth="1108.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.EditingQuizController">
    <children>
       <VBox layoutY="196.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="196.0">
@@ -30,39 +29,44 @@
             </ScrollPane>
          </children>
       </VBox>
-      <Label layoutX="31.0" layoutY="27.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b">
+      <Label fx:id="quizName" layoutX="31.0" layoutY="27.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b" AnchorPane.leftAnchor="31.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="75.0" text="Question: 0 | This quiz is open">
+      <Label fx:id="questionLabel" layoutX="31.0" layoutY="75.0" text="Question: 0 | This quiz is open" AnchorPane.leftAnchor="31.0">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="807.0" layoutY="75.0" text="Maximum grade">
+      <Label layoutX="807.0" layoutY="75.0" text="Maximum grade" AnchorPane.rightAnchor="207.0">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="911.0" layoutY="67.0" prefHeight="35.0" prefWidth="76.0" />
-      <Button layoutX="993.0" layoutY="67.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: #56a7da;" text="SAVE" textFill="WHITE">
+      <TextField fx:id="maxGradeField" layoutX="911.0" layoutY="67.0" prefHeight="35.0" prefWidth="76.0" AnchorPane.rightAnchor="121.0" />
+      <Button fx:id="saveBut" layoutX="993.0" layoutY="67.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: #56a7da;" text="SAVE" textFill="WHITE" AnchorPane.rightAnchor="55.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
       <Label layoutX="922.0" layoutY="116.0" text="Total of marks: 0.00" />
-      <Button layoutX="31.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #2ba5eb;" text="REPAGNATE" textFill="WHITE">
+      <Button layoutX="31.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #2ba5eb;" text="REPAGNATE" textFill="WHITE" AnchorPane.leftAnchor="158.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="158.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #2ba5eb;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
+      <Button fx:id="selectMultiBut" layoutX="158.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectMultipleItems" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #2ba5eb;" text="SELECT MULTIPLE ITEMS" textFill="WHITE" AnchorPane.leftAnchor="158.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <ComboBox layoutX="974.0" layoutY="165.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" />
-      <CheckBox layoutX="944.0" layoutY="139.0" mnemonicParsing="false" text="Shuffer" />
+      <ComboBox fx:id="addBut" layoutX="974.0" layoutY="165.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="58.0" />
+      <CheckBox fx:id="sufferBox" layoutX="944.0" layoutY="139.0" mnemonicParsing="false" onAction="#suffer" text="Shuffer" AnchorPane.rightAnchor="105.0" />
+      <Button layoutX="19.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #2ba5eb;" text="REPAGINATE" textFill="WHITE" AnchorPane.leftAnchor="19.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
