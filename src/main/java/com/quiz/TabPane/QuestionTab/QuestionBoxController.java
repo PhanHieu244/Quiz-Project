@@ -1,44 +1,17 @@
 package com.quiz.TabPane.QuestionTab;
 
-import com.Question.Test;
 import com.quiz.AddQuestion.EditQuestionController;
 import com.quiz.MainUI.UIController;
+import com.quiz.Tool.BaseController.QuestionBoxBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 
-public class QuestionBoxController {
-    @FXML
-    public CheckBox checkBox;
-    @FXML
-    private Label questionText;
-    @FXML
-    private Hyperlink edit;
-
-    private Test category;
-    private int quesID;
-
-    public void setID(Test category, int quesID){
-        this.category = category;
-        this.quesID = quesID;
-    }
-
-    @FXML
-    private void selectBox(ActionEvent event){
-        if (checkBox.isSelected()){
-            System.out.println("chon cau nay");
-
-        }else {
-            System.out.println("khong chon");
-        }
-    }
+public class QuestionBoxController extends QuestionBoxBase {
 
     @FXML
     private void editQuestion(ActionEvent event){
@@ -55,7 +28,5 @@ public class QuestionBoxController {
         }
     }
 
-    public void setText(String string){
-        questionText.setText(string);
-    }
+
 }
