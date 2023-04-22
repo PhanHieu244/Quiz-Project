@@ -30,7 +30,7 @@ public class QuestionListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
 
-    public void Show(Test test){
+    public void Show(Test test,boolean isShowSubCate){
         ArrayList<Question> questionsContent;
         try {
             questionsContent = QuestionAPI.getQuestionsContent(test.getIdTest());
@@ -48,12 +48,18 @@ public class QuestionListController implements Initializable {
                 controller.setID(test, question.getIdQuestion());
                 vBox.getChildren().add(node);
             }
-
+            if (isShowSubCate){
+                for (Test subCate: test.getChildren()){
+                    Show(subCate, isShowSubCate);
+                }
+            }
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("loi roi");
         }
     }
+
+
 
     @FXML
     private void selectAllQuestion(ActionEvent event){

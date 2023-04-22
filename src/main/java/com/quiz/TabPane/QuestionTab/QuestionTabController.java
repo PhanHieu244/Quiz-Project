@@ -53,8 +53,8 @@ public class QuestionTabController implements Initializable {
 
     @FXML
     private void showList(ActionEvent event){
-        if (!showQues.isSelected()) vBox.getChildren().remove(list);
-        else showQuesList(categoriesBox.getValue() != null);
+        vBox.getChildren().remove(list);
+        showQuesList(showQues.isSelected());
     }
 
     public void Setup(){
@@ -62,15 +62,14 @@ public class QuestionTabController implements Initializable {
         CategoriesBoxTool.Setup(categoriesBox);
     }
 
-    private void showQuesList(boolean isShow){
-        if (!isShow) return;
+    private void showQuesList(boolean isShowSubCate){
         if (categoriesBox.getValue() == null) return;
         try{
             vBox.getChildren().remove(list);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/TabPane/QuestionTab/QuestionList.fxml"));
             list = fxmlLoader.load();
             QuestionListController listController = fxmlLoader.getController();
-            listController.Show(categoriesBox.getValue());
+            listController.Show(categoriesBox.getValue(), isShowSubCate);
             vBox.getChildren().add(list);
         }catch (Exception e){
             e.printStackTrace();

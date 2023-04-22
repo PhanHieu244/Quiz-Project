@@ -7,6 +7,7 @@ public class Test {
     private final Integer idTest;// id của test
     private final Integer idParent;
 
+    private Integer amountQuestion;
     private int generation;
 
 
@@ -15,12 +16,13 @@ public class Test {
 
     private List<Test> children = new ArrayList<>();
 
-    public Test(Integer idTest, String nameTest, Integer idParent, List<Test> children, int generation) {
+    public Test(Integer idTest, String nameTest, Integer idParent, List<Test> children, int generation, int totalQuestion) {
         this.nameTest = nameTest;
         this.idTest = idTest;
         this.idParent = idParent;
         this.children = children;
         this.generation = generation;
+        amountQuestion = totalQuestion;
     }
 
     public Test(String nameTest, Integer idTest, Integer idParent, List<Question> questions) {
@@ -56,7 +58,7 @@ public class Test {
         return questions_;
     }
 
-    public int getAmountQuestion(){ return questions.size();}
+    public int getAmountQuestion(){ return amountQuestion;}
 
     public List<Test> getChildren() {
         return children;
@@ -83,5 +85,9 @@ public class Test {
 
     public int getGeneration() {
         return generation;
+    }
+
+    public Integer getIdParent() {
+        return idParent;
     }
 }

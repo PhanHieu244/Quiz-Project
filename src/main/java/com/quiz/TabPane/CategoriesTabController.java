@@ -1,17 +1,21 @@
 package com.quiz.TabPane;
 
 import com.DataManager.CategoryAPI;
+import com.Question.Test;
 import com.quiz.TabPane.QuestionTab.QuestionTabController;
+import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CategoriesTabController {
+public class CategoriesTabController implements Initializable {
     @FXML
     private Button add;
 
@@ -25,25 +29,25 @@ public class CategoriesTabController {
     private TextField name;
 
     @FXML
-    private ComboBox<String> parentCategory;
+    private ComboBox<Test> parentCategory;
 
      public QuestionTabController quesCtrl;
 
     @FXML
     void addCategory(ActionEvent event) {
         String nameString = name.getText();
-        String idString = idNumber.getText();
-        int id;
+        Test cateParent = parentCategory.getValue();
+        Integer idParent;
         if (name.getText().equals("")) return;
         try{
-            if (idString.equals("")) id = 0;
-            else id = Integer.parseInt(idString);
+            if (cateParent == null) idParent = null;
+            else idParent = cateParent.getIdTest();
         }catch (NumberFormatException e){
             System.out.println("Loi nhap id");
             e.printStackTrace();
             return;
         }
-        CategoryAPI.postNewCategory(nameString, info.getText(), id);
+        CategoryAPI.postNewCategory(nameString, info.getText(), idParent);
         quesCtrl.Setup();
         reset();
     }
@@ -52,7 +56,11 @@ public class CategoriesTabController {
         idNumber.setText("");
         name.setText("");
         info.setText("");
-        //todo reset parent
+        CategoriesBoxTool.Reset(parentCategory);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CategoriesBoxTool.Setup(parentCategory);
+    }
 }

@@ -47,6 +47,12 @@ public class QuestionAPI {
             int quesID = Integer.parseInt(jsonObject.get("id").toString());
             questions.add(new Question(content, quesID));
         }
+        /*questions.sort(new Comparator<Question>() {
+            @Override
+            public int compare(Question o1, Question o2) {
+                return Integer.compare(o1.getIdQuestion(), o2.getIdQuestion());
+            }
+        });*/
         return questions;
     }
 
@@ -58,13 +64,14 @@ public class QuestionAPI {
         if (jsonObject.get("imgQuiz") == null) base64 = "";
         else base64 = jsonObject.get("imgQuiz").toString();
         JSONArray choicesJson = (JSONArray) jsonObject.get("questionAnswerSet");
-        List<Choice> choices = getChoices(choicesJson);
+        List<Choice> choices = getChoices(choicesJson, false);
         return new Question(content, base64, choices, quesID);
     }
 
     //todo get all choice
-    private static List<Choice> getChoices(JSONArray choicesJson){
+    private static List<Choice> getChoices(JSONArray choicesJson, boolean isSuffer){
         List<Choice> choices = new ArrayList<>();
+        System.out.println(choicesJson.toString());
         for (int i = 0; i < choicesJson.size(); i++) {
             JSONObject object = (JSONObject) choicesJson.get(i);
             String content = object.get("description").toString();
@@ -75,6 +82,12 @@ public class QuestionAPI {
             int id = Integer.parseInt(object.get("id").toString());
             choices.add(new Choice(id, content, base64, percent));
         }
+        if (!isSuffer) choices.sort(new Comparator<Choice>() {
+            @Override
+            public int compare(Choice o1, Choice o2) {
+                return Integer.compare(o1.id, o2.id);
+            }
+        });
         return choices;
     }
 

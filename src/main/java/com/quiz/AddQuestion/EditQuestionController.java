@@ -30,7 +30,7 @@ public class EditQuestionController extends AddQuestionBase {
                 LoadChoice(choice);
             }
             int remain = 5 - choices.size();
-            if (remain < 0) moreChoices.setVisible(false);
+            if (remain <= 0) moreChoices.setVisible(false);
             else {
                 moreChoices.setText("BLANKS FOR " + remain + " MORE CHOICE");
                 moreChoices.setOnAction(event -> {

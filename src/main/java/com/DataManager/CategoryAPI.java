@@ -28,11 +28,12 @@ public class CategoryAPI {
             JSONObject jsonObject = (JSONObject) json;
             String name = jsonObject.get("name").toString();
             int id = Integer.parseInt(jsonObject.get("id").toString());
+            int totalQuestion = Integer.parseInt(jsonObject.get("totalQuestion").toString());
             Integer idParent = null;
             if (jsonObject.get("parentID") != null) idParent = (Integer) jsonObject.get("parentID");
             JSONArray jsonChildren = (JSONArray) jsonObject.get("children");
             List<Test> children = getCateChildren(jsonChildren, gen + 1);
-            categories.add(new Test(id, name, idParent, children, gen));
+            categories.add(new Test(id, name, idParent, children, gen, totalQuestion));
         }
         return categories;
     }
@@ -47,11 +48,11 @@ public class CategoryAPI {
 
 
 
-    private static String creatJsonCategory(String name, String description, int cateID){
+    private static String creatJsonCategory(String name, String description, Integer parentID){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
         jsonObject.put("description", description);
-        jsonObject.put("category_id", cateID);
+        jsonObject.put("parentID", parentID);
         System.out.println(jsonObject);
         return jsonObject.toString();
     }
@@ -60,8 +61,8 @@ public class CategoryAPI {
         APIConnector.postData(json, urlCategory);
     }
 
-    public static void postNewCategory(String name, String description, int cateID){
-        String quizString = creatJsonCategory(name, description, cateID);
+    public static void postNewCategory(String name, String description, Integer parentID){
+        String quizString = creatJsonCategory(name, description, parentID);
         try {
             post(quizString);
         } catch (IOException e) {
