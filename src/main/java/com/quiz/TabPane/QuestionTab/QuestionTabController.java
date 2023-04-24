@@ -23,7 +23,7 @@ public class QuestionTabController extends QuestionTabBase {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        listPath = "/com/quiz/TabPane/QuestionTab/QuestionList.fxml";
+        boxPath = "/com/quiz/TabPane/QuestionTab/QuestionBox.fxml";
         super.initialize(url, resourceBundle);
     }
     @FXML

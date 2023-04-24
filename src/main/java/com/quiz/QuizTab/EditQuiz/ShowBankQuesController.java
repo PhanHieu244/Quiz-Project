@@ -1,5 +1,8 @@
 package com.quiz.QuizTab.EditQuiz;
 
-public class ShowBankQuesController {
+import com.quiz.Tool.BaseController.QuestionTabBase;
+
+
+public class ShowBankQuesController extends QuestionTabBase {
 
 }

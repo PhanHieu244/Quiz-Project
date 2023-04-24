@@ -1,4 +1,6 @@
 package com.quiz.QuizTab.EditQuiz;
 
-public class QuestionQuizBoxController {
+import com.quiz.Tool.BaseController.QuestionBoxBase;
+
+public class QuestionQuizBoxController extends QuestionBoxBase {
 }

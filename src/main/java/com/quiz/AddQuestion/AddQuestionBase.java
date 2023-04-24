@@ -1,14 +1,10 @@
 package com.quiz.AddQuestion;
 
 import com.Base64Convert.Base64Convert;
-import com.DataManager.CategoriesData;
-import com.DataManager.CategoryAPI;
-import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
 import com.Question.Test;
 import com.quiz.MainUI.UIController;
-import com.quiz.TabPane.QuestionTab.QuestionListController;
 import com.quiz.TabPane.SettingTab;
 import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
@@ -32,7 +28,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
