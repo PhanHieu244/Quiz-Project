@@ -10,28 +10,22 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
-public class ReaderQsWord {
-    private String url;
-    static int idImage = 0;
+public class ReaderQsWord extends ReaderQuestion {
+    private int idImage = 0;
 
-    public ReaderQsWord() {
-    }
-
-    public ReaderQsWord(String url) {
+    public ReaderQsWord(String url){
         this.url = url;
     }
 
-    public Test read() {
+    public Test read(){
         Test test = new Test();
 
         try {
             FileInputStream fis = new FileInputStream(this.url);
             XWPFDocument document = new XWPFDocument(OPCPackage.open(fis));
-            List<String> list = new ArrayList();
-            Iterator var5 = document.getAllPictures().iterator();
+            List<String> list = new ArrayList<>();
 
-            while(var5.hasNext()) {
-                XWPFPictureData pictureData = (XWPFPictureData)var5.next();
+            for (XWPFPictureData pictureData : document.getAllPictures()) {
                 byte[] imageData = pictureData.getData();
                 String encoded = Base64.getEncoder().encodeToString(imageData);
                 if (encoded != null) {
@@ -51,21 +45,19 @@ public class ReaderQsWord {
             System.out.println("đoạn này ở class ReaderQdWord");
             Iterator var14 = xwpfParagraphs.iterator();
 
-            label98:
+            label:
             while(true) {
                 while(true) {
                     if (!var14.hasNext()) {
-                        break label98;
+                        break label;
                     }
 
                     XWPFParagraph x = (XWPFParagraph)var14.next();
                     ++error;
                     boolean hasPic = false;
                     List<XWPFRun> runs = x.getRuns();
-                    Iterator var18 = runs.iterator();
 
-                    while(var18.hasNext()) {
-                        XWPFRun run = (XWPFRun)var18.next();
+                    for (XWPFRun run : runs) {
                         if (run.getEmbeddedPictures().size() > 0) {
                             System.out.println("có ảnh ở paragraph này");
                             hasPic = true;
@@ -79,13 +71,13 @@ public class ReaderQsWord {
                         if (line.length() == 0) {
                             if (numChoices < 2 || numKey != 1) {
                                 flag = false;
-                                break label98;
+                                break label;
                             }
 
                             if (!question.setKeyChoice()) {
                                 System.out.println("Không tìm ra key");
                                 flag = false;
-                                break label98;
+                                break label;
                             }
 
                             test.addQuestion(question);
@@ -96,7 +88,7 @@ public class ReaderQsWord {
                         } else {
                             if (line.length() <= 3) {
                                 flag = false;
-                                break label98;
+                                break label;
                             }
 
                             if (line.charAt(2) == ' ' && line.charAt(1) == '.' && numKey < 1 && line.charAt(0) <= 'Z' && line.charAt(0) >= 'A') {
@@ -108,7 +100,7 @@ public class ReaderQsWord {
                             } else {
                                 if (line.length() <= 8 || 0 != line.indexOf("ANSWER: ")) {
                                     flag = false;
-                                    break label98;
+                                    break label;
                                 }
 
                                 ++numKey;
@@ -118,7 +110,7 @@ public class ReaderQsWord {
                     } else {
                         if (line.length() < 1) {
                             flag = false;
-                            break label98;
+                            break label;
                         }
 
                         question.setNameAndContentQs(line);
@@ -151,4 +143,6 @@ public class ReaderQsWord {
 
         return test;
     }
+
+
 }

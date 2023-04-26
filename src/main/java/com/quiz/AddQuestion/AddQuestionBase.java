@@ -156,15 +156,6 @@ public abstract class AddQuestionBase implements Initializable {
         UIController.Instance.openTabPane(SettingTab.QuestionTab);
     }
 
-    @FXML
-    protected void saveContinue(ActionEvent event){
-
-    }
-
-    @FXML
-    protected void saveOut(ActionEvent event){
-        out();
-    }
 
     protected Question creatQuestion(){
         List<Choice> choices = new ArrayList<>();
@@ -180,11 +171,27 @@ public abstract class AddQuestionBase implements Initializable {
             choices.add(choice);
         }
         //todo get question name
-        return new Question(questionText.getText(), base64, choices, questionSave.idQuestion);
+        System.out.println(questionName.getText());
+        return new Question(questionName.getText() ,questionText.getText(), base64, choices, questionSave.idQuestion);
     }
+    protected abstract void pushQuestion();
 
     @FXML
     protected void cancel(ActionEvent event){
+        pushQuestion();
         out();
     }
+
+    @FXML
+    protected void saveContinue(ActionEvent event){
+        questionSave = creatQuestion();
+    }
+
+    @FXML
+    protected void saveOut(ActionEvent event){
+        questionSave = creatQuestion();
+        pushQuestion();
+        out();
+    }
+
 }

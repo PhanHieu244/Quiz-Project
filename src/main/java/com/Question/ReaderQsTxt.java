@@ -2,17 +2,13 @@ package com.Question;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-public class ReaderQsTxt {
-    private String url;
-
-    public ReaderQsTxt() {
-    }
+public class ReaderQsTxt extends ReaderQuestion{
 
     public ReaderQsTxt(String url) {
         this.url = url;
     }
 
-    public Test read() throws AikenException {
+    public Test read() {
         Test test = new Test();
 
         try {
@@ -95,4 +91,5 @@ public class ReaderQsTxt {
 
         return test;
     }
+
 }

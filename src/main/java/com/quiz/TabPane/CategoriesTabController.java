@@ -31,8 +31,6 @@ public class CategoriesTabController implements Initializable {
     @FXML
     private ComboBox<Test> parentCategory;
 
-     public QuestionTabController quesCtrl;
-
     @FXML
     void addCategory(ActionEvent event) {
         String nameString = name.getText();
@@ -48,7 +46,6 @@ public class CategoriesTabController implements Initializable {
             return;
         }
         CategoryAPI.postNewCategory(nameString, info.getText(), idParent);
-        quesCtrl.Setup();
         reset();
     }
 
@@ -56,7 +53,7 @@ public class CategoriesTabController implements Initializable {
         idNumber.setText("");
         name.setText("");
         info.setText("");
-        CategoriesBoxTool.Reset(parentCategory);
+        CategoriesBoxTool.resetAll();
     }
 
     @Override

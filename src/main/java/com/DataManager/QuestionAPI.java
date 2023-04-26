@@ -34,7 +34,20 @@ public class QuestionAPI {
             JSONObject jsonObject =(JSONObject) jsonArray.get(i);
             String content = jsonObject.get("description").toString();
             int quesID = Integer.parseInt(jsonObject.get("id").toString());
-            questions.add(new Question(content, quesID));
+            String name = (String) jsonObject.get("name");
+            questions.add(new Question(name, content, quesID));
+        }
+        return questions;
+    }
+
+    public static ArrayList<Question> getAllQuestionInCate(int id, boolean getSubCate) throws IOException {
+        String url = getSubCate ? urlSubCateQuestions : urlAllQuestions;
+        JSONObject jsonData = (JSONObject) APIConnector.getData(url + id);
+        JSONArray jsonArray = (JSONArray) jsonData.get("data");
+        ArrayList<Question> questions = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject =(JSONObject) jsonArray.get(i);
+            questions.add(getQuestion(jsonObject, null));
         }
         return questions;
     }
@@ -43,14 +56,17 @@ public class QuestionAPI {
     public static Question getQuestion(int quesID) throws IOException {
         JSONObject jsonData = (JSONObject) APIConnector.getData(urlQuestion + quesID);
         JSONObject jsonObject = (JSONObject) jsonData.get("data");
+        return getQuestion(jsonObject, quesID);
+    }
+
+    private static Question getQuestion(JSONObject jsonObject, Integer quesID){
         String content = jsonObject.get("description").toString();
-        String name = jsonObject.get("name").toString();
-        String base64;
-        if (jsonObject.get("imgQuiz") == null) base64 = "";
-        else base64 = jsonObject.get("imgQuiz").toString();
+        String name = (String) jsonObject.get("name");
+        String base64 =(String) jsonObject.get("imgQuiz");
         JSONArray choicesJson = (JSONArray) jsonObject.get("questionAnswerSet");
         List<Choice> choices = getChoices(choicesJson, false);
-        return new Question(content, base64, choices, quesID);
+        if (choices.size() > 5) System.out.println("qua 5 cau hoi");
+        return new Question(name, content, base64, choices, quesID);
     }
 
     //todo get all choice
@@ -60,9 +76,7 @@ public class QuestionAPI {
         for (int i = 0; i < choicesJson.size(); i++) {
             JSONObject object = (JSONObject) choicesJson.get(i);
             String content = object.get("description").toString();
-            String base64;
-            if (object.get("imgAnswer") == null) base64 = "";
-            else base64 = object.get("imgAnswer").toString();
+            String base64 =(String) object.get("imgAnswer");
             float percent = Float.parseFloat(object.get("score").toString());
             int id = Integer.parseInt(object.get("id").toString());
             choices.add(new Choice(id, content, base64, percent));
@@ -95,7 +109,7 @@ public class QuestionAPI {
         }
         if(question.idQuestion != null) jsonObject.put("id", question.idQuestion);
         jsonObject.put("questionAnswerDtos", jsonArray);
-        jsonObject.put("name", "question.getName"); // todo question.getName;
+        jsonObject.put("name", question.getNameQuestion());
         jsonObject.put("description", question.getContentQuestion());
         jsonObject.put("imgQuestion", question.getImageDataQs());
         jsonObject.put("question_mark", 1);
@@ -112,6 +126,7 @@ public class QuestionAPI {
 
     public static void postListQuestion(int id, List<Question> questions){
         String jsonString = creatJsonListQues(questions).toString();
+        System.out.println(jsonString);
         try {
             post(jsonString, id);
         } catch (IOException e) {
@@ -133,7 +148,7 @@ public class QuestionAPI {
     public static void putNewQuestion(Question question){
         String questionString = creatJsonQuestion(question).toString();
         try {
-            System.out.println(questionString);
+            System.out.println("put: " + questionString);
             put(questionString, question.idQuestion);
         } catch (IOException e) {
             throw new RuntimeException(e);

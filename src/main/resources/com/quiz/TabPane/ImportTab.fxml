@@ -43,7 +43,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="44.0" layoutY="19.0" text="Category " />
-                  <ComboBox fx:id="category" layoutX="178.0" layoutY="15.0" prefHeight="27.0" prefWidth="177.0" />
+                  <ComboBox fx:id="categoriesBox" layoutX="178.0" layoutY="15.0" prefHeight="27.0" prefWidth="177.0" promptText="Default" style="-fx-background-color: white; -fx-border-color: gray;" />
                </children>
             </AnchorPane>
          </content>
@@ -67,6 +67,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
+                  <Label fx:id="nameLabel" layoutX="345.0" layoutY="88.0" text="File Name: null" />
                </children>
             </AnchorPane>
          </content>

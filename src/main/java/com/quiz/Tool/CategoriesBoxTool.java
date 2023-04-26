@@ -8,12 +8,15 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesBoxTool {
+    private static List<ComboBox<Test>> cateBoxList = new ArrayList<>();
 
     public static void Setup(ComboBox<Test> categoriesBox){
         Reset(categoriesBox);
+        cateBoxList.add(categoriesBox);
         categoriesBox.setCellFactory(new Callback<ListView<Test>, ListCell<Test>>() {
             @Override
             public ListCell<Test> call(ListView<Test> param) {
@@ -48,10 +51,16 @@ public class CategoriesBoxTool {
         });
     }
 
-    public static void Reset(ComboBox<Test> categoriesBox){
+    private static void Reset(ComboBox<Test> categoriesBox){
         categoriesBox.getItems().clear();
         categoriesBox.setPromptText("Default");
         getChildrenCate(categoriesBox, CategoryAPI.getAllCategories());
+    }
+
+    public static void resetAll(){
+        for (ComboBox<Test> testComboBox : cateBoxList) {
+            Reset(testComboBox);
+        }
     }
 
     private static String setTree(int gen){

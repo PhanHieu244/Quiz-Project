@@ -37,8 +37,7 @@ public class Writer {
         this.password = password;
     }
 
-    public void PDFWrite(Test test) {
-        List<Question> questions = test.getQuestions();
+    public void PDFWrite(List<Question> questions) {
 
         try {
             Document document = new Document();
@@ -46,10 +45,8 @@ public class Writer {
             document.open();
             BaseFont bf = BaseFont.createFont("arial-unicode-ms.ttf", "Identity-H", true);
             Font font = new Font(bf);
-            Iterator var6 = questions.iterator();
 
-            while(var6.hasNext()) {
-                Question q = (Question)var6.next();
+            for (Question q : questions) {
                 document.add(new Paragraph(q.getNameQuestion() + q.getContentQuestion(), font));
                 if (q.getImageDataQs() != null) {
                     byte[] decoded = Base64.getDecoder().decode(q.getImageDataQs());
@@ -57,10 +54,7 @@ public class Writer {
                     document.add(image);
                 }
 
-                Iterator var13 = q.getChoices().iterator();
-
-                while(var13.hasNext()) {
-                    Choice choice = (Choice)var13.next();
+                for (Choice choice : q.getChoices()) {
                     document.add(new Paragraph(choice.getName() + ". " + choice.getContentChoice(), font));
                     if (choice.getImageDataChoice() != null) {
                         byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
@@ -79,8 +73,8 @@ public class Writer {
 
     }
 
-    public void PDFProtecteWrite(Test test) throws IOException {// tạo file có mật khẩu
-        this.PDFWrite(test);
+    public void PDFProtectWrite(List<Question> questions ) throws IOException {// tạo file có mật khẩu
+        this.PDFWrite(questions);
         PDDocument doc = PDDocument.load(new File(this.url));
         String password = this.password;
         StandardProtectionPolicy spp = new StandardProtectionPolicy(password, password, new AccessPermission());

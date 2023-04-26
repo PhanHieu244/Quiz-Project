@@ -25,25 +25,9 @@ public class AddQuestionController extends AddQuestionBase {
         super.initialize(url, resourceBundle);
     }
 
-    protected void postQuestion() {
+    protected void pushQuestion() {
         QuestionAPI.postNewQuestion(categoriesBox.getValue().getIdTest(), questionSave);
     }
 
-    @Override
-    protected void saveOut(ActionEvent event) {
-        questionSave = creatQuestion();
-        postQuestion();
-        out();
-    }
 
-    @Override
-    protected void saveContinue(ActionEvent event) {
-        questionSave = creatQuestion();
-    }
-
-    @Override
-    protected void cancel(ActionEvent event) {
-        postQuestion();
-        out();
-    }
 }

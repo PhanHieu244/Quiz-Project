@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class Question {
     public final Integer idQuestion;// id của câu hỏi
-    private String nameQuestion = null;// tên câ hỏi
+    private String nameQuestion = "";// tên câ hỏi
     private String contentQuestion;// nội dung đề bài
     private List<Choice> choices = new ArrayList<Choice>();// danh sách câu trả lời
     private String key;// dạng chuỗi vì nó có thể chứa nhiều đáp án
@@ -18,30 +18,34 @@ public class Question {
         idQuestion = null;
     }
 
-    public Question(String contentQuestion, List<Choice> choices, String key) {
+    public Question(String nameQuestion,String contentQuestion, List<Choice> choices, String key) {
         this.contentQuestion = contentQuestion;
+        this.nameQuestion = nameQuestion;
         this.choices = choices;
         this.key = key;
         idQuestion = null;
     }
 
-    public Question(String contentQuestion, String base64, List<Choice> choices) {
+    public Question(String nameQuestion, String contentQuestion, String base64, List<Choice> choices) {
         this.contentQuestion = contentQuestion;
+        this.nameQuestion = nameQuestion;
         this.choices = choices;
         imageDataQs = base64;
         idQuestion = null;
     }
 
-    public Question(String contentQuestion, String base64, List<Choice> choices, Integer idQuestion) {
+    public Question(String nameQuestion, String contentQuestion, String base64, List<Choice> choices, Integer idQuestion) {
         this.contentQuestion = contentQuestion;
+        this.nameQuestion = nameQuestion;
         this.choices = choices;
         imageDataQs = base64;
         this.idQuestion = idQuestion;
     }
 
-    public Question(String contentQuestion, Integer idQuestion){
+    public Question(String nameQuestion, String contentQuestion, Integer idQuestion){
         this.contentQuestion = contentQuestion;
         this.idQuestion = idQuestion;
+        this.nameQuestion = nameQuestion;
     }
     public void setNameQuestion(String nameQuestion) {
         this.nameQuestion = nameQuestion;

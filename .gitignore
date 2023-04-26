@@ -12,6 +12,7 @@ target/
 *.iml
 *.ipr
 *.mp4
+*.pdf
 
 ### Eclipse ###
 .apt_generated

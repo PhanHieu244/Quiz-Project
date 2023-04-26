@@ -26,7 +26,6 @@ public class EditQuestionController extends AddQuestionBase {
             loadQuesContent(questionSave);
             List<Choice> choices = questionSave.getChoices();
             for (Choice choice : choices) {
-
                 LoadChoice(choice);
             }
             int remain = 5 - choices.size();
@@ -45,26 +44,16 @@ public class EditQuestionController extends AddQuestionBase {
     }
 
     private void loadQuesContent(Question question){
-        questionName.setText("question.getName");
+        questionName.setText(question.getNameQuestion());
         questionText.setText(question.getContentQuestion());
         imageView.setImage(Base64Convert.base64ToImage(question.getImageDataQs()));
         //todo show video
     }
 
-    private void putQuestion(){
-        QuestionAPI.putNewQuestion(creatQuestion());
+    protected void pushQuestion(){
+        QuestionAPI.putNewQuestion(questionSave);
     }
 
-    @Override
-    protected void saveOut(ActionEvent event) {
-        putQuestion();
-        out();
-    }
-
-    @Override
-    protected void saveContinue(ActionEvent event) {
-        putQuestion();
-    }
 
 }
 

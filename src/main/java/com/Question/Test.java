@@ -44,6 +44,12 @@ public class Test {
         this.idParent = idParent;
     }
 
+    /*public Test(List<Question> questions) {
+        nameTest =null;
+        idTest=null;
+        idParent = null;
+        this.questions = questions;
+    }*/
 
     public List<Question> getRandomQuestions(){
         List<Question> questions_ =  new ArrayList<Question>();

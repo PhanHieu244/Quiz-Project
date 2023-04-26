@@ -52,7 +52,10 @@ public class QuestionTabBase implements Initializable {
 
 
     protected void showList(){
-        if (categoriesBox.getValue() == null) return;
+        if (categoriesBox.getValue() == null) {
+            list.setVisible(false);
+            return;
+        }
         vBox.getChildren().clear();
         showQuesList();
     }
