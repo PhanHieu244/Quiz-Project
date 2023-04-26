@@ -2,6 +2,7 @@ package com.Question;
 
 public class Choice {
     public final Integer id;
+    private String nameQuestion = null;// tên đáp án
     private String contentChoice;// nội dung đáp án
     private double point;// điểm có được khi chọn đáp án
     private boolean key;// nếu choice là ans thì choice = true

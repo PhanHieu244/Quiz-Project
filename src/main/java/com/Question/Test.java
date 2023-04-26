@@ -16,6 +16,12 @@ public class Test {
 
     private List<Test> children = new ArrayList<>();
 
+    public Test() {
+        nameTest =null;
+        idTest=null;
+        idParent = null;
+    }
+
     public Test(Integer idTest, String nameTest, Integer idParent, List<Test> children, int generation, int totalQuestion) {
         this.nameTest = nameTest;
         this.idTest = idTest;

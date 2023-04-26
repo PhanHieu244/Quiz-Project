@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class Question {
     public final Integer idQuestion;// id của câu hỏi
+    private String nameQuestion = null;// tên câ hỏi
     private String contentQuestion;// nội dung đề bài
     private List<Choice> choices = new ArrayList<Choice>();// danh sách câu trả lời
     private String key;// dạng chuỗi vì nó có thể chứa nhiều đáp án
@@ -42,6 +43,9 @@ public class Question {
         this.contentQuestion = contentQuestion;
         this.idQuestion = idQuestion;
     }
+    public void setNameQuestion(String nameQuestion) {
+        this.nameQuestion = nameQuestion;
+    }
 
     public void setContentQuestion(String contentQuestion) {
         this.contentQuestion = contentQuestion;
@@ -73,6 +77,10 @@ public class Question {
         return choices;
     }
 
+    public String getNameQuestion() {
+        return nameQuestion;
+    }
+
     public String getKey() {
         return key;
     }
@@ -81,7 +89,13 @@ public class Question {
         Choice c= new Choice(s,name);
         choices.add(c);
     }
-
+    public void setNameAndContentQs(String s) {
+        int id = s.indexOf(":");
+        String nameQs = s.substring(0, id);
+        String contentQs = s.substring(id + 1);
+        this.setNameQuestion(nameQs);
+        this.setContentQuestion(contentQs);
+    }
     // thêm đáp án key[0] thành đáp án đúng
     public boolean setKeyChoice(){
         for (Choice choice : choices) {
@@ -105,8 +119,7 @@ public class Question {
     }
     // show ra question
     public void show(){
-        System.out.println(idQuestion);
-        System.out.println(contentQuestion);
+        System.out.println(idQuestion+" "+nameQuestion+contentQuestion);
         System.out.println(imageDataQs);
         for (Choice choice : choices) {
             System.out.println(choice.getName() + " " + choice.getContentChoice() + " " + choice.isKey() + " " + choice.getImageDataChoice());

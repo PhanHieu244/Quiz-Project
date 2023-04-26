@@ -5,6 +5,8 @@ module com.quiz {
     requires javafx.media;
     requires org.apache.poi.ooxml;
     requires okhttp3;
+    requires itextpdf;
+    requires org.apache.pdfbox;
 
     exports com.quiz.TabPane;
     opens com.quiz.TabPane to javafx.fxml;
