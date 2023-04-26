@@ -101,6 +101,7 @@ public class Question {
         for (Choice choice : choices) {
             if (choice.getName() == key.charAt(0)) {
                 choice.setKey(true);
+                choice.setPercentGrade(100);
                 return true;
             }
         }
@@ -112,6 +113,7 @@ public class Question {
         for (Choice choice : choices) {
             if (choice.getName() == c) {
                 choice.setKey(true);
+                choice.setPercentGrade(100);
                 return true;
             }
         }
@@ -119,10 +121,9 @@ public class Question {
     }
     // show ra question
     public void show(){
-        System.out.println(idQuestion+" "+nameQuestion+contentQuestion);
-        System.out.println(imageDataQs);
+        System.out.println(idQuestion+" "+nameQuestion+":"+contentQuestion+" "+imageDataQs);
         for (Choice choice : choices) {
-            System.out.println(choice.getName() + " " + choice.getContentChoice() + " " + choice.isKey() + " " + choice.getImageDataChoice());
+            System.out.println(choice.getName() + " " + choice.getContentChoice() + " " + choice.isKey() + " " + choice.getImageDataChoice() +" "+ choice.getPercentGrade());
         }
         System.out.println(key);
     }

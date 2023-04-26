@@ -4,8 +4,7 @@ public class Choice {
     public final Integer id;
     private String nameQuestion = null;// tên đáp án
     private String contentChoice;// nội dung đáp án
-    private double point;// điểm có được khi chọn đáp án
-    private boolean key;// nếu choice là ans thì choice = true
+    private boolean key=false;// nếu choice là ans thì choice = true
     private char name;// dạng char vì name chỉ có 1 kí tự
     private String imageDataChoice = null;
 
@@ -21,6 +20,8 @@ public class Choice {
         imageDataChoice = base64;
         percentGrade = percent;
     }
+
+
 
     public Choice(String contentChoice, char name) {
         this.contentChoice = contentChoice;
@@ -40,9 +41,7 @@ public class Choice {
         return contentChoice;
     }
 
-    public double getPoint() {
-        return point;
-    }
+
 
     public char getName() {
         return name;
@@ -55,7 +54,13 @@ public class Choice {
     public void setKey(boolean Key) {
         this.key = Key;
     }
-
+    public void setPercentGrade(float percentGrade) {
+        if(percentGrade<-100||percentGrade>100){
+            System.out.println("error");
+            return;
+        }
+        this.percentGrade = percentGrade;
+    }
     public void setImageDataChoice(String imageDataChoice) {
         this.imageDataChoice = imageDataChoice;
     }
@@ -64,11 +69,7 @@ public class Choice {
         return imageDataChoice;
     }
 
-    public boolean setPoint(double point) {
-        if(point > 1 || point < -1) return false;
-        this.point = point;
-        return true;
-    }
+
 
     public float getPercentGrade() {
         return percentGrade;
