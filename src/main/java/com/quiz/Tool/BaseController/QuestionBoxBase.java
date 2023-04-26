@@ -12,14 +12,11 @@ public class QuestionBoxBase {
     public CheckBox checkBox;
     @FXML
     protected Label questionText;
-    @FXML
-    protected Hyperlink edit;
 
     protected Test category;
     protected int quesID;
 
-    public void setID(Test category, int quesID){
-        this.category = category;
+    public void setID(int quesID){
         this.quesID = quesID;
     }
 

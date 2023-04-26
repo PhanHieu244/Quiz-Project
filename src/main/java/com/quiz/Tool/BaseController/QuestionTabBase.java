@@ -52,7 +52,7 @@ public class QuestionTabBase implements Initializable {
 
 
     protected void showList(){
-        list.setVisible(true);
+        if (categoriesBox.getValue() == null) return;
         vBox.getChildren().clear();
         showQuesList();
     }
@@ -70,10 +70,14 @@ public class QuestionTabBase implements Initializable {
     public void Show(Test test){
         ArrayList<Question> questionsContent;
         try {
-            questionsContent = QuestionAPI.getQuestionsContent(test.getIdTest());
+            questionsContent = QuestionAPI.getQuestionsContent(test.getIdTest(), showCateQues.isSelected());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        showQuestions(questionsContent);
+    }
+
+    protected void showQuestions(ArrayList<Question> questionsContent){
         try {
             for (Question question : questionsContent) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(boxPath));
@@ -81,21 +85,14 @@ public class QuestionTabBase implements Initializable {
                 QuestionBoxController controller = fxmlLoader.getController();
                 listCheckBox.add(controller.checkBox);
                 controller.setText(question.getContentQuestion());
-                controller.setID(test, question.getIdQuestion());
+                controller.setID(question.getIdQuestion());
                 vBox.getChildren().add(node);
-            }
-            if (showCateQues.isSelected()){
-                for (Test subCate: test.getChildren()){
-                    Show(subCate);
-                }
             }
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("loi roi");
         }
     }
-
-
 
     @FXML
     protected void selectAllQuestion(ActionEvent event){

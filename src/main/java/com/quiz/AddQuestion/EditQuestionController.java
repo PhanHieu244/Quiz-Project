@@ -19,9 +19,9 @@ public class EditQuestionController extends AddQuestionBase {
     }
 
 
-    public void loadData(int idCate, int quesID){
+    public void loadData(int quesID){
         try {
-            questionSave = QuestionAPI.getQuestion(quesID, idCate);
+            questionSave = QuestionAPI.getQuestion(quesID);
             base64 = questionSave.getImageDataQs();
             loadQuesContent(questionSave);
             List<Choice> choices = questionSave.getChoices();
@@ -45,6 +45,7 @@ public class EditQuestionController extends AddQuestionBase {
     }
 
     private void loadQuesContent(Question question){
+        questionName.setText("question.getName");
         questionText.setText(question.getContentQuestion());
         imageView.setImage(Base64Convert.base64ToImage(question.getImageDataQs()));
         //todo show video

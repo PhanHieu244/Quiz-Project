@@ -2,7 +2,6 @@ package com.DataManager;
 
 import com.Question.Choice;
 import com.Question.Question;
-import com.Question.Test;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -10,25 +9,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class QuestionAPI {
-    private final static String urlQuestion = "http://localhost:8080/api/v1/answer/quiz_id=";
-
+    private final static String urlAllQuestions = "http://localhost:8080/api/v1/answer/quiz_id=";
+    private final static String urlSubCateQuestions = "http://localhost:8080/api/v1/answer/subquiz/quiz_id=";
+    private final static String urlQuestion = "http://localhost:8080/api/v1/question/";
     private final static String urlAnswer = "http://localhost:8080/api/v1/answer/question_id=";
-
-    public static Map<Integer, JSONObject> getAllQuestion(int id) throws IOException {
-        JSONObject jsonObject = (JSONObject) APIConnector.getData(urlQuestion + id);
-        JSONArray jsonArray = (JSONArray) jsonObject.get("data");
-        Map<Integer, JSONObject> map = new HashMap<>();
-        for (Object json : jsonArray) {
-            JSONObject jsonQues = (JSONObject) json;
-            int idQues = Integer.parseInt(jsonQues.get("id").toString());
-            map.put(idQues, jsonQues);
-        }
-        return map;
-    }
 
     //post array question
     public static void post(String json, int id) throws IOException {
-        APIConnector.postData(json, urlQuestion + id);
+        APIConnector.postData(json, urlAllQuestions + id);
     }
 
     //put object question
@@ -37,29 +25,26 @@ public class QuestionAPI {
     }
 
     //todo get all question
-    public static ArrayList<Question> getQuestionsContent(int id) throws IOException {
-        Map<Integer, JSONObject> map = getAllQuestion(id);
-        List<JSONObject> listJson = new ArrayList<>(map.values());
+    public static ArrayList<Question> getQuestionsContent(int id, boolean getSubCate) throws IOException {
+        String url = getSubCate ? urlSubCateQuestions : urlAllQuestions;
+        JSONObject jsonData = (JSONObject) APIConnector.getData(url + id);
+        JSONArray jsonArray = (JSONArray) jsonData.get("data");
         ArrayList<Question> questions = new ArrayList<>();
-        for (int i = 0; i < listJson.size(); i++) {
-            JSONObject jsonObject = listJson.get(i);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject =(JSONObject) jsonArray.get(i);
             String content = jsonObject.get("description").toString();
             int quesID = Integer.parseInt(jsonObject.get("id").toString());
             questions.add(new Question(content, quesID));
         }
-        /*questions.sort(new Comparator<Question>() {
-            @Override
-            public int compare(Question o1, Question o2) {
-                return Integer.compare(o1.getIdQuestion(), o2.getIdQuestion());
-            }
-        });*/
         return questions;
     }
 
     //todo get one question
-    public static Question getQuestion(int quesID, int id) throws IOException {
-        JSONObject jsonObject = getAllQuestion(id).get(quesID);;
+    public static Question getQuestion(int quesID) throws IOException {
+        JSONObject jsonData = (JSONObject) APIConnector.getData(urlQuestion + quesID);
+        JSONObject jsonObject = (JSONObject) jsonData.get("data");
         String content = jsonObject.get("description").toString();
+        String name = jsonObject.get("name").toString();
         String base64;
         if (jsonObject.get("imgQuiz") == null) base64 = "";
         else base64 = jsonObject.get("imgQuiz").toString();
@@ -110,6 +95,7 @@ public class QuestionAPI {
         }
         if(question.idQuestion != null) jsonObject.put("id", question.idQuestion);
         jsonObject.put("questionAnswerDtos", jsonArray);
+        jsonObject.put("name", "question.getName"); // todo question.getName;
         jsonObject.put("description", question.getContentQuestion());
         jsonObject.put("imgQuestion", question.getImageDataQs());
         jsonObject.put("question_mark", 1);

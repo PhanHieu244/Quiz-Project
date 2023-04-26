@@ -34,7 +34,7 @@
                         <Insets left="10.0" top="6.0" />
                      </HBox.margin>
                   </Text>
-                  <ComboBox fx:id="categoriesBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="195.0" promptText="Default" style="-fx-background-color: white;">
+                  <ComboBox fx:id="categoriesBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="195.0" promptText="Default" style="-fx-background-color: white; -fx-border-color: #8ca3b9;">
                      <HBox.margin>
                         <Insets left="2.0" />
                      </HBox.margin>

@@ -179,6 +179,7 @@ public abstract class AddQuestionBase implements Initializable {
             Choice choice = new Choice(idChoice ,choiceContent, base64Choices[i], percent);
             choices.add(choice);
         }
+        //todo get question name
         return new Question(questionText.getText(), base64, choices, questionSave.idQuestion);
     }
 

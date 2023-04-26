@@ -16,4 +16,6 @@ module com.quiz {
     opens com.quiz.TabPane.QuestionTab to javafx.fxml;
     exports com.quiz.Tool.BaseController;
     opens com.quiz.Tool.BaseController to javafx.fxml;
+    exports com.quiz.QuizTab;
+    opens com.quiz.QuizTab to javafx.fxml;
 }

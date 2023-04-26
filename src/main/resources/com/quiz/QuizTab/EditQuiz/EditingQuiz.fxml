@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -15,7 +16,7 @@
    <children>
       <VBox layoutY="196.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="196.0">
          <children>
-            <ScrollPane prefHeight="572.0" prefWidth="1108.0">
+            <ScrollPane prefHeight="470.0" prefWidth="1093.0">
                <content>
                   <VBox fx:id="vBox" prefHeight="368.0" prefWidth="1091.0">
                      <opaqueInsets>
@@ -24,9 +25,181 @@
                      <padding>
                         <Insets left="15.0" />
                      </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="10.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox1" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText1" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 2">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="56.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox11" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText11" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut11" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="103.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 4">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="149.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox1111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText1111" prefHeight="20.0" prefWidth="731.0" text=" 5">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut1111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="196.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox11111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText11111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut11111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="242.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox111111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText111111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut111111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="288.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox1111111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText1111111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut1111111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="335.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox11111111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText11111111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut11111111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="378.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox111111111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText111111111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut111111111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="424.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="checkBox1111111111" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
+                              <Label fx:id="questionText1111111111" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="deleteBut1111111111" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
                   </VBox>
                </content>
             </ScrollPane>
+            <AnchorPane prefHeight="152.0" prefWidth="1108.0">
+               <children>
+                  <ComboBox fx:id="pageChoose" layoutX="770.0" layoutY="38.0" prefHeight="35.0" prefWidth="134.0" promptText="Jump to ..." style="-fx-background-color: white; -fx-border-color: gray;" />
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
       <Label fx:id="quizName" layoutX="31.0" layoutY="27.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b" AnchorPane.leftAnchor="31.0">
@@ -68,5 +241,6 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="test" layoutX="534.0" layoutY="63.0" mnemonicParsing="false" text="test" />
    </children>
 </AnchorPane>

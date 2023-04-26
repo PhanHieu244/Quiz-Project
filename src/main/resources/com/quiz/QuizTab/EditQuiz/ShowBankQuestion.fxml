@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="760.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.QuestionTab.QuestionListController">
+<AnchorPane prefHeight="760.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.EditQuiz.ShowBankQuesController">
    <children>
-      <VBox fx:id="vBox1" layoutX="20.0" layoutY="27.0" prefHeight="874.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="20.0" layoutY="27.0" prefHeight="874.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="26.0" prefWidth="313.0" text="Add from the question bank at the end" textFill="#eb0e0e">
                <VBox.margin>
@@ -34,7 +34,7 @@
                         <Insets left="10.0" top="6.0" />
                      </HBox.margin>
                   </Text>
-                  <ComboBox fx:id="categoriesBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="195.0" promptText="Default" style="-fx-background-color: white;">
+                  <ComboBox fx:id="categoriesBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="195.0" promptText="Default" style="-fx-background-color: white; -fx-border-color: #8ca3b9;">
                      <HBox.margin>
                         <Insets left="2.0" />
                      </HBox.margin>
@@ -57,7 +57,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <CheckBox fx:id="showQues" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showList" selected="true" text="Also show questions from subcategories">
+            <CheckBox fx:id="showCateQues" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showList" selected="true" text="Also show questions from subcategories">
                <padding>
                   <Insets left="10.0" top="5.0" />
                </padding>
@@ -76,7 +76,7 @@
                   <Font size="13.0" />
                </font>
             </CheckBox>
-            <VBox prefHeight="605.0" prefWidth="600.0">
+            <VBox fx:id="list" prefHeight="605.0" prefWidth="600.0">
                <children>
                   <AnchorPane prefHeight="54.0" prefWidth="593.0">
                      <children>
@@ -111,7 +111,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="305.0" style="-fx-background-color: #1a91cd;" text="ADD SELECTED QUESTIONS TO THE QUIZ" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="addSelectedBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="305.0" style="-fx-background-color: #1a91cd;" text="ADD SELECTED QUESTIONS TO THE QUIZ" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="10.0" top="20.0" />
                      </VBox.margin>

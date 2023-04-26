@@ -40,5 +40,9 @@ public class QuestionTabController extends QuestionTabBase {
         }
     }
 
-
+    @Override
+    protected void showList() {
+        list.setVisible(true);
+        super.showList();
+    }
 }

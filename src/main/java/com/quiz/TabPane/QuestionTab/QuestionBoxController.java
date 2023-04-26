@@ -7,11 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Hyperlink;
 
 import java.io.IOException;
 
 
 public class QuestionBoxController extends QuestionBoxBase {
+    @FXML
+    protected Hyperlink edit;
 
     @FXML
     private void editQuestion(ActionEvent event){
@@ -21,7 +24,7 @@ public class QuestionBoxController extends QuestionBoxBase {
             Node node = fxmlLoader.load();
             EditQuestionController controller = fxmlLoader.getController();
             UIController.Instance.SetCenter(node);
-            controller.loadData(category.getIdTest(), quesID);
+            controller.loadData(quesID);
             controller.setup(category);
         } catch (IOException e) {
             throw new RuntimeException(e);
