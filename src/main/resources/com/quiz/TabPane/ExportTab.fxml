@@ -11,7 +11,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="567.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.TabPane.ExportTabController">
    <children>
       <CheckBox fx:id="isSetPass" layoutX="36.0" layoutY="205.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="150.0" text="Set Password">
@@ -33,7 +32,7 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <PasswordField fx:id="passField" disable="true" layoutX="37.0" layoutY="240.0" promptText="password" visible="false" />
+      <PasswordField fx:id="passField" layoutX="37.0" layoutY="240.0" promptText="password" visible="false" />
       <Button fx:id="exportBut" layoutX="257.0" layoutY="339.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportFile" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #d32e2e;" text="EXPORT" textFill="WHITE">
          <font>
             <Font size="15.0" />

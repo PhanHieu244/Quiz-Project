@@ -2,6 +2,7 @@ package com.quiz.TabPane;
 
 import com.DataManager.QuestionAPI;
 import com.Question.*;
+import com.quiz.Tool.AlertTool;
 import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,16 +40,16 @@ public class ImportTabController implements Initializable {
     @FXML
     private void importFile(ActionEvent event) {
         if (file == null) {
-            showWarning("Error: File not found!");
+            AlertTool.showWarning("Error: File not found!");
             return;
         }
         String nameFile = file.getName();
         if (!CheckFileText(nameFile)) {
-            showWarning("Wrong Format");
+            AlertTool.showWarning("Wrong Format");
              return;
         }
         if (categoriesBox.getValue() == null) {
-            showWarning("Error: Category not found!");
+            AlertTool.showWarning("Error: Category not found!");
             return;
         }
         String path = file.getPath();
@@ -56,30 +57,11 @@ public class ImportTabController implements Initializable {
         Test category = readerQuestion.read();
         QuestionAPI.postListQuestion
                 (categoriesBox.getValue().getIdTest(), category.getQuestions());
-        showMessageBox();
+        AlertTool.showMessageBox();
         reset();
     }
 
-    private void showWarning(String content){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("WARNING");
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void showWrongAiken(int i){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("WARNING");
-        alert.setContentText("Error at" + i);
-        alert.showAndWait();
-    }
-
-    private void showMessageBox(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("OK");
-        alert.setTitle("Message Box");
-        alert.showAndWait();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -94,9 +94,9 @@ public class Question {
         choices.add(c);
     }
     public void setNameAndContentQs(String s) {
-        int id = s.indexOf(":");
+        int id = s.indexOf(": ");
         String nameQs = s.substring(0, id);
-        String contentQs = s.substring(id + 1);
+        String contentQs = s.substring(id + 2);
         this.setNameQuestion(nameQs);
         this.setContentQuestion(contentQs);
     }

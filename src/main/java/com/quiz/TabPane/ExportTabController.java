@@ -4,6 +4,7 @@ import com.DataManager.QuestionAPI;
 import com.Question.Question;
 import com.Question.Test;
 import com.Writer.Writer;
+import com.quiz.Tool.AlertTool;
 import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,13 +50,17 @@ public class ExportTabController implements Initializable {
 
     @FXML
     private void exportFile(ActionEvent event) {
+        if (categoriesBox.getValue() == null){
+            AlertTool.showWarning("Category not found");
+            return;
+        }
+        if (fileName.getText().isEmpty()) {
+            AlertTool.showWarning("File name not found");
+            return;
+        }
         directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory != null) {
-            // The user has selected a directory, so now we can save the file there
-            // For example:
-            // File file = new File(selectedDirectory.getAbsolutePath() + "/myFile.txt");
-            // // Write data to the file
             ArrayList<Question> questionsContent;
             try {
                 questionsContent = QuestionAPI.getAllQuestionInCate
@@ -64,12 +69,21 @@ public class ExportTabController implements Initializable {
                 throw new RuntimeException(e);
             }
             Writer writer = new Writer(selectedDirectory.getAbsolutePath() + "/" + fileName.getText() + ".pdf");
-            writer.PDFWrite(questionsContent);
+            if (isSetPass.isSelected() && !passField.getText().equals("")){
+                try {
+                    writer.PDFProtectWrite(questionsContent, passField.getText());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                writer.PDFWrite(questionsContent);
+            }
         }
     }
 
-    @FXML
-    void chooseFolder(ActionEvent event) {
-
+    private void reset(){
+        categoriesBox.setValue(null);
+        fileName.setText(null);
+        passField.setText(null);
     }
 }

@@ -19,7 +19,7 @@ import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 public class Writer {
     private String url;
-    private String password;
+    //private String password;
 
     public Writer() {
     }
@@ -28,14 +28,14 @@ public class Writer {
         this.url = url;
     }
 
-    public void setPassword(String password) {
-        if(password.length()<6){
-            System.out.println("Mật khẩu quá ngắn!!");
-            return;
-        }
-        System.out.println("Chọn mật khẩu thành công!");
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        if(password.length()<6){
+//            System.out.println("Mật khẩu quá ngắn!!");
+//            return;
+//        }
+//        System.out.println("Chọn mật khẩu thành công!");
+//        this.password = password;
+//    }
 
     public void PDFWrite(List<Question> questions) {
 
@@ -47,15 +47,22 @@ public class Writer {
             Font font = new Font(bf);
 
             for (Question q : questions) {
-                document.add(new Paragraph(q.getNameQuestion() + q.getContentQuestion(), font));
+                String tmp = q.getNameQuestion();
+                if(tmp==null){
+                    document.add(new Paragraph(q.getContentQuestion(),font));
+                }else{
+                    document.add(new Paragraph(tmp + ": " + q.getContentQuestion(), font));
+                }
+
                 if (q.getImageDataQs() != null) {
                     byte[] decoded = Base64.getDecoder().decode(q.getImageDataQs());
                     Image image = Image.getInstance(decoded);
                     document.add(image);
                 }
-
+                int idAns = 0;
                 for (Choice choice : q.getChoices()) {
-                    document.add(new Paragraph(choice.getName() + ". " + choice.getContentChoice(), font));
+
+                    document.add(new Paragraph((char)((int)'A'+idAns++) + ". " + choice.getContentChoice(), font));
                     if (choice.getImageDataChoice() != null) {
                         byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
                         Image image = Image.getInstance(decoded);
@@ -73,10 +80,9 @@ public class Writer {
 
     }
 
-    public void PDFProtectWrite(List<Question> questions ) throws IOException {// tạo file có mật khẩu
+    public void PDFProtectWrite(List<Question> questions, String password ) throws IOException {// tạo file có mật khẩu
         this.PDFWrite(questions);
         PDDocument doc = PDDocument.load(new File(this.url));
-        String password = this.password;
         StandardProtectionPolicy spp = new StandardProtectionPolicy(password, password, new AccessPermission());
         spp.setEncryptionKeyLength(128);
         spp.setPermissions(new AccessPermission());
