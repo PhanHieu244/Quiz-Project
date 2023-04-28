@@ -1,6 +1,7 @@
 package com.quiz.QuizTab.EditQuiz;
 
 import com.Question.Question;
+import com.quiz.Tool.BaseController.QuestionAddTab;
 import com.quiz.Tool.BaseController.QuestionTabBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class ShowBankQuesController extends QuestionTabBase {
+public class ShowBankQuesController extends QuestionAddTab {
     @FXML
     private Button addSelectedBut;
 
@@ -25,8 +26,7 @@ public class ShowBankQuesController extends QuestionTabBase {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listIDs = new ArrayList<>();
         addSelectedBut.setOnAction(event -> {
-            System.out.println(listIDs);
-            //todo
+            close(listIDs);
         });
         super.initialize(url, resourceBundle);
     }

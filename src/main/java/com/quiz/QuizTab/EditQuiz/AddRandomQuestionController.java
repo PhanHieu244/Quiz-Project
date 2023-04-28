@@ -3,6 +3,8 @@ package com.quiz.QuizTab.EditQuiz;
 import com.DataManager.QuestionAPI;
 import com.Question.Question;
 import com.Question.Test;
+import com.quiz.Tool.AlertTool;
+import com.quiz.Tool.BaseController.QuestionAddTab;
 import com.quiz.Tool.BaseController.QuestionTabBase;
 import com.quiz.Tool.CategoriesBoxTool;
 import com.quiz.Tool.RandomListGenerator;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddRandomQuestionController extends QuestionTabBase {
+public class AddRandomQuestionController extends QuestionAddTab {
     @FXML
     private Pagination pagination;
     @FXML
@@ -41,14 +43,13 @@ public class AddRandomQuestionController extends QuestionTabBase {
 
     @Override
     public void Show(Test test) {
-        ArrayList<Question> questionsContent;
         try {
-            questionsContent = QuestionAPI.categoryPagination
+            questions = QuestionAPI.categoryPagination
                     (test.getIdTest(), showCateQues.isSelected(), currentPage, pageSize);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        showQuestions(questionsContent);
+        showQuestions(questions);
     }
 
     @Override
@@ -101,7 +102,21 @@ public class AddRandomQuestionController extends QuestionTabBase {
 
     @FXML
     private void addRandomQuestions(ActionEvent event) {
-        if (categoriesBox.getValue() == null) return;
-        List<Question> randomQuesAdd = RandomListGenerator.getRandomList(questions, randomBox.getValue());
+        if (categoriesBox.getValue() == null){
+            AlertTool.showWarning("Category not found");
+            return;
+        }
+        if (randomBox.getValue() == null){
+            AlertTool.showWarning("Number random not found");
+            return;
+        }
+        List<Question> parent;
+        try {
+            parent = QuestionAPI.getAllQuestionInCate(categoriesBox.getValue().getIdTest(), showCateQues.isSelected());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<Question> randomQuesAdd = RandomListGenerator.getRandomList(parent, randomBox.getValue());
+        close(randomQuesAdd);
     }
 }

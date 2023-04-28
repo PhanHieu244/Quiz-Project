@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="767.0" prefWidth="1108.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.EditingQuizController">
+<AnchorPane prefHeight="722.0" prefWidth="1108.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.EditingQuizController">
    <children>
-      <VBox layoutY="196.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="196.0">
+      <VBox layoutX="-1.0" layoutY="177.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="177.0">
          <children>
-            <ScrollPane fx:id="scroll" prefHeight="470.0">
+            <ScrollPane fx:id="scroll" prefHeight="342.0" prefWidth="1108.0">
                <content>
                   <VBox fx:id="vBox" prefHeight="368.0" prefWidth="2000.0">
                      <opaqueInsets>
@@ -72,53 +72,53 @@
             </ScrollPane>
             <AnchorPane prefHeight="152.0" prefWidth="1108.0">
                <children>
-                  <ComboBox fx:id="pageChoose" layoutX="770.0" layoutY="38.0" prefHeight="35.0" prefWidth="134.0" promptText="Jump to ..." style="-fx-background-color: white; -fx-border-color: gray;" />
+                  <ComboBox fx:id="pageChoose" layoutX="796.0" layoutY="14.0" prefHeight="35.0" prefWidth="134.0" promptText="Jump to ..." style="-fx-background-color: white; -fx-border-color: gray;" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="14.0" />
                </children>
             </AnchorPane>
          </children>
       </VBox>
-      <Label fx:id="quizName" layoutX="31.0" layoutY="27.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b" AnchorPane.leftAnchor="31.0">
+      <Label fx:id="quizName" layoutX="32.0" layoutY="7.0" prefHeight="35.0" prefWidth="813.0" text="Editing quiz" textFill="#e10b0b" AnchorPane.leftAnchor="32.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="questionLabel" layoutX="31.0" layoutY="75.0" text="Question: 0 | This quiz is open" AnchorPane.leftAnchor="31.0">
+      <Label fx:id="questionLabel" layoutX="32.0" layoutY="55.0" text="Question: 0 | This quiz is open" AnchorPane.leftAnchor="32.0">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="807.0" layoutY="75.0" text="Maximum grade" AnchorPane.rightAnchor="207.0">
+      <Label layoutX="808.0" layoutY="55.0" text="Maximum grade" AnchorPane.rightAnchor="206.0">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="maxGradeField" layoutX="911.0" layoutY="67.0" prefHeight="35.0" prefWidth="76.0" AnchorPane.rightAnchor="121.0" />
-      <Button fx:id="saveBut" layoutX="993.0" layoutY="67.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: #56a7da;" text="SAVE" textFill="WHITE" AnchorPane.rightAnchor="55.0">
+      <TextField fx:id="maxGradeField" layoutX="912.0" layoutY="47.0" prefHeight="35.0" prefWidth="76.0" AnchorPane.rightAnchor="120.0" />
+      <Button fx:id="saveBut" layoutX="994.0" layoutY="47.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: #56a7da;" text="SAVE" textFill="WHITE" AnchorPane.rightAnchor="54.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="922.0" layoutY="116.0" text="Total of marks: 0.00" AnchorPane.rightAnchor="82.0" />
-      <Button layoutX="31.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #2ba5eb;" text="REPAGNATE" textFill="WHITE" AnchorPane.leftAnchor="158.0">
+      <Label fx:id="mark" layoutX="923.0" layoutY="96.0" text="Total of marks: 0.00" AnchorPane.rightAnchor="81.0" />
+      <Button layoutX="159.0" layoutY="87.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #2ba5eb;" text="REPAGNATE" textFill="WHITE" AnchorPane.leftAnchor="159.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="selectMultiBut" layoutX="158.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectMultipleItems" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #2ba5eb;" text="SELECT MULTIPLE ITEMS" textFill="WHITE" AnchorPane.leftAnchor="158.0">
+      <Button fx:id="selectMultiBut" layoutX="159.0" layoutY="87.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectMultipleItems" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #2ba5eb;" text="SELECT MULTIPLE ITEMS" textFill="WHITE" AnchorPane.leftAnchor="159.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <ComboBox fx:id="addBut" layoutX="974.0" layoutY="165.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="58.0" />
-      <CheckBox fx:id="sufferBox" layoutX="944.0" layoutY="139.0" mnemonicParsing="false" onAction="#suffer" text="Shuffer" AnchorPane.rightAnchor="105.0" />
-      <Button layoutX="19.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #2ba5eb;" text="REPAGINATE" textFill="WHITE" AnchorPane.leftAnchor="19.0">
+      <ComboBox fx:id="addBut" layoutX="975.0" layoutY="145.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="57.0" />
+      <CheckBox fx:id="sufferBox" layoutX="945.0" layoutY="119.0" mnemonicParsing="false" onAction="#suffer" text="Shuffer" AnchorPane.rightAnchor="104.0" />
+      <Button layoutX="20.0" layoutY="87.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #2ba5eb;" text="REPAGINATE" textFill="WHITE" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="test" layoutX="534.0" layoutY="63.0" mnemonicParsing="false" text="test" />
-      <CheckBox fx:id="selectAll" layoutX="22.0" layoutY="169.0" mnemonicParsing="false" onAction="#selectAllQuestion" text="Select all question" textFill="#d91111" visible="false" />
-      <Button fx:id="deleteBut" layoutX="158.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="178.0" style="-fx-background-color: #f23e3e;" text="Delete the selected questions" textFill="WHITE" visible="false" />
-      <Button fx:id="cancelBut" layoutX="349.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelSelectMulti" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #7cb6d9;" text="Cancel" textFill="WHITE" visible="false" />
+      <Button fx:id="test" layoutX="535.0" layoutY="43.0" mnemonicParsing="false" text="test" />
+      <CheckBox fx:id="selectAll" layoutX="23.0" layoutY="149.0" mnemonicParsing="false" onAction="#selectAllQuestion" text="Select all question" textFill="#d91111" visible="false" />
+      <Button fx:id="deleteBut" layoutX="159.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="178.0" style="-fx-background-color: #f23e3e;" text="Delete the selected questions" textFill="WHITE" visible="false" />
+      <Button fx:id="cancelBut" layoutX="350.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelSelectMulti" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #7cb6d9;" text="Cancel" textFill="WHITE" visible="false" />
    </children>
 </AnchorPane>

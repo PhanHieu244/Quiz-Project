@@ -109,7 +109,7 @@ public class QuestionAPI {
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject =(JSONObject) jsonArray.get(i);
-            questions.add(getQuestion(jsonObject, null));
+            questions.add(getQuestion(jsonObject));
         }
         return questions;
     }
@@ -121,18 +121,18 @@ public class QuestionAPI {
     public static Question getQuestion(int quesID) throws IOException {
         JSONObject jsonData = (JSONObject) APIConnector.getData(urlQuestion + quesID);
         JSONObject jsonObject = (JSONObject) jsonData.get("data");
-        return getQuestion(jsonObject, quesID);
+        return getQuestion(jsonObject);
     }
 
     /**
      * Get data of question with JSON object
-     * @param quesID id of this question
      * @param jsonObject json object to get data
      */
-    private static Question getQuestion(JSONObject jsonObject, Integer quesID){
+    private static Question getQuestion(JSONObject jsonObject){
         String content = jsonObject.get("description").toString();
         String name = (String) jsonObject.get("name");
         String base64 =(String) jsonObject.get("imgQuiz");
+        int quesID = Integer.parseInt(jsonObject.get("id").toString());
         JSONArray choicesJson = (JSONArray) jsonObject.get("questionAnswerSet");
         List<Choice> choices = getChoices(choicesJson, false);
         if (choices.size() > 5) System.out.println("qua 5 cau hoi");

@@ -20,13 +20,13 @@
          <children>
             <VBox prefHeight="166.0" prefWidth="597.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="20.0" prefWidth="597.0" style="-fx-background-color: #19A7CE;">
+                  <AnchorPane maxHeight="-Infinity" prefHeight="20.0" prefWidth="597.0" style="-fx-background-color: #19A7CE;">
                      <children>
-                        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="83.0" text="Button" />
+                        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="83.0" text="Button" AnchorPane.leftAnchor="14.0" />
                         <Label accessibleRole="BUTTON" alignment="CENTER" graphicTextGap="5.0" prefHeight="42.0" prefWidth="122.0" text="Name" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="126.0" prefWidth="597.0">
+                  <AnchorPane maxHeight="-Infinity" prefHeight="126.0" prefWidth="597.0">
                      <children>
                         <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="55.0" text="IT" textFill="#b50f2b">
                            <opaqueInsets>
@@ -67,7 +67,7 @@
                            </children>
                         </HBox>
                         <Separator layoutY="110.0" prefHeight="3.0" prefWidth="597.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0" />
-                        <Button fx:id="settingBut" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#ShowSettingPopUp" prefHeight="31.0" prefWidth="39.0">
+                        <Button fx:id="settingBut" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#ShowSettingPopUp" prefHeight="31.0" prefWidth="39.0" AnchorPane.rightAnchor="25.0">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
