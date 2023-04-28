@@ -49,7 +49,7 @@
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Text>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScene" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #17a1e1;" text="CREAT A NEW QUESTION...." textFill="WHITE" visible="false">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #17a1e1;" text="CREAT A NEW QUESTION...." textFill="WHITE" visible="false">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
@@ -57,7 +57,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <CheckBox fx:id="showCateQues" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showList" selected="true" text="Also show questions from subcategories">
+            <CheckBox fx:id="showCateQues" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="Also show questions from subcategories">
                <padding>
                   <Insets left="10.0" top="5.0" />
                </padding>
@@ -80,7 +80,7 @@
                <children>
                   <AnchorPane prefHeight="54.0" prefWidth="593.0">
                      <children>
-                        <CheckBox fx:id="seclectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
+                        <CheckBox fx:id="selectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
                         <Label layoutX="45.0" layoutY="6.0" text="Question">
                            <font>
                               <Font size="14.0" />

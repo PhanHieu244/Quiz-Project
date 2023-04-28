@@ -13,7 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,10 +34,13 @@ public class QuestionTabBase implements Initializable {
     @FXML
     protected CheckBox showCateQues;
     @FXML
-    protected CheckBox seclectAll;
+    protected CheckBox selectAll;
     @FXML
     protected VBox list;
+    protected ArrayList<Question> questions;
     protected String boxPath;
+
+    protected final float minHeight = 46f;
 
 
     @Override
@@ -71,13 +76,12 @@ public class QuestionTabBase implements Initializable {
     }
 
     public void Show(Test test){
-        ArrayList<Question> questionsContent;
         try {
-            questionsContent = QuestionAPI.getQuestionsContent(test.getIdTest(), showCateQues.isSelected());
+            questions = QuestionAPI.getAllQuestionInCate(test.getIdTest(), showCateQues.isSelected());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        showQuestions(questionsContent);
+        showQuestions(questions);
     }
 
     protected void showQuestions(ArrayList<Question> questionsContent){
@@ -87,7 +91,7 @@ public class QuestionTabBase implements Initializable {
                 Node node = fxmlLoader.load();
                 QuestionBoxController controller = fxmlLoader.getController();
                 listCheckBox.add(controller.checkBox);
-                controller.setText(question.getContentQuestion());
+                controller.setText(setContent(question).getText());
                 controller.setID(question.getIdQuestion());
                 vBox.getChildren().add(node);
             }
@@ -99,9 +103,19 @@ public class QuestionTabBase implements Initializable {
 
     @FXML
     protected void selectAllQuestion(ActionEvent event){
-        boolean isSelected = seclectAll.isSelected();
+        boolean isSelected = selectAll.isSelected();
         for (CheckBox checkBox : listCheckBox) {
             checkBox.setSelected(isSelected);
         }
+    }
+
+
+    protected Label setContent(Question question){
+        Label label = new Label
+                (question.getNameQuestion() + ": " + question.getContentQuestion());
+        label.setPrefSize(725, minHeight);
+        label.setMinHeight(minHeight);
+        label.setFont(Font.font(14));
+        return label;
     }
 }

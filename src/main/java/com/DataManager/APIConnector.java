@@ -12,17 +12,7 @@ import java.io.IOException;
 
 
 public class APIConnector {
-    private static APIConnector instance;
     private final static OkHttpClient client = new OkHttpClient();
-
-    private APIConnector() {}
-
-    public static APIConnector getInstance() {
-        if (instance == null){
-            instance = new APIConnector();
-        }
-        return instance;
-    }
 
     public static Object getData(String url){
         Request request = new Request.Builder()

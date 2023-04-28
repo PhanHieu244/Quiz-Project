@@ -17,8 +17,8 @@ public class Test {
     private List<Test> children = new ArrayList<>();
 
     public Test() {
-        nameTest =null;
-        idTest=null;
+        nameTest = null;
+        idTest = null;
         idParent = null;
     }
 
@@ -51,7 +51,7 @@ public class Test {
         this.questions = questions;
     }*/
 
-    public List<Question> getRandomQuestions(){
+    /*public List<Question> getRandomQuestions(){
         List<Question> questions_ =  new ArrayList<Question>();
         boolean check []=new boolean[this.size()];
         for(int i =0; i < this.size(); i++){
@@ -68,7 +68,7 @@ public class Test {
             check[ranNum]=true;
         }
         return questions_;
-    }
+    }*/
 
     public int getAmountQuestion(){ return amountQuestion;}
 

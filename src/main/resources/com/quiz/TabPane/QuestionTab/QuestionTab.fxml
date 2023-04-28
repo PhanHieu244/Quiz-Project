@@ -80,7 +80,7 @@
                <children>
                   <AnchorPane prefHeight="54.0" prefWidth="593.0">
                      <children>
-                        <CheckBox fx:id="seclectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
+                        <CheckBox fx:id="selectAll" layoutY="23.0" mnemonicParsing="false" onAction="#selectAllQuestion" />
                         <Label layoutX="45.0" layoutY="6.0" text="Question">
                            <font>
                               <Font size="14.0" />

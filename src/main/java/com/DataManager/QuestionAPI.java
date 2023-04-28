@@ -13,18 +13,43 @@ public class QuestionAPI {
     private final static String urlSubCateQuestions = "http://localhost:8080/api/v1/answer/subquiz/quiz_id=";
     private final static String urlQuestion = "http://localhost:8080/api/v1/question/";
     private final static String urlAnswer = "http://localhost:8080/api/v1/answer/question_id=";
-
-    //post array question
-    public static void post(String json, int id) throws IOException {
-        APIConnector.postData(json, urlAllQuestions + id);
+    private final static String getQuizURL = "http://localhost:8080/api/v1/answer/question_id=";
+    private final static String urlPaginationCate = "http://localhost:8080/api/v1/answer/quizId=";
+    /**
+     * Post array question to API
+     * @param json string of array json
+     * @param id id of category
+     */
+    public static void post(String json, int id) {
+        try {
+            System.out.println("post: " + json);
+            APIConnector.postData(json, urlAllQuestions + id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    //put object question
-    public static void put(String json, int id) throws IOException {
-        APIConnector.putData(json, urlAnswer + id);
+
+    /**
+     * Put object question to API
+     * @param json string of object json
+     * @param id id of category
+     */
+    public static void put(String json, int id) {
+        try {
+            System.out.println("put :" + json);
+            APIConnector.putData(json, urlAnswer + id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    //todo get all question
+    /**
+     * Get all questions content in category (Do not get choice)
+     * . Get description, id, name
+     * @param getSubCate is get question in subcategories?
+     * @param id ID of this category
+     */
     public static ArrayList<Question> getQuestionsContent(int id, boolean getSubCate) throws IOException {
         String url = getSubCate ? urlSubCateQuestions : urlAllQuestions;
         JSONObject jsonData = (JSONObject) APIConnector.getData(url + id);
@@ -40,9 +65,46 @@ public class QuestionAPI {
         return questions;
     }
 
+    /**
+     * Get all questions content in this category (get all choices)
+     * @param getSubCate is get question in subcategories?
+     * @param id ID of this category
+     */
     public static ArrayList<Question> getAllQuestionInCate(int id, boolean getSubCate) throws IOException {
         String url = getSubCate ? urlSubCateQuestions : urlAllQuestions;
-        JSONObject jsonData = (JSONObject) APIConnector.getData(url + id);
+        url += id;
+        /*JSONObject jsonData = (JSONObject) APIConnector.getData(url + id);
+        JSONArray jsonArray = (JSONArray) jsonData.get("data");
+        ArrayList<Question> questions = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject =(JSONObject) jsonArray.get(i);
+            questions.add(getQuestion(jsonObject, null));
+        }*/
+        return getAllQuestionFromURL(url);
+    }
+
+    /**
+     * Get all questions content in this category (get all choices)
+     * @param getSubCate is get question in subcategories?
+     * @param id ID of this category
+     */
+    public static ArrayList<Question> categoryPagination(int id, boolean getSubCate,int pageIndex, int pageSize) throws IOException {
+        String url = getSubCate ? "urlPaginationSubCate" : urlPaginationCate;
+        url += id + "/pageNo=" + pageIndex + "/pageSize=" + pageSize;
+        System.out.println(url);
+        return getAllQuestionFromURL(url);
+    }
+
+    public static ArrayList<Question> getAllQuestionInQuiz(int id) throws IOException{
+        return getAllQuestionFromURL(getQuizURL + id);
+    }
+
+    /**
+     * Get all questions content in this category (get all choices)
+     * @param url URL to get question in category or quiz
+     */
+    public static ArrayList<Question> getAllQuestionFromURL(String url) throws IOException {
+        JSONObject jsonData = (JSONObject) APIConnector.getData(url);
         JSONArray jsonArray = (JSONArray) jsonData.get("data");
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -52,13 +114,21 @@ public class QuestionAPI {
         return questions;
     }
 
-    //todo get one question
+    /**
+     * Get a question with question ID
+     * @param quesID id of this question
+     */
     public static Question getQuestion(int quesID) throws IOException {
         JSONObject jsonData = (JSONObject) APIConnector.getData(urlQuestion + quesID);
         JSONObject jsonObject = (JSONObject) jsonData.get("data");
         return getQuestion(jsonObject, quesID);
     }
 
+    /**
+     * Get data of question with JSON object
+     * @param quesID id of this question
+     * @param jsonObject json object to get data
+     */
     private static Question getQuestion(JSONObject jsonObject, Integer quesID){
         String content = jsonObject.get("description").toString();
         String name = (String) jsonObject.get("name");
@@ -70,6 +140,11 @@ public class QuestionAPI {
     }
 
     //todo get all choice
+    /**
+     * Get all choice from question
+     * @param isSuffer default: sort ID
+     * @return list choices from choices JSON
+     */
     private static List<Choice> getChoices(JSONArray choicesJson, boolean isSuffer){
         List<Choice> choices = new ArrayList<>();
         System.out.println(choicesJson.toString());
@@ -90,6 +165,11 @@ public class QuestionAPI {
         return choices;
     }
 
+    /**
+     * Creat the change JSON choice from choices to put/post
+     * , if null create new
+     * , if not null change data of choice
+     */
     private static JSONObject creatJsonChoice(Choice choice){
         JSONObject jsonObject = new JSONObject();
         if (choice.id != null) jsonObject.put("id", choice.id);
@@ -100,6 +180,11 @@ public class QuestionAPI {
         return jsonObject;
     }
 
+    /**
+     * Creat the change JSON choice from question to put/post
+     * , if null create new
+     * , if not null change data of question
+     */
     public static JSONObject creatJsonQuestion(Question question){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -116,6 +201,9 @@ public class QuestionAPI {
         return jsonObject;
     }
 
+    /**
+     * Create json array from list question
+     */
     public static JSONArray creatJsonListQues(List<Question> questions){
         JSONArray json = new JSONArray();
         for (Question question : questions) {
@@ -124,35 +212,34 @@ public class QuestionAPI {
         return json;
     }
 
+    /**
+     * Post list questions to API
+     * , post when import file
+     */
     public static void postListQuestion(int id, List<Question> questions){
         String jsonString = creatJsonListQues(questions).toString();
-        System.out.println(jsonString);
-        try {
-            post(jsonString, id);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        post(jsonString, id);
     }
 
+    /**
+     * Post a question to API
+     * , use when add new question
+     * @param id ID of Category to post
+     */
     public static void postNewQuestion(int id, Question question){
         JSONArray json = new JSONArray();
         json.add(creatJsonQuestion(question));
         String questionString = json.toString();
-        try {
-            post(questionString, id);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        post(questionString, id);
     }
 
+    /**
+     * Put a question to API
+     * , use when edit old question
+     */
     public static void putNewQuestion(Question question){
         String questionString = creatJsonQuestion(question).toString();
-        try {
-            System.out.println("put: " + questionString);
-            put(questionString, question.idQuestion);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        put(questionString, question.idQuestion);
     }
 
 }

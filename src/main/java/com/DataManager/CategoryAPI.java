@@ -14,7 +14,7 @@ public class CategoryAPI {
     private final static String urlCategory = "http://localhost:8080/api/v1/quiz";
 
 
-    public static JSONArray getJSONCategories() throws IOException {
+    private static JSONArray getJSONCategories() throws IOException {
         JSONObject jsonObject = (JSONObject) APIConnector.getData(urlCategory);
         return (JSONArray) jsonObject.get("data");
     }
@@ -62,9 +62,9 @@ public class CategoryAPI {
     }
 
     public static void postNewCategory(String name, String description, Integer parentID){
-        String quizString = creatJsonCategory(name, description, parentID);
+        String cateString = creatJsonCategory(name, description, parentID);
         try {
-            post(quizString);
+            post(cateString);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

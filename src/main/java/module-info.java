@@ -20,4 +20,6 @@ module com.quiz {
     opens com.quiz.Tool.BaseController to javafx.fxml;
     exports com.quiz.QuizTab;
     opens com.quiz.QuizTab to javafx.fxml;
+    exports com.quiz.QuizTab.EditQuiz;
+    opens com.quiz.QuizTab.EditQuiz to javafx.fxml;
 }
