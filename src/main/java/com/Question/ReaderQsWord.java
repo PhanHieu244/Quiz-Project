@@ -37,6 +37,9 @@ public class ReaderQsWord extends ReaderQuestion {
             boolean flag = true;
             int error = 0;
             List<XWPFParagraph> xwpfParagraphs = document.getParagraphs();
+            int numOfImage = list.size();
+            boolean isImageMixed = numOfImage>5 ? true:false;
+
             int numContentQs = 0;
             int numChoices = 0;
             int numKey = 0;
@@ -66,7 +69,7 @@ public class ReaderQsWord extends ReaderQuestion {
 
                     String line = x.getText();
                     int var10001 = i++;
-                    System.out.println("" + var10001 + " " + line);
+                    System.out.println(var10001 + " " + line);
                     if (numContentQs != 0) {
                         if (line.length() == 0) {
                             if (numChoices < 2 || numKey != 1) {
@@ -95,7 +98,9 @@ public class ReaderQsWord extends ReaderQuestion {
                                 ++numChoices;
                                 question.addChoice(line.substring(3), line.charAt(0));
                                 if (hasPic) {
-                                    question.setImageDataLastChoice((String)list.get(idImage++));
+                                    int id = isImageMixed? ((idImage-5+numOfImage)%numOfImage) : idImage;
+                                    question.setImageDataLastChoice((String)list.get(id));
+                                    idImage++;
                                 }
                             } else {
                                 if (line.length() <= 8 || 0 != line.indexOf("ANSWER: ")) {
@@ -115,7 +120,9 @@ public class ReaderQsWord extends ReaderQuestion {
 
                         question.setNameAndContentQs(line);
                         if (hasPic) {
-                            question.setImageDataQs((String)list.get(idImage++));
+                            int id = isImageMixed? (idImage-5+numOfImage)%numOfImage:idImage;
+                            question.setImageDataQs((String)list.get(id));
+                            idImage++;
                         }
 
                         ++numContentQs;

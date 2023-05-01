@@ -7,12 +7,10 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.Question.Choice;
 import com.Question.Question;
-import com.Question.Test;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
@@ -41,36 +39,55 @@ public class Writer {
 
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(this.url));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(this.url));
             document.open();
-            BaseFont bf = BaseFont.createFont("arial-unicode-ms.ttf", "Identity-H", true);
-            Font font = new Font(bf);
-
+            BaseFont bf = BaseFont.createFont("arial-unicode-ms.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            int fontSize = 10;
+            Font font = new Font(bf,fontSize);
+            float spaceLeft=1000;
+            float spacingBefore=0;
+            String string = null;
+            Paragraph para=null;
+            Image image = null;
+            boolean hasImage = false;
             for (Question q : questions) {
-                String tmp = q.getNameQuestion();
-                if(tmp==null){
-                    document.add(new Paragraph(q.getContentQuestion(),font));
-                }else{
-                    document.add(new Paragraph(tmp + ": " + q.getContentQuestion(), font));
+                string = q.getNameQuestion()==null?q.getContentQuestion():q.getNameQuestion() + ": " + q.getContentQuestion();
+                para= new Paragraph(string,font);
+                hasImage = q.getImageDataQs() != null;
+                if(hasImage){
+                    byte[] decoded = Base64.getDecoder().decode(q.getImageDataQs());
+                    image=Image.getInstance(decoded);
                 }
 
-                if (q.getImageDataQs() != null) {
-                    byte[] decoded = Base64.getDecoder().decode(q.getImageDataQs());
-                    Image image = Image.getInstance(decoded);
+                spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100)?0:spaceLeft;
+                document.add(para);
+                para.setSpacingBefore(spacingBefore);
+                if (hasImage){
                     document.add(image);
+                    hasImage=false;
                 }
+                spaceLeft = writer.getVerticalPosition(true)-document.bottomMargin();
+
                 int idAns = 0;
                 for (Choice choice : q.getChoices()) {
-
-                    document.add(new Paragraph((char)((int)'A'+idAns++) + ". " + choice.getContentChoice(), font));
-                    if (choice.getImageDataChoice() != null) {
-                        byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
-                        Image image = Image.getInstance(decoded);
-                        document.add(image);
+                    string = (char)((int)'A'+idAns++) + ". " + choice.getContentChoice();
+                    para= new Paragraph(string,font);
+                    hasImage = choice.getImageDataChoice() != null;
+                    if(hasImage){
+                    byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
+                    image=Image.getInstance(decoded);
                     }
+                    spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100)?0:spaceLeft;
+                    para.setSpacingBefore(spacingBefore);
+                    document.add(para);
+                    if (hasImage){
+                        document.add(image);
+                        hasImage=false;
+                    }
+                    spaceLeft = writer.getVerticalPosition(true)-document.bottomMargin();
                 }
 
-                document.add(new Paragraph("\n"));
+                document.add(new Paragraph("ANSWER: "+q.getKey(),font));
             }
 
             document.close();
@@ -79,8 +96,11 @@ public class Writer {
         }
 
     }
-
     public void PDFProtectWrite(List<Question> questions, String password ) throws IOException {// tạo file có mật khẩu
+        if (password.length()<6||password.indexOf(" ")>=0) {
+            System.out.println("mật khẩu lỗi");
+            return;
+        }
         this.PDFWrite(questions);
         PDDocument doc = PDDocument.load(new File(this.url));
         StandardProtectionPolicy spp = new StandardProtectionPolicy(password, password, new AccessPermission());
