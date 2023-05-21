@@ -22,4 +22,6 @@ module com.quiz {
     opens com.quiz.QuizTab to javafx.fxml;
     exports com.quiz.QuizTab.EditQuiz;
     opens com.quiz.QuizTab.EditQuiz to javafx.fxml;
+    exports com.quiz.Exam;
+    opens com.quiz.Exam to javafx.fxml;
 }

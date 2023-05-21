@@ -31,16 +31,13 @@ public class UIController implements Initializable {
         if (Instance == null){
             Instance = this;
         }
-        //SetupNode();
-        //main.setCenter(settingTabPane);
+        SetupNode();
     }
 
     private void SetupNode(){
         try {
-            Node settingTabPane = new FXMLLoader(getClass().getResource("QuestionTab.fxml")).load();
-            Node settingTabPane2 = new FXMLLoader(getClass().getResource("QuestionTab.fxml")).load();
-            main.setCenter(settingTabPane);
-            main.setBottom(settingTabPane2);
+            Node quizList = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/QuizList.fxml")).load();
+            main.setCenter(quizList);
         }catch (Exception e){
             e.printStackTrace();
         }

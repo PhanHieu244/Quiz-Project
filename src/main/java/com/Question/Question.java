@@ -6,7 +6,7 @@ public class Question {
     public final Integer idQuestion;// id của câu hỏi
     private String nameQuestion = "";// tên câ hỏi
     private String contentQuestion;// nội dung đề bài
-    private List<Choice> choices = new ArrayList<Choice>();// danh sách câu trả lời
+    private List<Choice> choices = new ArrayList<>();// danh sách câu trả lời
     private String key;// dạng chuỗi vì nó có thể chứa nhiều đáp án
     private String imageDataQs = null;
     public Question(){
@@ -47,48 +47,19 @@ public class Question {
         this.idQuestion = idQuestion;
         this.nameQuestion = nameQuestion;
     }
-    public void setNameQuestion(String nameQuestion) {
-        this.nameQuestion = nameQuestion;
+
+    public boolean isMultiChoice(){
+        int count = 0;
+        for (Choice choice:
+             choices) {
+            if (choice.getPercentGrade() > 0){
+                count++;
+                if (count > 1) return true;
+            }
+        }
+        return false;
     }
 
-    public void setContentQuestion(String contentQuestion) {
-        this.contentQuestion = contentQuestion;
-    }// đặt tiêu đề câu hỏi
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public void setImageDataQs(String imageDataQs) {
-        this.imageDataQs = imageDataQs;
-    }
-    public void setImageDataLastChoice(String imageDataLastChoice){
-        choices.get(choices.size()-1).setImageDataChoice(imageDataLastChoice);
-    }
-    public int getIdQuestion() {
-        return idQuestion;
-    }
-
-    public String getContentQuestion() {
-        return contentQuestion;
-    }
-
-    public String getImageDataQs() {
-        return imageDataQs;
-    }
-
-    public List<Choice> getChoices() {
-        return choices;
-    }
-
-    public String getNameQuestion() {
-        return nameQuestion;
-    }
-
-    public String getKey() {
-        return key;
-    }
-    // thêm đáp án vào list ans, không có điểm
     public void addChoice(String s, char name){
         Choice c= new Choice(s,name);
         choices.add(c);
@@ -131,4 +102,47 @@ public class Question {
         }
         System.out.println(key);
     }
+
+
+    public void setNameQuestion(String nameQuestion) {
+        this.nameQuestion = nameQuestion;
+    }
+
+    public void setContentQuestion(String contentQuestion) {
+        this.contentQuestion = contentQuestion;
+    }// đặt tiêu đề câu hỏi
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+    public void setImageDataQs(String imageDataQs) {
+        this.imageDataQs = imageDataQs;
+    }
+    public void setImageDataLastChoice(String imageDataLastChoice){
+        choices.get(choices.size()-1).setImageDataChoice(imageDataLastChoice);
+    }
+    public int getIdQuestion() {
+        return idQuestion;
+    }
+
+    public String getContentQuestion() {
+        return contentQuestion;
+    }
+
+    public String getImageDataQs() {
+        return imageDataQs;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+
+    public String getNameQuestion() {
+        return nameQuestion;
+    }
+
+    public String getKey() {
+        return key;
+    }
+    // thêm đáp án vào list ans, không có điểm
 }

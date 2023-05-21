@@ -6,11 +6,8 @@ public class Test {
     private final String nameTest;
     private final Integer idTest;// id của test
     private final Integer idParent;
-
     private Integer amountQuestion;
     private int generation;
-
-
 
     private List<Question> questions =  new ArrayList<>();
 

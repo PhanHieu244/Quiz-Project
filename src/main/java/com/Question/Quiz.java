@@ -12,4 +12,8 @@ public class Quiz {
     public Quiz() {
         idQuiz = null;
     }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
 }
