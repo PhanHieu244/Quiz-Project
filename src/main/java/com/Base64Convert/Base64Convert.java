@@ -4,7 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 public class Base64Convert {
     private static Base64Convert instance;
@@ -76,4 +78,33 @@ public class Base64Convert {
         return nameFile.endsWith(".png") || nameFile.endsWith(".jpg")
                 || nameFile.endsWith(".gif");
     }
+
+    public static boolean isImage(String base64String) {
+        // Decode the Base64 string to byte array
+        byte[] data = Base64.getDecoder().decode(base64String);
+
+        // Check the file signature for image formats
+        if (data.length >= 2) {
+            return (data[0] == (byte) 0xFF && data[1] == (byte) 0xD8) // JPEG
+                    || (data[0] == (byte) 0x89 && data[1] == (byte) 0x50) // PNG
+                    || (data[0] == (byte) 0x47 && data[1] == (byte) 0x49) // GIF
+                    || (data[0] == (byte) 0x42 && data[1] == (byte) 0x4D); // BMP
+        }
+
+        return false;
+    }
+
+    public static boolean isVideo(String base64String) {
+        // Decode the Base64 string to byte array
+        byte[] data = Base64.getDecoder().decode(base64String);
+
+        // Check the file signature for video formats
+        if (data.length >= 4) {
+            return (data[0] == (byte) 0x00 && data[1] == (byte) 0x00 && data[2] == (byte) 0x00 && data[3] == (byte) 0x18) // MP4
+                    || (data[0] == (byte) 0x1A && data[1] == (byte) 0x45 && data[2] == (byte) 0xDF && data[3] == (byte) 0xA3); // WebM
+        }
+
+        return false;
+    }
+
 }

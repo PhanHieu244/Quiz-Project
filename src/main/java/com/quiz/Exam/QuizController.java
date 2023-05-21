@@ -4,11 +4,13 @@ import com.DataManager.QuestionAPI;
 import com.Question.Question;
 import com.Question.Quiz;
 import com.Question.Test;
+import com.quiz.Tool.BaseController.CountdownTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizController {
+public class QuizController{
 
     @FXML
     private Hyperlink finishBut;
@@ -41,20 +43,24 @@ public class QuizController {
 
     private List<QuestionController> QuesControllerList;
     private List<Pane> DonePaneList;
+    List<Question> questions;
 
     private float totalMarks = 0f;
     private boolean isFinish = false;
     private final float widthHbox = 370f;
     private final float heightHbox = 40;
     private final float widthNaviBox = 28f;
-    private final float widthPane = 28f;
     private final float heightNaviBox = 32f;
-    private final float heightPane = 32f;
+    CountdownTimer countdownTimer;
+
 
     public void LoadQuiz(Test quiz){//todo Quiz
+        //todo quiz time
+        countdownTimer = new CountdownTimer(60, this);
+        countdownTimer.createCountdownLabel(timeLabel);
         QuesControllerList = new ArrayList<>();
         DonePaneList = new ArrayList<>();
-        List<Question> questions;
+
         //List<Question> questions = QuestionAPI.getAllQuestionInQuiz();
         try {
             questions = QuestionAPI.getAllQuestionInCate(quiz.getIdTest(), false);
@@ -109,22 +115,25 @@ public class QuizController {
             quizNavigation.getChildren().add(hBox);
         }
     }
-    
 
-    private String formatTime(int totalSeconds) {
-        int hours = totalSeconds / 3600;
-        int minutes = (totalSeconds % 3600) / 60;
-        int seconds = totalSeconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
-    }
+
 
     @FXML
-    private void finish(){
+    public void finish(){
         if(!isFinish){
             for (QuestionController controller :
                     QuesControllerList) {
                 totalMarks += controller.finishQuiz();
-                //todo show marks
+            }
+            vBox.getChildren().remove(0);
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Marks.fxml"));
+                Parent root = fxmlLoader.load();
+                MarksController marksController = fxmlLoader.getController();
+                marksController.setup(countdownTimer.getTimeTaken(), totalMarks, questions.size(), 10f);
+                vBox.getChildren().add(0, root);
+            } catch (Exception e){
+                e.printStackTrace();
             }
         } else {
             //todo return;

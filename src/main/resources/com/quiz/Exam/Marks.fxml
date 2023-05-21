@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.Exam.MarksController">
+   <children>
+      <Label layoutX="92.0" layoutY="34.0" text="State" textFill="#ee0808" AnchorPane.leftAnchor="92.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="169.0" layoutY="34.0" text="Finished" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="14.0" text="Started on" textFill="#ee0808" AnchorPane.leftAnchor="59.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="169.0" layoutY="14.0" text="Saturday, 18 March 2023" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="54.0" text="Completed on" textFill="#ee0808" AnchorPane.leftAnchor="35.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="169.0" layoutY="54.0" text="Saturday, 18 March 2023" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="74.0" text="Time taken" textFill="#ee0808" AnchorPane.leftAnchor="59.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="timeLabel" layoutX="169.0" layoutY="74.0" text="1 min 27 secs" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="94.0" text="Marks" textFill="#ee0808" AnchorPane.leftAnchor="89.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="marksLabel" layoutX="169.0" layoutY="94.0" text="0.00/67.00" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="114.0" text="Grade" textFill="#ee0808">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="gradeLabel" layoutX="169.0" layoutY="114.0" text="0.00 out of 10.00 (0%)" AnchorPane.leftAnchor="169.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

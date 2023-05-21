@@ -5,6 +5,11 @@ import com.DataManager.QuestionAPI;
 import com.Question.Choice;
 import com.Question.Question;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 import java.io.*;
 import java.net.URL;
@@ -46,8 +51,16 @@ public class EditQuestionController extends AddQuestionBase {
     private void loadQuesContent(Question question){
         questionName.setText(question.getNameQuestion());
         questionText.setText(question.getContentQuestion());
-        imageView.setImage(Base64Convert.base64ToImage(question.getImageDataQs()));
-        //todo show video
+        String base64String = question.getImageDataQs();
+        if(base64String != null) {
+            if (Base64Convert.isImage(base64String)) {
+                imageView.setImage(Base64Convert.base64ToImage(base64String));
+            } else {
+                MediaPlayer mediaPlayer = new MediaPlayer(Base64Convert.base64ToMedia(base64String));
+                mediaView.setMediaPlayer(mediaPlayer);
+                mediaPlayer.play();
+            }
+        }
     }
 
     protected void pushQuestion(){

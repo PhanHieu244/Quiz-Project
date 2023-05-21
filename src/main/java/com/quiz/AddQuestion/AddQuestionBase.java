@@ -6,6 +6,7 @@ import com.Question.Question;
 import com.Question.Test;
 import com.quiz.MainUI.UIController;
 import com.quiz.TabPane.SettingTab;
+import com.quiz.Tool.AlertTool;
 import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,8 +62,8 @@ public abstract class AddQuestionBase implements Initializable {
     protected ArrayList<TextArea> choicesText = new ArrayList<>();
     protected String base64;
     protected String[] base64Choices;
-
     protected Question questionSave;
+    private float totalPercent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -158,6 +159,7 @@ public abstract class AddQuestionBase implements Initializable {
 
 
     protected Question creatQuestion(){
+        totalPercent = 0;
         List<Choice> choices = new ArrayList<>();
         List<Choice> choicesSave = questionSave.getChoices();
         for (int i = 0; i < choicesText.size(); i++) {
@@ -165,6 +167,7 @@ public abstract class AddQuestionBase implements Initializable {
             String choiceContent = choiceText.getText();
             if (choiceContent.equals("")) continue;
             float percent = getPercent(listGradeChoice.get(i).getValue());
+            totalPercent += (percent > 0) ? percent : 0;
             Integer idChoice = null;
             if (i < choicesSave.size()) idChoice = choicesSave.get(i).id;
             Choice choice = new Choice(idChoice ,choiceContent, base64Choices[i], percent);
@@ -184,14 +187,24 @@ public abstract class AddQuestionBase implements Initializable {
 
     @FXML
     protected void saveContinue(ActionEvent event){
-        questionSave = creatQuestion();
+        Question ques = creatQuestion();
+        if (showAlert()) return;
+        questionSave = ques;
     }
 
     @FXML
     protected void saveOut(ActionEvent event){
         questionSave = creatQuestion();
+        if (showAlert()) return;
         pushQuestion();
         out();
     }
 
+    private boolean showAlert(){
+        if (totalPercent != 100){
+            AlertTool.showWarning("Total Grade of Choices is not equal 100%");
+            return true;
+        }
+        return false;
+    }
 }
