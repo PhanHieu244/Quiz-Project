@@ -1,5 +1,6 @@
 package com.quiz.TabPane;
 
+import com.DataManager.CategoryAPI;
 import com.DataManager.QuestionAPI;
 import com.Question.*;
 import com.quiz.Tool.AlertTool;
@@ -15,6 +16,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ImportTabController implements Initializable {
@@ -39,6 +41,7 @@ public class ImportTabController implements Initializable {
 
     @FXML
     private void importFile(ActionEvent event) {
+        int id = 0;
         if (file == null) {
             AlertTool.showWarning("Error: File not found!");
             return;
@@ -49,14 +52,20 @@ public class ImportTabController implements Initializable {
              return;
         }
         if (categoriesBox.getValue() == null) {
-            AlertTool.showWarning("Error: Category not found!");
-            return;
-        }
+            if (categoriesBox.getItems().isEmpty()){
+                String nameString = "Default Category " + LocalDate.now();
+                CategoryAPI.postNewCategory(nameString, "", null);
+                CategoriesBoxTool.resetAll();
+                id = categoriesBox.getItems().get(0).getIdTest();
+            } else{
+                id = CategoriesBoxTool.randomCate(categoriesBox);
+            }
+
+        }else id = categoriesBox.getValue().getIdTest();
         String path = file.getPath();
         ReaderQuestion readerQuestion = nameFile.endsWith(".txt") ? new ReaderQsTxt(path) : new ReaderQsWord(path);
         Test category = readerQuestion.read();
-        QuestionAPI.postListQuestion
-                (categoriesBox.getValue().getIdTest(), category.getQuestions());
+        QuestionAPI.postListQuestion(id, category.getQuestions());
         AlertTool.showMessageBox();
         reset();
     }

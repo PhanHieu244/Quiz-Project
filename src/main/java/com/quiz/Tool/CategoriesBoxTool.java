@@ -10,6 +10,7 @@ import javafx.util.StringConverter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CategoriesBoxTool {
     private static List<ComboBox<Test>> cateBoxList = new ArrayList<>();
@@ -80,5 +81,25 @@ public class CategoriesBoxTool {
         int total = category.getAmountQuestion();
         if (total == 0) return name;
         return name + " (" + total + ")";
+    }
+
+    public static int getNewCate(){
+        int maxID = -1;
+        for (ComboBox<Test> comboBox : cateBoxList) {
+            Test test = comboBox.getValue();
+            if (test != null && test.getIdTest() > maxID) {
+                maxID = test.getIdTest();
+            }
+        }
+        System.out.println(maxID);
+        return maxID;
+    }
+
+    public static int randomCate(ComboBox<Test> categoriesBox){
+        Random random = new Random();
+
+        int randomIndex = random.nextInt(categoriesBox.getItems().size());
+        Test randomComboBox = categoriesBox.getItems().get(randomIndex);
+        return randomComboBox.getIdTest();
     }
 }
