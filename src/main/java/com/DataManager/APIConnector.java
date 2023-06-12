@@ -55,4 +55,14 @@ public class APIConnector {
         response.close();
     }
 
+    public static void deleteData(String json, String url) throws IOException {
+        RequestBody body = RequestBody.create(json, DataManager.JSON);
+        Request request = new Request.Builder()
+                .url(url)
+                .delete(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response);
+        response.close();
+    }
 }

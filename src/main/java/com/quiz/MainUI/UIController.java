@@ -63,7 +63,11 @@ public class UIController implements Initializable {
     public void setMainUI(MainTab mainTab){
         String source = "";
         switch (mainTab){
-            case QuizList -> {source = "/com/quiz/QuizTab/QuizList.fxml";}
+            case QuizList -> {
+                source = "/com/quiz/QuizTab/QuizList.fxml";
+                this.mainTab = mainTab;
+                settingBut.setVisible(true);
+            }
             case AddNewQuiz -> source = "/com/quiz/QuizTab/AddNewQuiz.fxml";
             default -> AlertTool.showWarning("Main UI error");
         }
@@ -96,6 +100,10 @@ public class UIController implements Initializable {
 
     public void SetCenter(Node node){
         main.setCenter(node);
+    }
+
+    public void SetFullSize(){
+        ((Stage) settingBut.getScene().getWindow()).setMaximized(true);
     }
 
     public void openTabPane(SettingTab settingTab){
@@ -150,6 +158,7 @@ public class UIController implements Initializable {
     }
 
     public void openAttempt(Quiz quiz){
+        settingBut.setVisible(false);
         if(mainTab == MainTab.EditQuiz){
             int size = box.getChildren().size();
             box.getChildren().remove( size - 2, size);
@@ -190,4 +199,7 @@ public class UIController implements Initializable {
         removeElements(listQuiz, false);
     }
 
+    /*public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }*/
 }

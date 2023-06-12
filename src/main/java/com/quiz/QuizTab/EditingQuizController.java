@@ -1,16 +1,22 @@
 package com.quiz.QuizTab;
 
 import com.DataManager.QuestionAPI;
+import com.DataManager.QuizAPI;
 import com.Question.Question;
 import com.Question.Quiz;
+import com.quiz.MainUI.MainTab;
 import com.quiz.MainUI.UIController;
+import com.quiz.Tool.AlertTool;
 import com.quiz.Tool.BaseController.QuestionAddTab;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -23,6 +29,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,22 +59,26 @@ public class EditingQuizController implements Initializable {
     @FXML
     private Button deleteBut;
     @FXML
-    private Button test;
-    @FXML
     private Button cancelBut;
     @FXML
     private CheckBox selectAll;
     private List<CheckBox> checkBoxList;
-    private List<Question> questionsList;
-    private List<Question> removeList;
-    private List<Question> preRemoveList;
-    private List<Question> addList;
+    private ArrayList<Question> questionsList;
+    private ArrayList<Question> removeList;
+    private ArrayList<Question> preRemoveList;
+    private ArrayList<Question> addList;
     private  Quiz quiz;
     private final float minHeight = 46f;
     private final float fontSize = 14f;
-    private final int quesInPage = 4;
+    private final int quesInPage = 15;
     private int count;
     private int currentPage;
+    ObservableList<String> itemList = FXCollections.observableArrayList(
+            "",
+            "a new question",
+            "from question bank",
+            "a random question"
+    );
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,27 +89,21 @@ public class EditingQuizController implements Initializable {
         addList = new ArrayList<>();
         count = 0;
 
-        addBut.getItems().addAll("a new question", "from question bank", "a random question");
-        test.setOnAction(event -> {
-            System.out.println(removeList.size());
-            System.out.println(questionsList.size());
-            System.out.println(addList.size());
-        });
+        addBut.setItems(itemList);
 
         addBut.setOnAction(event -> {
             if (addBut.getValue() == null) return;
             String value = addBut.getValue();
-            addBut.setValue(null); //todo error
             FXMLLoader loader;
-            if (value.equals("a random question")){
+            if (value.equals("a random question")) {
                 loader = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/EditQuiz/AddRandomQuestion.fxml"));
-            }
-            else if (value.equals("from question bank")){
+            } else if (value.equals("from question bank")) {
                 loader = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/EditQuiz/ShowBankQuestion.fxml"));
-            }else {
+            } else {
                 return;
             }
-            try{
+
+            try {
                 Scene scene = new Scene(loader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -107,10 +112,13 @@ public class EditingQuizController implements Initializable {
                 QuestionAddTab questionAddTab = loader.getController();
                 questionAddTab.setEditController(this);
                 stage.show();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+            addBut.setValue("");
         });
+
+
         pageChoose.setOnAction(event -> {
             if (pageChoose.getValue() == null) return;
             checkBoxList.clear();
@@ -118,27 +126,36 @@ public class EditingQuizController implements Initializable {
             showQuesInPage(pageChoose.getValue() - 1);
             setupMulti(false);
         });
-        //vBox.prefWidthProperty().bind(scroll.prefWidthProperty());
-        //loadData(); //todo delete
 
     }
 
     public void addQuestion(List<Question> listAdd){
+        int count = 0;
+        int amount = listAdd.size();
+        Iterator<Question> iterator = listAdd.iterator();
+        while (iterator.hasNext()) {
+            Question ques = iterator.next();
+            for (Question question : questionsList) {
+                if (question.getIdQuestion() == ques.getIdQuestion()) {
+                    iterator.remove();
+                    count++;
+                    break;
+                }
+            }
+        }
+        if (count > 0) AlertTool.showWarning("Remove the " + count +
+                        " duplicated questions from the quiz from the " +
+                        amount + " questions you added.");
         questionsList.addAll(listAdd);
         addList.addAll(listAdd);
         vBox.getChildren().clear();
         setupPageChoose();
-        showQuesInPage(currentPage);
         setLabel();
     }
 
     public void loadData(Quiz quiz){
         this.quiz = quiz;
-        try {
-            questionsList = QuestionAPI.getAllQuestionInCate(quiz.getIdQuiz(), true);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        questionsList = QuestionAPI.getQuestionQuiz(quiz, false);
         setupPageChoose();
         showQuesInPage(0);
         setLabel();
@@ -219,7 +236,32 @@ public class EditingQuizController implements Initializable {
 
     @FXML
     private void save(ActionEvent event) {
-        //todo
+        String gradeString = maxGradeField.getText();
+        try {
+            float grade = Float.parseFloat(gradeString);
+            if(grade < 0) {
+                AlertTool.showWarning("Grade is greater than 0!!!");
+                return;
+            }
+            quiz.setGrade(grade);
+            QuizAPI.putInfoQuiz(quiz);
+            //UIController.Instance.setQuiz(quiz);
+
+        } catch (NumberFormatException e) {
+            AlertTool.showWarning("Grade is float!!!");
+            return;
+        }
+        QuestionAPI.postQuesQuiz(addList, quiz.getIdQuiz());
+        QuestionAPI.deleteQuestion(removeList, quiz.getIdQuiz());
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/PreviousAttempts.fxml"));
+            Parent root = fxmlLoader.load();
+            PreviousAttemptsController controller = fxmlLoader.getController();
+            controller.Setup(quiz);
+            UIController.Instance.SetCenter(root);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -242,7 +284,7 @@ public class EditingQuizController implements Initializable {
 
     @FXML
     private void suffer(ActionEvent event) {
-
+        quiz.setSuffer(sufferBox.isSelected());
     }
 
     private void setupMulti(boolean show){
@@ -257,6 +299,7 @@ public class EditingQuizController implements Initializable {
         int index = currentPage - 1;
         int start = quesInPage * index;
         int end = Math.min(quesInPage * (index + 1), questionsList.size()) ;
+        if(start > end) return new ArrayList<>();
         return questionsList.subList(start, end);
     }
 
@@ -275,7 +318,7 @@ public class EditingQuizController implements Initializable {
         int num = getPageNum();
         if (num == 0) return;
         for (int i = 0; i < num; i++) {
-            list.add(i+1);
+            list.add(i + 1);
         }
         pageChoose.getItems().addAll(list);
         if (currentPage > num || currentPage < 1) currentPage = 1;
@@ -287,5 +330,6 @@ public class EditingQuizController implements Initializable {
         questionLabel.setText("Question: "+ questionsList.size() +" | This quiz is open");
         mark.setText("Total of marks: "+ questionsList.size() + ".00");
         sufferBox.setSelected(quiz.isSuffer());
+        maxGradeField.setText("" + quiz.getGrade());
     }
 }

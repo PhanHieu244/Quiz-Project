@@ -11,13 +11,15 @@ import java.util.List;
 public class QuizAPI {
     private final static String examURL = "http://localhost:8080/api/v1/exam";
     private final static String postQuizURL = "http://localhost:8080/api/v1/exam";
+    private final static String putQuizURL = "http://localhost:8080/api/v1/exam/";
+
 
     /**
      * post new question to database
      */
     public static void postNewQuiz(String name, Integer timeLimit, boolean suffer){
-        String quizString = creatJsonQuiz(name, timeLimit, suffer);
-        post(quizString);
+        JSONObject json = creatJsonQuiz(name, timeLimit, 10,suffer);
+        post(json.toString());
     }
 
     public static ArrayList<Quiz> getAllQuizzes(){
@@ -30,7 +32,8 @@ public class QuizAPI {
                 String name = jsonObject.get("name").toString();
                 int id = Integer.parseInt(jsonObject.get("id").toString());
                 int minutes = Integer.parseInt(jsonObject.get("timeLimit").toString());
-                quizzes.add(new Quiz(id, name, minutes));
+                float grade = Float.parseFloat(jsonObject.get("grade").toString());
+                quizzes.add(new Quiz(id, name, minutes, grade));
             }
             return quizzes;
         } catch (IOException e){
@@ -56,13 +59,29 @@ public class QuizAPI {
         }
     }
 
-    private static String creatJsonQuiz(String name, Integer timeLimit, boolean suffer){
+    public static void putInfoQuiz(Quiz quiz){
+        String name = quiz.getName();
+        int timeLimit = quiz.getMinutes();
+        float grade = quiz.getGrade();
+        boolean suffer = quiz.isSuffer();
+        JSONObject jsonObject = creatJsonQuiz(name, timeLimit, grade, suffer);
+        jsonObject.put("id", quiz.getIdQuiz());
+        String quizString = jsonObject.toString();
+        try{
+            APIConnector.putData(quizString,putQuizURL + quiz.getIdQuiz());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static JSONObject creatJsonQuiz(String name, Integer timeLimit, float grade, boolean suffer){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("description","");
         jsonObject.put("name", name);
         jsonObject.put("timeLimit", timeLimit);
         jsonObject.put("suffer", suffer);
-        return jsonObject.toString();
+        jsonObject.put("grade", grade);
+        return jsonObject;
     }
 
 }

@@ -32,20 +32,13 @@ public class SettingController implements Initializable {
     private void SetupScene(){
         try {
             FXMLLoader quesLoader = new FXMLLoader(getClass().getResource("QuestionTab/QuestionTab.fxml"));
-            //FXMLLoader quesLoader = new FXMLLoader(getClass().getResource(""));
             FXMLLoader cateLoader = new FXMLLoader(getClass().getResource("CategoriesTab.fxml"));
             FXMLLoader importLoader = new FXMLLoader(getClass().getResource("ImportTab.fxml"));
-            FXMLLoader exportLoader = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/EditQuiz/EditingQuiz.fxml"));
-            //FXMLLoader exportLoader = new FXMLLoader(getClass().getResource("ExportTab.fxml"));
+            FXMLLoader exportLoader = new FXMLLoader(getClass().getResource("ExportTab.fxml"));
             questionTab.setContent(quesLoader.load());
             categoriesTab.setContent(cateLoader.load());
             importTab.setContent(importLoader.load());
             exportTab.setContent(exportLoader.load());
-            /*QuestionTabController quesCtrl = quesLoader.getController();
-            CategoriesTabController cateCtrl = cateLoader.getController();
-            ImportTabController importCtrl = importLoader.getController();
-            //ExportTabController exportCtrl = exportLoader.getController();
-            cateCtrl.quesCtrl = quesCtrl;*/
 
         } catch (Exception e){
             e.printStackTrace();

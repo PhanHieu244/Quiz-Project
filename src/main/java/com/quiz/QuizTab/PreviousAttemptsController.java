@@ -78,12 +78,13 @@ public class PreviousAttemptsController {
         }*/
     }
 
-    public void Setup(Quiz quiz){ // todo Quiz
+    public void Setup(Quiz quiz){
         this.quiz = quiz;
         nameQuiz.setText(quiz.getName());
         UIController.Instance.openAttempt(quiz);
         timeQuiz = setTime();
         timeLitmitLabel.setText("Time limit: " + timeQuiz);
+        UIController.Instance.SetFullSize();
     }
 
     private String setTime(){

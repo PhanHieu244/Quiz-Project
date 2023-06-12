@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -25,48 +24,6 @@
                      <padding>
                         <Insets left="15.0" />
                      </padding>
-                     <children>
-                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="46.0" prefWidth="10000.0" spacing="10.0" style="-fx-background-color: gray;">
-                           <children>
-                              <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
-                              <Label fx:id="questionText" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="10.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
-                           <children>
-                              <CheckBox fx:id="checkBox1" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
-                              <Label fx:id="questionText1" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 2">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="deleteBut1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="200.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="56.0" minHeight="-Infinity" prefHeight="46.0" prefWidth="629.0" spacing="10.0">
-                           <children>
-                              <CheckBox fx:id="checkBox11" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" text="[]" visible="false" />
-                              <Label fx:id="questionText11" prefHeight="20.0" prefWidth="731.0" text="Cho cac dac diem sau day: 1. Thuong moc o nhung noi quang dang 2. Phien dan 3">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="deleteBut11" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: #2ba5eb;" text="Delete" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="200.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
                   </VBox>
                </content>
             </ScrollPane>
@@ -116,7 +73,6 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="test" layoutX="535.0" layoutY="43.0" mnemonicParsing="false" text="test" />
       <CheckBox fx:id="selectAll" layoutX="23.0" layoutY="149.0" mnemonicParsing="false" onAction="#selectAllQuestion" text="Select all question" textFill="#d91111" visible="false" />
       <Button fx:id="deleteBut" layoutX="159.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="178.0" style="-fx-background-color: #f23e3e;" text="Delete the selected questions" textFill="WHITE" visible="false" />
       <Button fx:id="cancelBut" layoutX="350.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelSelectMulti" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #7cb6d9;" text="Cancel" textFill="WHITE" visible="false" />

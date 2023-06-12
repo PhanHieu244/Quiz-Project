@@ -31,8 +31,9 @@ public class AddRandomQuestionController extends QuestionAddTab {
     private Button test;
     @FXML
     private ComboBox<Integer> randomBox;
+    private int sizeQuestion = 0;
     private int currentPage;
-    private final int pageSize = 1;
+    private final int pageSize = 15;
     private final int maxPage = 7;
 
     @Override
@@ -43,13 +44,38 @@ public class AddRandomQuestionController extends QuestionAddTab {
 
     @Override
     public void Show(Test test) {
+        int id = test.getIdTest();
+        if (showCateQues.isSelected()) showWithSubCate(id);
+        else showOnlyCate(id);
+        showQuestions(questions);
+    }
+
+    private void showOnlyCate(int id){
         try {
             questions = QuestionAPI.categoryPagination
-                    (test.getIdTest(), showCateQues.isSelected(), currentPage, pageSize);
+                    (id, false, currentPage, pageSize);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        showQuestions(questions);
+    }
+
+    private void showWithSubCate(int id){
+        try {
+            questions.clear();
+            ArrayList<Question> listQues = QuestionAPI.getAllQuestionInCate(id, true);
+            sizeQuestion = listQues.size();
+            int index = currentPage;
+            int start = pageSize * index;
+            int end = Math.min(pageSize * (index + 1), listQues.size()) ;
+            if(start > end) {
+                System.out.println("error");
+                return;
+            }
+            questions.addAll(listQues.subList(start, end));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -75,10 +101,11 @@ public class AddRandomQuestionController extends QuestionAddTab {
     }
 
     public void setupPagination(){
+        pagination.setPageFactory(this::showPage);
         currentPage = 0;
         int pageCount = 1;
         if(categoriesBox.getValue() != null) {
-            int amount = categoriesBox.getValue().getAmountQuestion();
+            int amount = showCateQues.isSelected() ? sizeQuestion : categoriesBox.getValue().getAmountQuestion();
             pageCount =(int) Math.ceil((double) amount / pageSize);
             randomBox.getItems().clear();
             for (int i = 0; i < amount; i++) {
@@ -87,7 +114,6 @@ public class AddRandomQuestionController extends QuestionAddTab {
         }
         pagination.setPageCount(pageCount);
         pagination.setMaxPageIndicatorCount(maxPage);
-        pagination.setPageFactory(this::showPage);
     }
 
 
@@ -96,7 +122,7 @@ public class AddRandomQuestionController extends QuestionAddTab {
         vBox = new VBox();
         vBox.setPadding(new Insets(0,0,0,15));
         ScrollPane scrollPane = new ScrollPane(vBox);
-        if (!showCateQues.isSelected()) showQuesList(); //todo delete if()
+        showQuesList();
         return scrollPane;
     }
 

@@ -55,22 +55,16 @@ public class QuizController{
     private final float heightNaviBox = 32f;
     private CountdownTimer countdownTimer;
 
+    private Quiz quiz;
 
     public void LoadQuiz(Quiz quiz){
         UIController.Instance.openPreview();
-
-        countdownTimer = new CountdownTimer(60, this);
+        this.quiz = quiz;
+        countdownTimer = new CountdownTimer(quiz.getMinutes(), this);
         countdownTimer.createCountdownLabel(timeLabel);
         QuesControllerList = new ArrayList<>();
         DonePaneList = new ArrayList<>();
-
-        //List<Question> questions = QuestionAPI.getAllQuestionInQuiz();
-        try {
-            questions = QuestionAPI.getAllQuestionInCate(quiz.getIdQuiz(), false);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        questions = QuestionAPI.getQuestionQuiz(quiz);
         creatQuizNavigation(questions);
 
         int i = 1;
@@ -91,8 +85,8 @@ public class QuizController{
 
     }
 
-    private void creatQuizNavigation(List<Question> quiz){ //todo Quiz
-        int size = quiz.size();
+    private void creatQuizNavigation(List<Question> questions){
+        int size = questions.size();
         System.out.println("day la size "+ size);
         int sizeBox = (size - 1) / 8;
         for (int i = 0; i <= sizeBox; i++) {
@@ -133,7 +127,7 @@ public class QuizController{
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Marks.fxml"));
                 Parent root = fxmlLoader.load();
                 MarksController marksController = fxmlLoader.getController();
-                marksController.setup(countdownTimer.getTimeTaken(), totalMarks, questions.size(), 10f);
+                marksController.setup(countdownTimer.getTimeTaken(), totalMarks, questions.size(), quiz.getGrade());
                 vBox.getChildren().add(0, root);
             } catch (Exception e){
                 e.printStackTrace();

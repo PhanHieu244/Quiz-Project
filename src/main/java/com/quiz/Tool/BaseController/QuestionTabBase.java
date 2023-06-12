@@ -38,7 +38,8 @@ public class QuestionTabBase implements Initializable {
     protected CheckBox selectAll;
     @FXML
     protected VBox list;
-    protected ArrayList<Question> questions;
+
+    protected ArrayList<Question> questions = new ArrayList<>();
     protected String boxPath;
 
     protected final float minHeight = 46f;

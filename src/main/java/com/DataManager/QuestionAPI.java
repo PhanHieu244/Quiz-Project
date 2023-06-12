@@ -2,6 +2,7 @@ package com.DataManager;
 
 import com.Question.Choice;
 import com.Question.Question;
+import com.Question.Quiz;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,7 +14,9 @@ public class QuestionAPI {
     private final static String urlSubCateQuestions = "http://localhost:8080/api/v1/answer/subquiz/quiz_id=";
     private final static String urlQuestion = "http://localhost:8080/api/v1/question/";
     private final static String urlAnswer = "http://localhost:8080/api/v1/answer/question_id=";
-    private final static String getQuizURL = "http://localhost:8080/api/v1/answer/question_id=";
+    private final static String getQuizURL = "http://localhost:8080/api/v1/examquestion/exam_id=";
+    private final static String postQuizURL = "http://localhost:8080/api/v1/examquestion/exam_id=";
+    private final static String deleteQuizURL = "http://localhost:8080/api/v1/examquestion/exam_id=";
     private final static String urlPaginationCate = "http://localhost:8080/api/v1/answer/quizId=";
     /**
      * Post array question to API
@@ -22,7 +25,6 @@ public class QuestionAPI {
      */
     public static void post(String json, int id) {
         try {
-            System.out.println("post: " + json);
             APIConnector.postData(json, urlAllQuestions + id);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,7 +39,6 @@ public class QuestionAPI {
      */
     public static void put(String json, int id) {
         try {
-            System.out.println("put :" + json);
             APIConnector.putData(json, urlAnswer + id);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -65,11 +66,34 @@ public class QuestionAPI {
         return questions;
     }
 
+    public static ArrayList<Question> getQuestionQuiz(Quiz quiz, boolean suffer){
+        String url = getQuizURL + quiz.getIdQuiz();
+        ArrayList<Question> questions = new ArrayList<>();
+        try{
+            questions = getAllQuestionFromURL(url, suffer);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return questions;
+    }
+
+    public static ArrayList<Question> getQuestionQuiz(Quiz quiz){
+        String url = getQuizURL + quiz.getIdQuiz();
+        ArrayList<Question> questions = new ArrayList<>();
+        try{
+            questions = getAllQuestionFromURL(url, quiz.isSuffer());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return questions;
+    }
+
     /**
      * Get all questions content in this category (get all choices)
      * @param getSubCate is get question in subcategories?
      * @param id ID of this category
      */
+
     public static ArrayList<Question> getAllQuestionInCate(int id, boolean getSubCate) throws IOException {
         String url = getSubCate ? urlSubCateQuestions : urlAllQuestions;
         url += id;
@@ -80,7 +104,7 @@ public class QuestionAPI {
             JSONObject jsonObject =(JSONObject) jsonArray.get(i);
             questions.add(getQuestion(jsonObject, null));
         }*/
-        return getAllQuestionFromURL(url);
+        return getAllQuestionFromURL(url, false);
     }
 
     /**
@@ -91,19 +115,15 @@ public class QuestionAPI {
     public static ArrayList<Question> categoryPagination(int id, boolean getSubCate,int pageIndex, int pageSize) throws IOException {
         String url = getSubCate ? "urlPaginationSubCate" : urlPaginationCate;
         url += id + "/pageNo=" + pageIndex + "/pageSize=" + pageSize;
-        System.out.println(url);
-        return getAllQuestionFromURL(url);
+        return getAllQuestionFromURL(url, false);
     }
 
-    public static ArrayList<Question> getAllQuestionInQuiz(int id) throws IOException{
-        return getAllQuestionFromURL(getQuizURL + id);
-    }
 
     /**
      * Get all questions content in this category (get all choices)
      * @param url URL to get question in category or quiz
      */
-    public static ArrayList<Question> getAllQuestionFromURL(String url) throws IOException {
+    public static ArrayList<Question> getAllQuestionFromURL(String url, boolean suffer) throws IOException {
         JSONObject jsonData = (JSONObject) APIConnector.getData(url);
         JSONArray jsonArray = (JSONArray) jsonData.get("data");
         ArrayList<Question> questions = new ArrayList<>();
@@ -136,7 +156,6 @@ public class QuestionAPI {
         int quesID = Integer.parseInt(jsonObject.get("id").toString());
         JSONArray choicesJson = (JSONArray) jsonObject.get("questionAnswerSet");
         List<Choice> choices = getChoices(choicesJson, suffer);
-        if (choices.size() > 5) System.out.println("qua 5 cau hoi");
         return new Question(name, content, base64, choices, quesID);
     }
 
@@ -148,7 +167,6 @@ public class QuestionAPI {
      */
     private static List<Choice> getChoices(JSONArray choicesJson, boolean isSuffer){
         List<Choice> choices = new ArrayList<>();
-        System.out.println(choicesJson.toString());
         for (int i = 0; i < choicesJson.size(); i++) {
             JSONObject object = (JSONObject) choicesJson.get(i);
             String content = object.get("description").toString();
@@ -190,8 +208,8 @@ public class QuestionAPI {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Choice> choices = question.getChoices();
-        for (int i = 0; i < choices.size(); i++) {
-            jsonArray.add(creatJsonChoice(choices.get(i)));
+        for (Choice choice : choices) {
+            jsonArray.add(creatJsonChoice(choice));
         }
         if(question.idQuestion != null) jsonObject.put("id", question.idQuestion);
         jsonObject.put("questionAnswerDtos", jsonArray);
@@ -200,6 +218,41 @@ public class QuestionAPI {
         jsonObject.put("imgQuestion", question.getImageDataQs());
         jsonObject.put("question_mark", 1);
         return jsonObject;
+    }
+
+
+    private static JSONArray createJsonQuesQuiz(ArrayList<Question> listID){
+
+        JSONArray jsonArray = new JSONArray();
+        for (Question i : listID){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("quizQuestionId", i.getIdQuestion());
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+
+    public static void postQuesQuiz(ArrayList<Question> listID, int quizID){
+        JSONArray json = createJsonQuesQuiz(listID);
+        String jsonString = json.toString();
+        System.out.println(jsonString);
+        try {
+            APIConnector.postData(jsonString, postQuizURL + quizID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void deleteQuestion(ArrayList<Question> listID, int quizID){
+        JSONArray json = createJsonQuesQuiz(listID);
+        String jsonString = json.toString();
+        System.out.println(jsonString);
+        try {
+            APIConnector.deleteData(jsonString, deleteQuizURL + quizID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
