@@ -1,8 +1,11 @@
 package com.quiz.QuizTab;
 
 import com.DataManager.CategoryAPI;
+import com.DataManager.QuizAPI;
+import com.Question.Quiz;
 import com.Question.Test;
 import com.quiz.MainUI.UIController;
+import com.quiz.MainUI.MainTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,9 +33,10 @@ public class QuizListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //todo get Test to Quiz
-        List<Test> quizzes = CategoryAPI.getAllCategories();
-        for(Test quiz : quizzes){
-            Hyperlink quizName = new Hyperlink(quiz.getNameTest());
+        UIController.Instance.removeBox();
+        List<Quiz> quizzes = QuizAPI.getAllQuizzes();
+        for(Quiz quiz : quizzes){
+            Hyperlink quizName = new Hyperlink(quiz.getName());
             quizName.setFont(Font.font(fontName));
             quizName.setPadding(new Insets(10, 0, 10,  10));
             quizName.setOnAction(event -> {
@@ -48,6 +52,9 @@ public class QuizListController implements Initializable {
             });
             vbox.getChildren().add(quizName);
         }
+        turnEditing.setOnAction(event -> {
+            UIController.Instance.setMainUI(MainTab.AddNewQuiz);
+        });
     }
 
     @FXML

@@ -15,7 +15,7 @@ public class QuizApplication extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(QuizApplication.class.getResource("Login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
-            stage.setTitle("Hello!");
+            stage.setTitle("Quiz Project");
             stage.setScene(scene);
             stage.show();
 

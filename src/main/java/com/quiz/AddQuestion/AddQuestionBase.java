@@ -67,6 +67,7 @@ public abstract class AddQuestionBase implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        UIController.Instance.openEditingQues();
         base64Choices = new String[5];
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"),

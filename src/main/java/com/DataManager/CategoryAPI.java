@@ -7,7 +7,6 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CategoryAPI {
@@ -53,7 +52,6 @@ public class CategoryAPI {
         jsonObject.put("name", name);
         jsonObject.put("description", description);
         jsonObject.put("parentID", parentID);
-        System.out.println(jsonObject);
         return jsonObject.toString();
     }
 

@@ -4,6 +4,7 @@ import com.Base64Convert.Base64Convert;
 import com.Question.Choice;
 import com.Question.Question;
 import com.Question.Test;
+import com.quiz.Tool.AlertTool;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -13,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -97,8 +97,10 @@ public class QuestionController {
                     question.getChoices()) {
                 CheckBox checkBox = new CheckBox();
                 setChoiceButton(checkBox, idChoice, choice);
+                //checkBoxList.add(checkBox);
                 idChoice++;
             }
+
         } else {
             ToggleGroup toggleGroup = new ToggleGroup();
             for (Choice choice :
@@ -114,7 +116,22 @@ public class QuestionController {
 
     private void setChoiceButton(ButtonBase button, int idChoice, Choice choice){
         button.setOnAction(event -> {
-            donePane.setStyle("-fx-background-color: #5b5858;");
+            boolean off = true;
+            if (button instanceof CheckBox){
+
+                for (ButtonBase buttonBase : choiceList) {
+                    CheckBox checkBox = (CheckBox) buttonBase;
+                    if (checkBox.isSelected()) {
+                        //AlertTool.showWarning("check");
+                        off = false;
+                        break;
+                    }
+                }
+            }
+            else off = false;
+            if(off){
+                donePane.setStyle("-fx-background-color: none");
+            } else donePane.setStyle("-fx-background-color: #5b5858;");
         });
         button.setWrapText(true);
         button.setMaxWidth(wrapWidth);

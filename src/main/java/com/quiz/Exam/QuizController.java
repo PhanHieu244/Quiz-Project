@@ -4,6 +4,8 @@ import com.DataManager.QuestionAPI;
 import com.Question.Question;
 import com.Question.Quiz;
 import com.Question.Test;
+import com.quiz.MainUI.MainTab;
+import com.quiz.MainUI.UIController;
 import com.quiz.Tool.BaseController.CountdownTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,11 +53,12 @@ public class QuizController{
     private final float heightHbox = 40;
     private final float widthNaviBox = 28f;
     private final float heightNaviBox = 32f;
-    CountdownTimer countdownTimer;
+    private CountdownTimer countdownTimer;
 
 
-    public void LoadQuiz(Test quiz){//todo Quiz
-        //todo quiz time
+    public void LoadQuiz(Quiz quiz){
+        UIController.Instance.openPreview();
+
         countdownTimer = new CountdownTimer(60, this);
         countdownTimer.createCountdownLabel(timeLabel);
         QuesControllerList = new ArrayList<>();
@@ -63,7 +66,7 @@ public class QuizController{
 
         //List<Question> questions = QuestionAPI.getAllQuestionInQuiz();
         try {
-            questions = QuestionAPI.getAllQuestionInCate(quiz.getIdTest(), false);
+            questions = QuestionAPI.getAllQuestionInCate(quiz.getIdQuiz(), false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -135,8 +138,10 @@ public class QuizController{
             } catch (Exception e){
                 e.printStackTrace();
             }
+            finishBut.setText("Finish review");
+            isFinish = true;
         } else {
-            //todo return;
+            UIController.Instance.setMainUI(MainTab.QuizList);
         }
     }
 

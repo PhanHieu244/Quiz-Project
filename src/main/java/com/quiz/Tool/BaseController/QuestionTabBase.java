@@ -3,6 +3,7 @@ package com.quiz.Tool.BaseController;
 import com.DataManager.QuestionAPI;
 import com.Question.Question;
 import com.Question.Test;
+import com.quiz.MainUI.UIController;
 import com.quiz.TabPane.QuestionTab.QuestionBoxController;
 import com.quiz.Tool.CategoriesBoxTool;
 import javafx.event.ActionEvent;
@@ -53,6 +54,7 @@ public class QuestionTabBase implements Initializable {
         showCateQues.setOnAction(event ->{
             showList();
         });
+
     }
 
 

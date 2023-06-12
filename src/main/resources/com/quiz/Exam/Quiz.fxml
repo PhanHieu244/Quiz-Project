@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="726.0" prefWidth="1305.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.Exam.QuizController">
    <children>
       <SplitPane dividerPositions="0.6945510360706063" layoutX="285.0" layoutY="192.0" prefHeight="726.0" prefWidth="1305.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -49,7 +48,7 @@
                   </ScrollPane>
                </children>
             </VBox>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="390.0">
                <children>
                   <Label layoutX="14.0" layoutY="1.0" text="Quiz navigation" textFill="#e81212">
                      <font>

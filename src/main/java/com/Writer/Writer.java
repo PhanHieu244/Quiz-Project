@@ -59,7 +59,7 @@ public class Writer {
                     image=Image.getInstance(decoded);
                 }
 
-                spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100)?0:spaceLeft;
+                spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100+1)?0:spaceLeft;
                 document.add(para);
                 para.setSpacingBefore(spacingBefore);
                 if (hasImage){
@@ -77,7 +77,7 @@ public class Writer {
                     byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
                     image=Image.getInstance(decoded);
                     }
-                    spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100)?0:spaceLeft;
+                    spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100+1)?0:spaceLeft;
                     para.setSpacingBefore(spacingBefore);
                     document.add(para);
                     if (hasImage){

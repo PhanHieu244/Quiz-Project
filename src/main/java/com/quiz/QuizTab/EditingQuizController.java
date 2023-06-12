@@ -2,6 +2,8 @@ package com.quiz.QuizTab;
 
 import com.DataManager.QuestionAPI;
 import com.Question.Question;
+import com.Question.Quiz;
+import com.quiz.MainUI.UIController;
 import com.quiz.Tool.BaseController.QuestionAddTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -18,12 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -63,6 +62,7 @@ public class EditingQuizController implements Initializable {
     private List<Question> removeList;
     private List<Question> preRemoveList;
     private List<Question> addList;
+    private  Quiz quiz;
     private final float minHeight = 46f;
     private final float fontSize = 14f;
     private final int quesInPage = 4;
@@ -71,6 +71,7 @@ public class EditingQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        UIController.Instance.OpenEditQuiz();
         checkBoxList = new ArrayList<>();
         removeList = new ArrayList<>();
         preRemoveList = new ArrayList<>();
@@ -118,7 +119,7 @@ public class EditingQuizController implements Initializable {
             setupMulti(false);
         });
         //vBox.prefWidthProperty().bind(scroll.prefWidthProperty());
-        loadData(); //todo delete
+        //loadData(); //todo delete
 
     }
 
@@ -131,9 +132,10 @@ public class EditingQuizController implements Initializable {
         setLabel();
     }
 
-    public void loadData(){
+    public void loadData(Quiz quiz){
+        this.quiz = quiz;
         try {
-            questionsList = QuestionAPI.getAllQuestionInCate(1, true);
+            questionsList = QuestionAPI.getAllQuestionInCate(quiz.getIdQuiz(), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -217,7 +219,7 @@ public class EditingQuizController implements Initializable {
 
     @FXML
     private void save(ActionEvent event) {
-
+        //todo
     }
 
     @FXML
@@ -254,7 +256,7 @@ public class EditingQuizController implements Initializable {
         if (questionsList.isEmpty()) return new ArrayList<>();
         int index = currentPage - 1;
         int start = quesInPage * index;
-        int end =Math.min(quesInPage * (index + 1), questionsList.size()) ;
+        int end = Math.min(quesInPage * (index + 1), questionsList.size()) ;
         return questionsList.subList(start, end);
     }
 
@@ -281,7 +283,9 @@ public class EditingQuizController implements Initializable {
     }
 
     private void setLabel(){
+        quizName.setText("Editing quiz: " + quiz.getName());
         questionLabel.setText("Question: "+ questionsList.size() +" | This quiz is open");
         mark.setText("Total of marks: "+ questionsList.size() + ".00");
+        sufferBox.setSelected(quiz.isSuffer());
     }
 }

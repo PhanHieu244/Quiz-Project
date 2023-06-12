@@ -110,7 +110,7 @@
          </font>
       </Button>
       <ComboBox fx:id="addBut" layoutX="975.0" layoutY="145.0" prefHeight="25.0" prefWidth="76.0" promptText="Add" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="57.0" />
-      <CheckBox fx:id="sufferBox" layoutX="945.0" layoutY="119.0" mnemonicParsing="false" onAction="#suffer" text="Shuffer" AnchorPane.rightAnchor="104.0" />
+      <CheckBox fx:id="sufferBox" layoutX="945.0" layoutY="119.0" mnemonicParsing="false" onAction="#suffer" text="Shuffle" AnchorPane.rightAnchor="104.0" />
       <Button layoutX="20.0" layoutY="87.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #2ba5eb;" text="REPAGINATE" textFill="WHITE" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="Arial" size="14.0" />

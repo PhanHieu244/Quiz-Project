@@ -1,6 +1,6 @@
 package com.quiz.TabPane;
 
-import com.quiz.TabPane.QuestionTab.QuestionTabController;
+import com.quiz.MainUI.UIController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +25,7 @@ public class SettingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SetupScene();
+        UIController.Instance.removeBox();
     }
 
 
