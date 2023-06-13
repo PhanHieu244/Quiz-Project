@@ -51,21 +51,22 @@ public class Writer {
             Image image = null;
             boolean hasImage = false;
             for (Question q : questions) {
-                string = q.getNameQuestion()==null?q.getContentQuestion():q.getNameQuestion() + ": " + q.getContentQuestion();
+                string = q.getNameQuestion()==null ? q.getContentQuestion() : q.getNameQuestion() + ": " + q.getContentQuestion();
                 para= new Paragraph(string,font);
                 hasImage = q.getImageDataQs() != null;
                 if(hasImage){
                     byte[] decoded = Base64.getDecoder().decode(q.getImageDataQs());
                     image=Image.getInstance(decoded);
                 }
-
-                spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100+1)?0:spaceLeft;
+                float imageHeight = hasImage ? image.getHeight() : 0;
+                spacingBefore= spaceLeft >= imageHeight+fontSize*(int)(string.length()/100+1) ? 0 : spaceLeft;
                 document.add(para);
                 para.setSpacingBefore(spacingBefore);
                 if (hasImage){
                     document.add(image);
                     hasImage=false;
                 }
+
                 spaceLeft = writer.getVerticalPosition(true)-document.bottomMargin();
 
                 int idAns = 0;

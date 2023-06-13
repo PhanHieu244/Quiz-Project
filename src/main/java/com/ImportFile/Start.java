@@ -12,10 +12,10 @@ public class Start {
     }
 
     public static void main(String[] args) throws IOException {
-        ReaderQuestion rd = new ReaderQsWord("C:\\Users\\ADMIN\\IdeaProjects\\projectOOP\\inputData\\demo-apache-apoi-word.docx");
+        ReaderQuestion rd = new ReaderQsWord("C:\\Users\\ADMIN\\IdeaProjects\\projectOOP\\inputData\\test.docx");
         Writer writer = new Writer("C:\\Users\\ADMIN\\IdeaProjects\\projectOOP\\outputData\\output1.pdf");
-
-        writer.PDFProtectWrite(rd.read().getQuestions(),"sondeptraiqua");
+        writer.PDFWrite(rd.read().getQuestions());
+//        writer.PDFProtectWrite(rd.read().getQuestions(),"sondeptraiqua");
 //        rd.read().getQuestions().get(2).show();
     }
 }
