@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.Exam.MarksController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="902.0" style="-fx-background-color: #e4dbb0;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.Exam.MarksController">
    <children>
       <Label layoutX="92.0" layoutY="34.0" text="State" textFill="#ee0808" AnchorPane.leftAnchor="92.0">
          <font>

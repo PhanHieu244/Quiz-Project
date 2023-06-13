@@ -142,7 +142,16 @@ public class Question {
     }
 
     public String getKey() {
-        return key;
+        String ans = "";
+        int size = choices.size();
+        int idChoice = 'A';
+        for (Choice choice : choices) {
+            if (choice.getPercentGrade() > 0) {
+                ans += (char) idChoice + " ";
+            }
+            idChoice++;
+        }
+        return ans;
     }
     // thêm đáp án vào list ans, không có điểm
 }

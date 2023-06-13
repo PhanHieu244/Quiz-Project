@@ -60,7 +60,7 @@
                         <VBox fx:id="quizNavigation" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                         <Hyperlink fx:id="finishBut" onAction="#finish" text="Finish attemp...">
                            <font>
-                              <Font size="13.0" />
+                              <Font size="14.0" />
                            </font>
                         </Hyperlink>
                      </children>

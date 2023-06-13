@@ -51,12 +51,22 @@ public class ExportTabController implements Initializable {
     @FXML
     private void exportFile(ActionEvent event) {
         if (categoriesBox.getValue() == null){
-            AlertTool.showWarning("Category not found");
+            AlertTool.showWarning("Category not found!!!");
             return;
         }
         if (fileName.getText().isEmpty()) {
-            AlertTool.showWarning("File name not found");
+            AlertTool.showWarning("File name not found!!!");
             return;
+        }
+        if (isSetPass.isSelected()) {
+            if (passField.getText().length() < 6){
+                AlertTool.showWarning("Password is too short!!!");
+                return;
+            }
+            if (passField.getText().contains(" ")){
+                AlertTool.showWarning("Password has space!!!");
+                return;
+            }
         }
         directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
@@ -78,6 +88,11 @@ public class ExportTabController implements Initializable {
             }else {
                 writer.PDFWrite(questionsContent);
             }
+            CategoriesBoxTool.resetAll();
+            fileName.setText("");
+            passField.setText("");
+            isSetPass.setSelected(false);
+            AlertTool.showMessageBox();
         }
     }
 

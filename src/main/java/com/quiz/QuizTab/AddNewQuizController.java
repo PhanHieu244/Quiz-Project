@@ -50,6 +50,7 @@ public class AddNewQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        UIController.Instance.SetFullSize();
         timeType.setItems(observableList);
         timeType.setValue("minutes");
         time.setText("0");
