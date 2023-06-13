@@ -143,6 +143,7 @@ public class UIController implements Initializable {
         int inc = include ? -1 : 1;
         int start = box.getChildren().indexOf(object) + inc;
         int end = box.getChildren().size();
+        if(start < 0) return;
         box.getChildren().remove(start, end);
     }
 

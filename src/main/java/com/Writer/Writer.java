@@ -78,7 +78,8 @@ public class Writer {
                     byte[] decoded = Base64.getDecoder().decode(choice.getImageDataChoice());
                     image=Image.getInstance(decoded);
                     }
-                    spacingBefore= spaceLeft>=image.getHeight()+fontSize*(int)(string.length()/100+1)?0:spaceLeft;
+                    imageHeight = hasImage ? image.getHeight() : 0;
+                    spacingBefore= spaceLeft >= imageHeight + fontSize*(int)(string.length()/100+1)? 0 : spaceLeft;
                     para.setSpacingBefore(spacingBefore);
                     document.add(para);
                     if (hasImage){
