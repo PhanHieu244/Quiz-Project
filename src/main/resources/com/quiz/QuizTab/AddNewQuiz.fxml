@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -29,6 +31,16 @@
                         <Label layoutX="30.0" layoutY="92.0" text="Description" AnchorPane.leftAnchor="30.0" />
                         <TextArea fx:id="description" layoutX="305.0" layoutY="82.0" prefHeight="122.0" prefWidth="386.0" AnchorPane.leftAnchor="305.0" />
                         <CheckBox layoutX="316.0" layoutY="218.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="229.0" text="Display description on course page" AnchorPane.leftAnchor="316.0" />
+                        <ImageView layoutX="297.0" layoutY="27.0">
+                           <image>
+                              <Image url="@../../../image/warning.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="542.0" layoutY="221.0">
+                           <image>
+                              <Image url="@../../../image/question%20(1).png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
               </content>
@@ -46,6 +58,16 @@
                         <ComboBox fx:id="expires" layoutX="316.0" layoutY="103.0" prefHeight="27.0" prefWidth="271.0" style="-fx-background-color: white; -fx-border-color: gray;" AnchorPane.bottomAnchor="31.399999999999977" />
                         <ComboBox fx:id="timeType" layoutX="414.0" layoutY="19.0" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: white; -fx-border-color: gray;" AnchorPane.leftAnchor="414.0" AnchorPane.topAnchor="19.0" />
                         <CheckBox fx:id="enableTime" layoutX="560.0" layoutY="14.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="66.0" text="Enable" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="18.0" />
+                        <ImageView layoutX="293.0" layoutY="98.0">
+                           <image>
+                              <Image url="@../../../image/question%20(1).png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="293.0" layoutY="37.0">
+                           <image>
+                              <Image url="@../../../image/question%20(1).png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>

@@ -3,14 +3,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="557.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quiz.QuizTab.PreviousAttemptsController">
    <children>
-      <Button fx:id="settingBut" layoutX="724.0" layoutY="14.0" mnemonicParsing="false" onAction="#openEdit" prefHeight="26.0" prefWidth="26.0" AnchorPane.rightAnchor="23.99999999999998" />
+      <Button fx:id="settingBut" layoutX="724.0" layoutY="14.0" mnemonicParsing="false" onAction="#openEdit" prefHeight="26.0" prefWidth="26.0" AnchorPane.rightAnchor="23.99999999999998">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="20.0">
+               <image>
+                  <Image url="@../../../image/setting1.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Label fx:id="nameQuiz" layoutX="28.0" layoutY="19.0" text="Thi giua ky 2 mon Cong Nghe" textFill="#ea0a0a" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="22.0" />

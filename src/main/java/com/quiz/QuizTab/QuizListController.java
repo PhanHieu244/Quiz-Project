@@ -14,6 +14,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -27,7 +29,7 @@ public class QuizListController implements Initializable {
     @FXML
     private VBox vbox;
     private List<Hyperlink> quizList;
-    private final float fontName = 14f;
+    private final float fontName = 17f;
 
 
     @Override
@@ -37,10 +39,17 @@ public class QuizListController implements Initializable {
         List<Quiz> quizzes = QuizAPI.getAllQuizzes();
         for(Quiz quiz : quizzes){
             Hyperlink quizName = new Hyperlink(quiz.getName());
+
+            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/image/fileImage.jpg")));
+            imageView.setFitWidth(22); // Adjust the width as needed
+            imageView.setFitHeight(26); // Adjust the height as needed
+            quizName.setGraphic(imageView);
+
             quizName.setFont(Font.font(fontName));
             quizName.setPadding(new Insets(10, 0, 10,  10));
             quizName.setOnAction(event -> {
                 try{
+
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PreviousAttempts.fxml"));
                     Parent root = fxmlLoader.load();
                     PreviousAttemptsController controller = fxmlLoader.getController();

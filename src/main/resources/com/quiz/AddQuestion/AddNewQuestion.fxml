@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -101,6 +102,21 @@
                               </HBox>
                            </children></VBox>
                         <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="160.0" layoutX="430.0" layoutY="286.0" />
+                        <ImageView layoutX="303.0" layoutY="80.0">
+                           <image>
+                              <Image url="@../../../image/warning.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="303.0" layoutY="138.0">
+                           <image>
+                              <Image url="@../../../image/warning.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView layoutX="300.0" layoutY="403.0">
+                           <image>
+                              <Image url="@../../../image/warning.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>

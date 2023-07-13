@@ -87,7 +87,7 @@ public class QuizController{
 
     private void creatQuizNavigation(List<Question> questions){
         int size = questions.size();
-        System.out.println("day la size "+ size);
+
         int sizeBox = (size - 1) / 8;
         for (int i = 0; i <= sizeBox; i++) {
             HBox hBox = new HBox();
@@ -105,7 +105,7 @@ public class QuizController{
                 Pane pane = new Pane();
                 pane.setPrefSize(widthNaviBox, heightNaviBox);
                 DonePaneList.add(pane);
-                System.out.println("day la "+ i);
+
                 naviBox.getChildren().addAll(label ,pane);
                 hBox.getChildren().add(naviBox);
             }

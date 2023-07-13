@@ -21,7 +21,7 @@ public class CategoryAPI {
 
 
     public static List<Test> getCateChildren(JSONArray jsonArray, int gen){
-        if (jsonArray.size() == 0) return new ArrayList<>();
+        if (jsonArray == null) return new ArrayList<>();
         List<Test> categories = new ArrayList<>();
         for (Object json: jsonArray){
             JSONObject jsonObject = (JSONObject) json;

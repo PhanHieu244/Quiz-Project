@@ -25,7 +25,7 @@ public class QuizAPI {
     public static ArrayList<Quiz> getAllQuizzes(){
         try {
             JSONArray jsonArray = getJSONQuizzes();
-            if (jsonArray.size() == 0) return new ArrayList<>();
+            if (jsonArray == null) return new ArrayList<>();
             ArrayList<Quiz> quizzes = new ArrayList<>();
             for (Object json: jsonArray){
                 JSONObject jsonObject = (JSONObject) json;

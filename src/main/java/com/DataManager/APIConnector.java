@@ -40,7 +40,7 @@ public class APIConnector {
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
-        System.out.println(response);
+
         response.close();
     }
 
@@ -51,7 +51,7 @@ public class APIConnector {
                 .put(body)
                 .build();
         Response response = client.newCall(request).execute();
-        System.out.println(response);
+
         response.close();
     }
 
@@ -62,7 +62,7 @@ public class APIConnector {
                 .delete(body)
                 .build();
         Response response = client.newCall(request).execute();
-        System.out.println(response);
+
         response.close();
     }
 }

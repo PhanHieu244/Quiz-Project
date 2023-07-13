@@ -30,7 +30,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private void SwitchAdminHomeScene(){
-        System.out.println("changeScene");
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_UI.fxml"));
             Parent root = fxmlLoader.load();

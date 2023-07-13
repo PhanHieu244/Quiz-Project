@@ -235,7 +235,7 @@ public class QuestionAPI {
     public static void postQuesQuiz(ArrayList<Question> listID, int quizID){
         JSONArray json = createJsonQuesQuiz(listID);
         String jsonString = json.toString();
-        System.out.println(jsonString);
+
         try {
             APIConnector.postData(jsonString, postQuizURL + quizID);
         } catch (IOException e) {
@@ -247,7 +247,7 @@ public class QuestionAPI {
     public static void deleteQuestion(ArrayList<Question> listID, int quizID){
         JSONArray json = createJsonQuesQuiz(listID);
         String jsonString = json.toString();
-        System.out.println(jsonString);
+
         try {
             APIConnector.deleteData(jsonString, deleteQuizURL + quizID);
         } catch (IOException e) {
