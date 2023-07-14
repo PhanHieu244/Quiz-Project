@@ -51,7 +51,8 @@ public class Writer {
             Image image = null;
             boolean hasImage = false;
             for (Question q : questions) {
-                string = q.getNameQuestion()==null ? q.getContentQuestion() : q.getNameQuestion() + ": " + q.getContentQuestion();
+                String name = q.getNameQuestion();
+                string = (name == null || name.equals("")) ? q.getContentQuestion() : name + ": " + q.getContentQuestion();
                 para= new Paragraph(string,font);
                 hasImage = q.getImageDataQs() != null;
                 if(hasImage){

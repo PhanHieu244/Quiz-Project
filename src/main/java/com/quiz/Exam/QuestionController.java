@@ -49,7 +49,9 @@ public class QuestionController {
         correctChoice = new ArrayList<>();
         idQuestionLabel.setText("Question " + id);
         this.donePane = donePane;
-        questionLabel.setText(question.getNameQuestion() + ": " + question.getContentQuestion());
+        String name = question.getNameQuestion();
+        String text = (name == null || name.equals("")) ? "" : name + ": ";
+        questionLabel.setText(text + question.getContentQuestion());
         String base64String = question.getImageDataQs();
         if(base64String != null) {
             if (Base64Convert.isImage(base64String)){

@@ -13,7 +13,7 @@ public class AlertTool {
     public static void showWrongAiken(int i){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("WARNING");
-        alert.setContentText("Error at" + i);
+        alert.setContentText("Error at " + i);
         alert.showAndWait();
     }
 

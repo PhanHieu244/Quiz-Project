@@ -114,8 +114,10 @@ public class QuestionTabBase implements Initializable {
 
 
     protected Label setContent(Question question){
+        String name = question.getNameQuestion();
+        String text = (name == null || name.equals("")) ? "" : name + ": ";
         Label label = new Label
-                (question.getNameQuestion() + ": " + question.getContentQuestion());
+                ( text + question.getContentQuestion());
         label.setPrefSize(725, minHeight);
         label.setMinHeight(minHeight);
         label.setFont(Font.font(14));

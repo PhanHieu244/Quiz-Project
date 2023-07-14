@@ -177,12 +177,16 @@ public class EditingQuizController implements Initializable {
             checkBoxList.add(checkBox);
             checkBox.setMinHeight(minHeight);
             checkBox.setVisible(false);
+
             //set up content label
+            String nameQues = question.getNameQuestion();
+            String text = (nameQues == null || nameQues.equals("")) ? "" : nameQues + ": ";
             Label label = new Label
-                    (question.getNameQuestion() + ": " + question.getContentQuestion());
+                    ( text + question.getContentQuestion());
             label.setPrefSize(725, minHeight);
             label.setMinHeight(minHeight);
             label.setFont(Font.font(fontSize));
+
             //set up delete button
             Button deleteBut = new Button("Delete");
             deleteBut.setPrefSize(52, 25);
@@ -196,6 +200,7 @@ public class EditingQuizController implements Initializable {
                 setupPageChoose(); //todo check
                 setLabel();
             });
+
             //add node to HBox
             HBox hBox = new HBox(checkBox, label, deleteBut);
             hBox.setSpacing(15);
