@@ -65,7 +65,7 @@ public class ImportTabController implements Initializable {
         String path = file.getPath();
         ReaderQuestion readerQuestion = nameFile.endsWith(".txt") ? new ReaderQsTxt(path) : new ReaderQsWord(path);
         Test category = readerQuestion.read();
-        if(category.getQuestions() != null) QuestionAPI.postListQuestion(id, category.getQuestions());
+        if(category != null) QuestionAPI.postListQuestion(id, category.getQuestions());
         AlertTool.showMessageBox();
         reset();
     }

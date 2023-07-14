@@ -3,6 +3,7 @@ package com.DataManager;
 import com.Question.Choice;
 import com.Question.Question;
 import com.Question.Quiz;
+import com.quiz.Tool.AlertTool;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -130,7 +131,7 @@ public class QuestionAPI {
         if (jsonArray == null) return questions;
         for (Object o : jsonArray) {
             JSONObject jsonObject = (JSONObject) o;
-            questions.add(getQuestion(jsonObject, false));
+            questions.add(getQuestion(jsonObject, suffer));
         }
         return questions;
     }

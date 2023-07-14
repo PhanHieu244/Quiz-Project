@@ -24,7 +24,7 @@ public class ReaderQsWord extends ReaderQuestion {
             FileInputStream fis = new FileInputStream(this.url);
             XWPFDocument document = new XWPFDocument(OPCPackage.open(fis));
             List<String> list = new ArrayList<>();
-
+            System.out.println("-----------------------  " + document.getAllPictures().size());
             for (XWPFPictureData pictureData : document.getAllPictures()) {
                 byte[] imageData = pictureData.getData();
                 String encoded = Base64.getEncoder().encodeToString(imageData);
@@ -38,7 +38,7 @@ public class ReaderQsWord extends ReaderQuestion {
             int error = 0;
             List<XWPFParagraph> xwpfParagraphs = document.getParagraphs();
             int numOfImage = list.size();
-            boolean isImageMixed = numOfImage>5 ? true:false;
+            boolean isImageMixed = numOfImage > 5;
 
             int numContentQs = 0;
             int numChoices = 0;

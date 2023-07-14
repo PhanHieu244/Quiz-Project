@@ -1,6 +1,7 @@
 package com.DataManager;
 
 import com.Question.Quiz;
+import com.quiz.Tool.AlertTool;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -33,7 +34,8 @@ public class QuizAPI {
                 int id = Integer.parseInt(jsonObject.get("id").toString());
                 int minutes = Integer.parseInt(jsonObject.get("timeLimit").toString());
                 float grade = Float.parseFloat(jsonObject.get("grade").toString());
-                quizzes.add(new Quiz(id, name, minutes, grade));
+                boolean suffer = (boolean) jsonObject.get("suffer");
+                quizzes.add(new Quiz(id, name, minutes, grade, suffer));
             }
             return quizzes;
         } catch (IOException e){

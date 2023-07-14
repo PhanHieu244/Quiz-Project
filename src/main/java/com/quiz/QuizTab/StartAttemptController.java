@@ -37,6 +37,7 @@ public class StartAttemptController {
         }
         );
         text.setText("Your attempt will have a time limit of " + time
-                + ". When you start, the timer will begin to count down and cannot be paused. You must finish your attempt before it expires. Are you sure you wish to start now?");
+                + ". When you start, the timer will begin to count down and cannot be paused. You must finish your " +
+                "attempt before it expires. Are you sure you wish to start now?");
     }
 }

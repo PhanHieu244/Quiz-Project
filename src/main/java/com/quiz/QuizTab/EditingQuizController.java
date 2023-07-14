@@ -4,7 +4,6 @@ import com.DataManager.QuestionAPI;
 import com.DataManager.QuizAPI;
 import com.Question.Question;
 import com.Question.Quiz;
-import com.quiz.MainUI.MainTab;
 import com.quiz.MainUI.UIController;
 import com.quiz.Tool.AlertTool;
 import com.quiz.Tool.BaseController.QuestionAddTab;
@@ -26,7 +25,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,7 +65,7 @@ public class EditingQuizController implements Initializable {
     private ArrayList<Question> removeList;
     private ArrayList<Question> preRemoveList;
     private ArrayList<Question> addList;
-    private  Quiz quiz;
+    private Quiz quiz;
     private final float minHeight = 46f;
     private final float fontSize = 14f;
     private final int quesInPage = 15;

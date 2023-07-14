@@ -17,11 +17,12 @@ public class Quiz {
         idQuiz = null;
     }
 
-    public Quiz(Integer id, String name, Integer minutes, Float grade){
+    public Quiz(Integer id, String name, Integer minutes, Float grade, boolean isSuffer){
         idQuiz = id;
         this.name = name;
         this.minutes = minutes;
         this.grade = grade;
+        this.isSuffer = isSuffer;
     }
 
     public List<Question> getQuestions() {

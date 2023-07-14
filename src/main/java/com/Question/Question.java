@@ -67,7 +67,7 @@ public class Question {
     public void setNameAndContentQs(String s) {
         int id = s.indexOf(":");
         String nameQs = (id > -1) ? s.substring(0, id) : "";
-        String contentQs = s.substring(id + 1);
+        String contentQs = s.substring(id + ((s.charAt(id + 1) == ' ') ? 2 : 1));
         this.setNameQuestion(nameQs);
         this.setContentQuestion(contentQs);
     }
