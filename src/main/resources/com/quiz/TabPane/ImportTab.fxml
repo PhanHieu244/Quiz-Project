@@ -64,21 +64,26 @@
                      </font>
                   </Button>
                   <Label layoutX="515.0" layoutY="22.0" text="Maximum size for new files: 100MB" />
-                  <Button fx:id="importBut" layoutX="345.0" layoutY="128.0" mnemonicParsing="false" onAction="#importFile" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #d32e2e;" text="IMPORT" textFill="WHITE">
+                  <Button fx:id="importBut" layoutX="339.0" layoutY="221.0" mnemonicParsing="false" onAction="#importFile" prefHeight="36.0" prefWidth="108.0" style="-fx-background-color: #d32e2e;" text="IMPORT" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Label fx:id="nameLabel" layoutX="345.0" layoutY="88.0" text="File Name: null" />
+                  <Label fx:id="nameLabel" layoutX="515.0" layoutY="39.0" text="File Name: null" />
                   <ImageView layoutX="315.0" layoutY="23.0">
                      <image>
                         <Image url="@../../../image/warning.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="291.0" layoutY="195.0" text="There are required fields in this from marked" textAlignment="CENTER" />
-                  <ImageView layoutX="530.0" layoutY="197.0">
+                  <Label alignment="CENTER" layoutX="291.0" layoutY="271.0" text="There are required fields in this from marked" textAlignment="CENTER" />
+                  <ImageView layoutX="533.0" layoutY="272.0">
                      <image>
                         <Image url="@../../../image/warning.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="128.0" fitWidth="446.0" layoutX="339.0" layoutY="75.0">
+                     <image>
+                        <Image url="@../../../image/drag.jpg" />
                      </image>
                   </ImageView>
                </children>

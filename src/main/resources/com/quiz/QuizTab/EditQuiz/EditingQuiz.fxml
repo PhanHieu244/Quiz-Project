@@ -78,9 +78,9 @@
       <CheckBox fx:id="selectAll" layoutX="23.0" layoutY="149.0" mnemonicParsing="false" onAction="#selectAllQuestion" text="Select all question" textFill="#d91111" visible="false" />
       <Button fx:id="deleteBut" layoutX="159.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="178.0" style="-fx-background-color: #f23e3e;" text="Delete the selected questions" textFill="WHITE" visible="false" />
       <Button fx:id="cancelBut" layoutX="350.0" layoutY="145.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelSelectMulti" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #7cb6d9;" text="Cancel" textFill="WHITE" visible="false" />
-      <ImageView fitHeight="17.0" fitWidth="12.0" layoutX="1007.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="89.0">
+      <ImageView layoutX="1006.0" layoutY="120.0" AnchorPane.rightAnchor="87.0">
          <image>
-            <Image url="@../../../../image/question%20(1).png" />
+            <Image url="@../../../../image/question.png" />
          </image>
       </ImageView>
    </children>

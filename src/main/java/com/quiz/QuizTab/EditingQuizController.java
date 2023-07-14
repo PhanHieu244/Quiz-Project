@@ -254,8 +254,8 @@ public class EditingQuizController implements Initializable {
             AlertTool.showWarning("Grade is float!!!");
             return;
         }
-        QuestionAPI.postQuesQuiz(addList, quiz.getIdQuiz());
         QuestionAPI.deleteQuestion(removeList, quiz.getIdQuiz());
+        QuestionAPI.postQuesQuiz(addList, quiz.getIdQuiz());
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/quiz/QuizTab/PreviousAttempts.fxml"));
             Parent root = fxmlLoader.load();

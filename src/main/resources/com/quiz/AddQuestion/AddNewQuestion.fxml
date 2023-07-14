@@ -64,7 +64,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="defaultMark" layoutX="321.0" layoutY="397.0" prefHeight="27.0" prefWidth="94.0" />
+                        <TextField fx:id="defaultMark" disable="true" layoutX="321.0" layoutY="397.0" prefHeight="27.0" prefWidth="94.0" text="1" />
                         <VBox fx:id="vBox" layoutX="242.0" layoutY="442.0" prefHeight="454.0" prefWidth="376.0">
                            <children>
                               <Button fx:id="moreChoices" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="191.0" style="-fx-background-color: #0cceff;" text="BLANKS FOR 3 MORE CHOICE" textAlignment="CENTER" textFill="WHITE">
@@ -102,12 +102,12 @@
                               </HBox>
                            </children></VBox>
                         <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="160.0" layoutX="430.0" layoutY="286.0" />
-                        <ImageView layoutX="303.0" layoutY="80.0">
+                        <ImageView layoutX="300.0" layoutY="80.0">
                            <image>
                               <Image url="@../../../image/warning.png" />
                            </image>
                         </ImageView>
-                        <ImageView layoutX="303.0" layoutY="138.0">
+                        <ImageView layoutX="300.0" layoutY="138.0">
                            <image>
                               <Image url="@../../../image/warning.png" />
                            </image>
