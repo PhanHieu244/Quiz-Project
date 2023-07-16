@@ -3,17 +3,15 @@ package com.quiz.Exam;
 import com.Base64Convert.Base64Convert;
 import com.Question.Choice;
 import com.Question.Question;
-import com.Question.Test;
-import com.quiz.Tool.AlertTool;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -59,29 +57,44 @@ public class QuestionController {
                 questionBox.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(0, 0, 0, 20));
             }else{
-                MediaPlayer mediaPlayer = new MediaPlayer(Base64Convert.base64ToMedia(base64String));
-                MediaView mediaView = new MediaView(mediaPlayer);
+                Media media = Base64Convert.base64ToMedia(base64String);
+                MediaView mediaView = new MediaView(new MediaPlayer(media));
+
                 VBox.setMargin(mediaView, new Insets(10, 0, 0, 55));
                 Button play = new Button();
                 play.setOnAction(event -> {
-                    mediaPlayer.play();
+                    mediaView.getMediaPlayer().play();
                 });
                 play.setText("Play");
                 Button pause = new Button();
                 pause.setOnAction(event -> {
-                    mediaPlayer.pause();
+                    mediaView.getMediaPlayer().pause();
                 });
                 pause.setText("Pause");
 
-                //pause.setStyle("-fx-font-size: #8e0707;");
+                Button reload = new Button();
+                reload.setOnAction(event -> {
+                    do {
+                        mediaView.setMediaPlayer(new MediaPlayer(media));
+                    } while(mediaView.getMediaPlayer() == null);
+
+                    mediaView.getMediaPlayer().play();
+                });
+                reload.setText("Reload");
+
                 pause.setStyle("-fx-background-color: #e5dbdb;");
                 pause.setStyle("-fx-text-fill: #e70808;");
                 pause.setStyle("-fx-border-color: #8e0707;");
+
                 play.setStyle("-fx-text-fill: #068af3;");
                 play.setStyle("-fx-background-color: #e5dbdb;");
                 play.setStyle("-fx-border-color: #043761;");
 
-                HBox hBox = new HBox(play, pause);
+                reload.setStyle("-fx-text-fill: #01a230;");
+                reload.setStyle("-fx-background-color: #e5dbdb;");
+                reload.setStyle("-fx-border-color: #01a230;");
+
+                HBox hBox = new HBox(play, pause, reload);
                 hBox.setSpacing(20);
                 hBox.setPadding(new Insets(10, 0, 0, 80));
 
